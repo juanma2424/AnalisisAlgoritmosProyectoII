@@ -13,8 +13,11 @@ import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -59,27 +62,44 @@ class MarcoServidor extends JFrame implements Runnable {
     public void run() {
 
         try {
-            ServerSocket ns = new ServerSocket(9999);
+
+            ServerSocket socketConect = new ServerSocket(9999);
             String nick, ip, mns;
 
-            pak pac;
+            Empaque paquete;
 
             while (true) {
-                Socket ms = ns.accept();
-                ObjectInputStream pkdata = new ObjectInputStream(ms.getInputStream());//flujo
-                pac = (pak) pkdata.readObject();
 
-                nick = pac.getNick();
-                ip = pac.getIp();
-                mns = pac.getMns();
+                Socket miSocket = socketConect.accept();
+
+                ObjectInputStream DataPaquete = new ObjectInputStream(miSocket.getInputStream());//flujo
+                paquete = (Empaque) DataPaquete.readObject();
+
+                nick = paquete.getNick();
+                ip = paquete.getIp();
+                mns = paquete.getMns();
 
 //DataInputStream  fs = new DataInputStream(ms.getInputStream());
 //            String m = fs.readUTF();
-                areatexto.append("\n");
-                areatexto.append("\n" + nick);
-                areatexto.append("\n" + ip);
-                areatexto.append("\n" + mns);
-                ms.close();
+                if (!mns.equals("online")) {
+
+                    areatexto.append("\n" + nick + ", " + ip + ", " + mns);
+
+                    Socket enviadest = new Socket(ip, 9090);//server-cliente
+                    ObjectOutputStream pkrev = new ObjectOutputStream(enviadest.getOutputStream());//flujo de datos
+                    pkrev.writeObject(paquete);
+                    enviadest.close();
+
+                    miSocket.close();
+                } else {
+                    //-------------detec online
+                    InetAddress localizacion = miSocket.getInetAddress();
+
+                    String ipRemota = localizacion.getHostAddress();
+
+                    System.out.println("Ip " + ipRemota);
+                    ArrayList <String> listaIP = new ArrayList<String>(); 
+                }
             }
         } catch (IOException ex) {
             Logger.getLogger(MarcoServidor.class.getName()).log(Level.SEVERE, null, ex);
