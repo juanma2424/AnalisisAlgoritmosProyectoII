@@ -5,6 +5,9 @@
  */
 package conjuro;
 
+import conjuronet.ConjuroComms;
+import conjuronet.ConjuroMsg;
+
 /**
  *
  * @author Juanma
@@ -15,7 +18,11 @@ public class Conjuro {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-    }
+       ConjuroComms prueba = new ConjuroComms();
+       prueba.conectarAJuego("172.19.49.37");
+      
+        
+       
+       }
     
 }
