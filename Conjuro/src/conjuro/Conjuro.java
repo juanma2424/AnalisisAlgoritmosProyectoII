@@ -5,9 +5,11 @@
  */
 package conjuro;
 
+import conjuronet.ConjuroComms;
+
 /**
  *
- * @author Juanma
+ * @author adri-
  */
 public class Conjuro {
 
@@ -16,6 +18,11 @@ public class Conjuro {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        ConjuroComms prueba = new ConjuroComms();
+        if( 1== 0)
+            prueba.iniciarJuegoNuevo();
+        else
+            prueba.conectarAJuego("172.19.49.37");
     }
     
 }
