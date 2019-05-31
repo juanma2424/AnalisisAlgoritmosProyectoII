@@ -37,7 +37,7 @@ public class ClientSocket extends Observable implements Constants, Runnable {
                 String msgData = (String)inputReader.readObject();
                 System.out.println(msgData);
                 ConjuroMsg msg = new ConjuroMsg(msgData);
-                System.out.println("El nombre es: "+msg.getValue("Nombre"));
+                System.out.println("El nombre es: "+msg.getValue("Nombress"));
                 this.notifyObservers(msg);
                 Thread.sleep(THREAD_SLEEP_TIME);
             } catch (Exception ex) {

@@ -39,8 +39,7 @@ public class ConjuroMsg implements Constants {
 
     public String getValue(String pKey) {
         String result = "";
-        result = values.contains(pKey) ? values.get(pKey) : result;
-        System.out.println("Este es el resultado: "+ result);
+        result = values.containsKey(pKey) ? values.get(pKey) : result;
         return result;
     }
 

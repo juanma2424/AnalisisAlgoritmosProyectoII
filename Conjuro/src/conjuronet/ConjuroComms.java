@@ -19,7 +19,7 @@ public class ConjuroComms implements IObserver, Constants {
     public void conectarAJuego(String pHost) {
         client = new ClientSocket(pHost, PORT_NUMBER);
         client.addObserver(this);
-        ConjuroMsg msg = new ConjuroMsg("0,Nombre=Adrian");
+        ConjuroMsg msg = new ConjuroMsg("0,Nombress=ger");
         client.sendMessage(msg);
     }
 
@@ -30,8 +30,12 @@ public class ConjuroComms implements IObserver, Constants {
     public void notify(Object pData) {
         ConjuroMsg msg = (ConjuroMsg) pData;
 
-//		switch (msg.getType()) {
-//		
+	/*	switch (msg.getType()) {
+                    case PLAYER_NAME:{
+                        
+                    }
+                }*/
+		
 //		}
     }
 }
