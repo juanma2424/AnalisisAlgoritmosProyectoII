@@ -6,11 +6,10 @@
 package conjuro;
 
 import conjuronet.ConjuroComms;
-import conjuronet.ConjuroMsg;
 
 /**
  *
- * @author Juanma
+ * @author adri-
  */
 public class Conjuro {
 
@@ -18,11 +17,12 @@ public class Conjuro {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       ConjuroComms prueba = new ConjuroComms();
-       prueba.conectarAJuego("172.19.49.37");
-      
-        
-       
-       }
+        // TODO code application logic here
+        ConjuroComms prueba = new ConjuroComms();
+        if( 1 == 0)
+            prueba.iniciarJuegoNuevo();
+        else
+        prueba.conectarAJuego("172.19.49.37");
+    }
     
 }
