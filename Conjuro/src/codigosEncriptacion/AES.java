@@ -20,7 +20,7 @@ class AES {
 
     byte[] skey = new byte[1000];
     String skeyString;
-    static byte[] raw;
+    byte[] raw;
     String inputMessage, encryptedData, decryptedMessage;
 
     public AES() {
@@ -29,16 +29,15 @@ class AES {
 
               inputMessage = JOptionPane.showInputDialog(null, "Enter message to encrypt");// gui
               byte[] ibyte = inputMessage.getBytes(); // obtienen el dato de la gui y codifica en una secuencia de bytes 
-              byte[] ebyte = encrypt(raw, ibyte);
-//            String encryptedData = new String(ebyte);
-//            System.out.println("Encrypted message " + encryptedData);
-//            JOptionPane.showMessageDialog(null, "Encrypted Data " + "\n" + encryptedData);
-//
-//            byte[] dbyte = decrypt(raw, ebyte);
-//            String decryptedMessage = new String(dbyte);
-//            System.out.println("Decrypted message " + decryptedMessage);
-//
-//            JOptionPane.showMessageDialog(null, "Decrypted Data " + "\n" + decryptedMessage);
+              byte[] ebyte = encrypt(raw, ibyte);// dato encriptado
+              String encryptedData = new String(ebyte);
+              System.out.println("Encrypted message " + encryptedData);// mensaje encriptado
+              JOptionPane.showMessageDialog(null, "Encrypted Data " + "\n" + encryptedData);// mensaje encriptado en GUI
+
+              byte[] dbyte = decrypt(raw, ebyte);// dato desencriptado
+              String decryptedMessage = new String(dbyte);
+              System.out.println("Decrypted message " + decryptedMessage);;// mensaje desencriptado
+              JOptionPane.showMessageDialog(null, "Decrypted Data " + "\n" + decryptedMessage);// mensaje desencriptado en GUI
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -63,7 +62,7 @@ class AES {
     }
 
     //resive una secuencia de bytes
-    private static byte[] getRawKey(byte[] seed) throws Exception {
+    private  byte[] getRawKey(byte[] seed) throws Exception {
         KeyGenerator kgen = KeyGenerator.getInstance("AES");//clave de tipo AES
         SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");//número aleatorio altamente seguro
         
@@ -75,21 +74,27 @@ class AES {
         return raw;
     }
 
-    private static byte[] encrypt(byte[] raw, byte[] clear) throws Exception {
-        SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
-        Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
-        byte[] encrypted = cipher.doFinal(clear);
-        return encrypted;
+    // resive la llave simetrica y el dato codificado (input) en secuencia de bytes  
+    private  byte[] encrypt(byte[] raw, byte[] clear) throws Exception {
+        
+        SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");// Crea el objeto SecretKey pasa la clave y el algoritmo "AES"
+        Cipher cipher = Cipher.getInstance("AES");//Crear un objeto de cifrado de tipo AES
+        cipher.init(Cipher.ENCRYPT_MODE, skeySpec);//  modo de operación (cifrar o descifrar) y la clave pública
+        byte[] encrypted = cipher.doFinal(clear);// completa la operación de cifrado
+        
+        return encrypted;//dato encriptado
+        
     }
-//
-//    private static byte[] decrypt(byte[] raw, byte[] encrypted) throws Exception {
-//        SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
-//        Cipher cipher = Cipher.getInstance("AES");
-//        cipher.init(Cipher.DECRYPT_MODE, skeySpec);
-//        byte[] decrypted = cipher.doFinal(encrypted);
-//        return decrypted;
-//    }
+
+    
+     // resive la llave simetrica y el dato codificado (input) en secuencia de bytes  
+    private byte[] decrypt(byte[] raw, byte[] encrypted) throws Exception {
+        SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");// Crea el objeto SecretKey pasa la clave y el algoritmo "AES"
+        Cipher cipher = Cipher.getInstance("AES");//Crear un objeto de cifrado de tipo AES
+        cipher.init(Cipher.DECRYPT_MODE, skeySpec);// modo de operación (cifrar o descifrar) y la clave pública
+        byte[] decrypted = cipher.doFinal(encrypted);// completa la operación de descifrado
+        return decrypted;
+    }
 
     public static void main(String args[]) {
         AES aes = new AES();
