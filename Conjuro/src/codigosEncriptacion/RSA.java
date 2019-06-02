@@ -2,6 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+ *https://www.sanfoundry.com/java-program-implement-rsa-algorithm/
  */
 package codigosEncriptacion;
 
@@ -88,7 +89,7 @@ public class RSA
 
 //import java.util.*;
 //import java.math.*;
-//
+//https://codedost.com/css/java-program-rsa-algorithm/
 //class RSA {
 //
 //    public static void main(String args[]) {
