@@ -25,7 +25,7 @@ class AES {
 
     public AES() {
         try {
-            generateSymmetricKey();// genera llave simetrica
+              generateSymmetricKey();// genera llave simetrica
 
               inputMessage = JOptionPane.showInputDialog(null, "Enter message to encrypt");// gui
               byte[] ibyte = inputMessage.getBytes(); // obtienen el dato de la gui y codifica en una secuencia de bytes 
@@ -81,7 +81,6 @@ class AES {
         Cipher cipher = Cipher.getInstance("AES");//Crear un objeto de cifrado de tipo AES
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec);//  modo de operación (cifrar o descifrar) y la clave pública
         byte[] encrypted = cipher.doFinal(clear);// completa la operación de cifrado
-        
         return encrypted;//dato encriptado
         
     }
