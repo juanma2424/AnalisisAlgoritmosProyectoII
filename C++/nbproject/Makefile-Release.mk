@@ -34,7 +34,9 @@ include Makefile
 OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
-OBJECTFILES=
+OBJECTFILES= \
+	${OBJECTDIR}/_ext/c5dadc53/decrypt.o \
+	${OBJECTDIR}/_ext/c5dadc53/encrypt.o
 
 
 # C Compiler Flags
@@ -59,7 +61,17 @@ LDLIBSOPTIONS=
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/c__.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/c__ ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/c__ ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/_ext/c5dadc53/decrypt.o: ../../../../Desktop/aes-master/decrypt.cpp
+	${MKDIR} -p ${OBJECTDIR}/_ext/c5dadc53
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/c5dadc53/decrypt.o ../../../../Desktop/aes-master/decrypt.cpp
+
+${OBJECTDIR}/_ext/c5dadc53/encrypt.o: ../../../../Desktop/aes-master/encrypt.cpp
+	${MKDIR} -p ${OBJECTDIR}/_ext/c5dadc53
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/c5dadc53/encrypt.o ../../../../Desktop/aes-master/encrypt.cpp
 
 # Subprojects
 .build-subprojects:
