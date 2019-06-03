@@ -172,15 +172,14 @@ void AESEncrypt(unsigned char *message, unsigned char *expandedKey, unsigned cha
 void encryp(string msg)
 {
 
-	cout << "=============================" << endl;
-	cout << " 128-bit AES Encryption Tool   " << endl;
-	cout << "=============================" << endl;
-
+	// cout << "=============================" << endl;
+	// cout << " 128-bit AES Encryption Tool   " << endl;
+	// cout << "=============================" << endl;
 
 	char message[1024] ;
-	strcpy( message, msg.c_str());
+	strcpy(message, msg.c_str());
 
-	cout << "Enter the message to encrypt: ";
+	// cout << "Enter the message to encrypt: ";
 	//cin.getline(message, sizeof(message));
 	cout << message << endl;
 
@@ -247,11 +246,11 @@ void encryp(string msg)
 	}
 
 	// mensaje encriptado en hex
-	cout << "Encrypted message in hex:" << endl;
+//	cout << "Encrypted message in hex:" << endl;
 	for (int i = 0; i < paddedMessageLen; i++)
 	{
-		cout << hex << (int)encryptedMessage[i];
-		cout << " ";
+	//	cout << hex << (int)encryptedMessage[i];
+	//	cout << " ";
 	}
 
 	cout << endl;
@@ -263,7 +262,7 @@ void encryp(string msg)
 	{
 		outfile << encryptedMessage;
 		outfile.close();
-		cout << "Wrote encrypted message to file message.aes" << endl;
+	//	cout << "Wrote encrypted message to file message.aes" << endl;
 	}
 
 	else
@@ -272,4 +271,6 @@ void encryp(string msg)
 	// Free memory
 	delete[] paddedMessage;
 	delete[] encryptedMessage;
+
+
 }

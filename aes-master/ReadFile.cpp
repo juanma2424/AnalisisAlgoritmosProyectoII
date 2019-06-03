@@ -30,7 +30,7 @@ void read()
             }
         }
         myfile.close();
-        cout << i ;
+        //cout << i ;
     }
     else
         cout << "Unable to open file";
@@ -40,9 +40,13 @@ void read()
 int main()
 {
     read();
+   
     for (int i = 0; i < 101; i++)
     {
-       encryp(conjuros[i]);
+       //encryp("aaaa");
+       encryp(conjuros[38]);
+       break;
     }
+
     
 }

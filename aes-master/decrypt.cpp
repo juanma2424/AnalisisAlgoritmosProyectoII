@@ -172,6 +172,9 @@ int main()
 	{
 		getline(infile, msgstr); // The first line of file is the message
 		cout << "Read in encrypted message from message.aes" << endl;
+		cout << '\n';
+		cout << msgstr.size();
+		cout << '\n';
 		infile.close();
 	}
 
@@ -179,10 +182,15 @@ int main()
 		cout << "Unable to open file";
 
 	char *msg = new char[msgstr.size() + 1];
+	cout << '\n';
+	cout << &msg;
+	cout << '\n';
 
 	strcpy(msg, msgstr.c_str());
 
 	int n = strlen((const char *)msg);
+
+	
 
 	unsigned char *encryptedMessage = new unsigned char[n];
 	for (int i = 0; i < n; i++)
