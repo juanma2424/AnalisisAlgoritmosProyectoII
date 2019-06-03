@@ -68,7 +68,7 @@ class AES {
         
         sr.setSeed(seed);//Establezca la semilla del generador de números aleatorios con la secuencia de byts del aleatorio porcesado
   
-        kgen.init(192, sr); // especificar el tamaño de la clave minimo de 128
+        kgen.init(128, sr); // especificar el tamaño de la clave minimo de 128
         SecretKey skey = kgen.generateKey();// genera la clave
         raw = skey.getEncoded();//codificación de caracteres del numero aleatorio y lo guarda en raw
         return raw;
