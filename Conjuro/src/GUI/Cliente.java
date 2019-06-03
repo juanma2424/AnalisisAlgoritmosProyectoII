@@ -18,7 +18,7 @@ public class Cliente extends javax.swing.JFrame {
      */
     private int click = 0;
     private int jugada = 0;
-    private boolean setMsg = false;
+    private boolean setMsg = true;
     public Cliente() {
         initComponents();
         C1.setToolTipText("Name: C1 | Tipe: Sha256 |desc cifrada | desc no cifrada| key1 | key2");
@@ -28,22 +28,27 @@ public class Cliente extends javax.swing.JFrame {
         C5.setToolTipText("Name: C5 | Tipe: Plain |desc cifrada | desc no cifrada| key1 | key2");
         C6.setToolTipText("Name: C6 | Tipe: RSA |desc cifrada | desc no cifrada| key1 | key2");
         C7.setToolTipText("Name: C7 | Tipe: PGP |desc cifrada | desc no cifrada| key1 | key2");
+        jButton8.setEnabled(false);
+        jButton9.setEnabled(false);
+        jButton10.setEnabled(false);
     }
     
     private void setCart(String Pdata){
         String auxGettxt;
         click++;
-        if(jTextField1.getText().length()!=0){
+        if(setMsg ){
+        if(jTextField1.getText().length()!=0 ){
              auxGettxt = jTextField1.getText();
              jTextField1.setText(auxGettxt+","+Pdata); 
-             if (click==3) setMsg=true;
+             if (click==3) jButton8.setEnabled(true);//setMsg=true;
         }else{
              jTextField1.setText(Pdata);
         }
-        if(click>3){
+        if(click>3 ){
             jTextField1.setText(Pdata);
-            setMsg=false;
+            jButton8.setEnabled(false);//setMsg=false;
             click =1;
+        }
         }
     }
     
@@ -251,15 +256,18 @@ public class Cliente extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        if(setMsg){
+        
         if(jugada==0){
             jTextField3.setText(jTextField1.getText());
             jugada++;
+            jButton9.setEnabled(true);
         }else{
              jTextField2.setText(jTextField1.getText());
+             jButton10.setEnabled(true);
+             setMsg = false;
         }
          jTextField1.setText(null);
-        }
+        jButton8.setEnabled(false);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -270,11 +278,15 @@ public class Cliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         jTextField3.setText(null);
         jugada=0;
+        jButton9.setEnabled(false);
+         setMsg = true;
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
         jTextField2.setText(null);
+        jButton9.setEnabled(false);
+         setMsg = true;
     }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
