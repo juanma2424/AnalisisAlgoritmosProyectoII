@@ -1,7 +1,3 @@
-/* decrypt.cpp
- * Performs decryption using AES 128-bit
- * @author Cecelia Wisniewska
- */
 #include <iostream>
 #include <cstring>
 #include <fstream>
@@ -14,16 +10,28 @@ using namespace std;
  * SubRoundKey es simplemente un XOR de un bloque de 128 bits con la clave de 128 bits.
  * Así que básicamente hace lo mismo que AddRoundKey en el cifrado
  */
-void SubRoundKey(unsigned char * state, unsigned char * roundKey) {
-	for (int i = 0; i < 16; i++) {
+void SubRoundKey(unsigned char *state, unsigned char *roundKey)
+{
+	for (int i = 0; i < 16; i++)
+	{
 		state[i] ^= roundKey[i];
 	}
 }
 
 /* InverseMixColumns usa las tablas de consulta mul9, mul11, mul13, mul14
  * Desmezcla las columnas invirtiendo el efecto de MixColumns en el cifrado
+ * | 14 | 11 | 13 | 9  |
+ * | 9  | 14 | 11 | 13 |
+ * | 13 | 9  | 14 | 11 |
+ * | 11 | 13 | 9  | 14 |
+ //////////////////////////////////
+ * | 2 | 3 | 1 | 1 |
+ * | 1 | 2 | 3 | 1 |
+ * | 1 | 1 | 2 | 3 |
+ * | 3 | 1 | 1 | 2 |
  */
-void InverseMixColumns(unsigned char * state) {
+void InverseMixColumns(unsigned char *state)
+{
 	unsigned char tmp[16];
 
 	tmp[0] = (unsigned char)mul14[state[0]] ^ mul11[state[1]] ^ mul13[state[2]] ^ mul9[state[3]];
@@ -46,13 +54,15 @@ void InverseMixColumns(unsigned char * state) {
 	tmp[14] = (unsigned char)mul13[state[12]] ^ mul9[state[13]] ^ mul14[state[14]] ^ mul11[state[15]];
 	tmp[15] = (unsigned char)mul11[state[12]] ^ mul13[state[13]] ^ mul9[state[14]] ^ mul14[state[15]];
 
-	for (int i = 0; i < 16; i++) {
+	for (int i = 0; i < 16; i++)
+	{
 		state[i] = tmp[i];
 	}
 }
 
 // Desplaza las filas a la derecha (en lugar de a la izquierda) para el descifrado
-void ShiftRows(unsigned char * state) {
+void ShiftRows(unsigned char *state)
+{
 	unsigned char tmp[16];
 
 	/* Column 1 */
@@ -79,7 +89,8 @@ void ShiftRows(unsigned char * state) {
 	tmp[14] = state[6];
 	tmp[15] = state[3];
 
-	for (int i = 0; i < 16; i++) {
+	for (int i = 0; i < 16; i++)
+	{
 		state[i] = tmp[i];
 	}
 }
@@ -87,8 +98,10 @@ void ShiftRows(unsigned char * state) {
 /* Realizar sustitución a cada uno de los 16 bytes.
  * Utiliza caja S inversa como tabla de búsqueda
  */
-void SubBytes(unsigned char * state) {
-	for (int i = 0; i < 16; i++) { // Realizar sustitución a cada uno de los 16 bytes
+void SubBytes(unsigned char *state)
+{
+	for (int i = 0; i < 16; i++)
+	{ // Realizar sustitución a cada uno de los 16 bytes
 		state[i] = inv_s[state[i]];
 	}
 }
@@ -97,7 +110,8 @@ void SubBytes(unsigned char * state) {
  * El número de rondas se define en AESDecrypt ()
  * No en vano, los pasos son los pasos de encriptación pero invertidos.
  */
-void Round(unsigned char * state, unsigned char * key) {
+void Round(unsigned char *state, unsigned char *key)
+{
 	SubRoundKey(state, key);
 	InverseMixColumns(state);
 	ShiftRows(state);
@@ -105,7 +119,8 @@ void Round(unsigned char * state, unsigned char * key) {
 }
 
 // Igual que Round () pero no InverseMixColumns
-void InitialRound(unsigned char * state, unsigned char * key) {
+void InitialRound(unsigned char *state, unsigned char *key)
+{
 	SubRoundKey(state, key);
 	ShiftRows(state);
 	SubBytes(state);
@@ -114,80 +129,35 @@ void InitialRound(unsigned char * state, unsigned char * key) {
 /* La función de descifrado AES
  * Organiza todos los pasos de descifrado en una función
  */
-void AESDecrypt(unsigned char * encryptedMessage, unsigned char * expandedKey, unsigned char * decryptedMessage)
+void AESDecrypt(unsigned char *encryptedMessage, unsigned char *expandedKey, unsigned char *decryptedMessage)
 {
 	unsigned char state[16]; // Stores the first 16 bytes of encrypted message
 
-	for (int i = 0; i < 16; i++) {
+	for (int i = 0; i < 16; i++)
+	{
 		state[i] = encryptedMessage[i];
 	}
 
-	InitialRound(state, expandedKey+160);
+	InitialRound(state, expandedKey + 160);
 
 	int numberOfRounds = 9;
 
-	for (int i = 8; i >= 0; i--) {
+	for (int i = 8; i >= 0; i--)
+	{
 		Round(state, expandedKey + (16 * (i + 1)));
 	}
 
 	SubRoundKey(state, expandedKey); // Final round
 
 	// Copy decrypted state to buffer
-	for (int i = 0; i < 16; i++) {
+	for (int i = 0; i < 16; i++)
+	{
 		decryptedMessage[i] = state[i];
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-int main() {
+int main()
+{
 
 	cout << "=============================" << endl;
 	cout << " 128-bit AES Decryption Tool " << endl;
@@ -205,16 +175,18 @@ int main() {
 		infile.close();
 	}
 
-	else cout << "Unable to open file";
+	else
+		cout << "Unable to open file";
 
-	char * msg = new char[msgstr.size()+1];
+	char *msg = new char[msgstr.size() + 1];
 
 	strcpy(msg, msgstr.c_str());
 
-	int n = strlen((const char*)msg);
+	int n = strlen((const char *)msg);
 
-	unsigned char * encryptedMessage = new unsigned char[n];
-	for (int i = 0; i < n; i++) {
+	unsigned char *encryptedMessage = new unsigned char[n];
+	for (int i = 0; i < n; i++)
+	{
 		encryptedMessage[i] = (unsigned char)msg[i];
 	}
 
@@ -233,7 +205,8 @@ int main() {
 		keyfile.close();
 	}
 
-	else cout << "Unable to open file";
+	else
+		cout << "Unable to open file";
 
 	istringstream hex_chars_stream(keystr);
 	unsigned char key[16];
@@ -248,23 +221,26 @@ int main() {
 	unsigned char expandedKey[176];
 
 	KeyExpansion(key, expandedKey);
-	
+
 	int messageLen = strlen((const char *)encryptedMessage);
 
-	unsigned char * decryptedMessage = new unsigned char[messageLen];
+	unsigned char *decryptedMessage = new unsigned char[messageLen];
 
-	for (int i = 0; i < messageLen; i += 16) {
+	for (int i = 0; i < messageLen; i += 16)
+	{
 		AESDecrypt(encryptedMessage + i, expandedKey, decryptedMessage + i);
 	}
 
 	cout << "Decrypted message in hex:" << endl;
-	for (int i = 0; i < messageLen; i++) {
+	for (int i = 0; i < messageLen; i++)
+	{
 		cout << hex << (int)decryptedMessage[i];
 		cout << " ";
 	}
 	cout << endl;
 	cout << "Decrypted message: ";
-	for (int i = 0; i < messageLen; i++) {
+	for (int i = 0; i < messageLen; i++)
+	{
 		cout << decryptedMessage[i];
 	}
 	cout << endl;
