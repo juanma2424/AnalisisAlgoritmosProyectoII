@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import java.util.Locale;
+
 /**
  *
  * @author Juanma
@@ -14,9 +16,37 @@ public class Cliente extends javax.swing.JFrame {
     /**
      * Creates new form Cliente
      */
+    private int click = 0;
+    private int jugada = 0;
+    private boolean setMsg = false;
     public Cliente() {
         initComponents();
+        C1.setToolTipText("Name: C1 | Tipe: Sha256 |desc cifrada | desc no cifrada| key1 | key2");
+        C2.setToolTipText("Name: C2 | Tipe: MD5 |desc cifrada | desc no cifrada| key1 | key2");
+        C3.setToolTipText("Name: C3 | Tipe: 3DES |desc cifrada | desc no cifrada| key1 | key2");
+        C4.setToolTipText("Name: C4 | Tipe: AES |desc cifrada | desc no cifrada| key1 | key2");
+        C5.setToolTipText("Name: C5 | Tipe: Plain |desc cifrada | desc no cifrada| key1 | key2");
+        C6.setToolTipText("Name: C6 | Tipe: RSA |desc cifrada | desc no cifrada| key1 | key2");
+        C7.setToolTipText("Name: C7 | Tipe: PGP |desc cifrada | desc no cifrada| key1 | key2");
     }
+    
+    private void setCart(String Pdata){
+        String auxGettxt;
+        click++;
+        if(jTextField1.getText().length()!=0){
+             auxGettxt = jTextField1.getText();
+             jTextField1.setText(auxGettxt+","+Pdata); 
+             if (click==3) setMsg=true;
+        }else{
+             jTextField1.setText(Pdata);
+        }
+        if(click>3){
+            jTextField1.setText(Pdata);
+            setMsg=false;
+            click =1;
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,80 +58,135 @@ public class Cliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jButton10 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        C3 = new javax.swing.JButton();
+        C1 = new javax.swing.JButton();
+        C4 = new javax.swing.JButton();
+        C6 = new javax.swing.JButton();
+        C5 = new javax.swing.JButton();
+        C7 = new javax.swing.JButton();
+        C2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1084, 646));
         setMinimumSize(new java.awt.Dimension(1084, 646));
-        setPreferredSize(new java.awt.Dimension(1084, 646));
 
         jPanel2.setMaximumSize(new java.awt.Dimension(1084, 646));
         jPanel2.setMinimumSize(new java.awt.Dimension(1084, 646));
         jPanel2.setPreferredSize(new java.awt.Dimension(1084, 646));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("C3");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, 80, 100));
+        jTextField1.setEditable(false);
+        jTextField1.setBackground(new java.awt.Color(0, 0, 51));
+        jTextField1.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setViewportView(jTextField1);
 
-        jButton2.setText("C1");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, 80, 100));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 420, 90));
 
-        jButton3.setText("C4");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 460, 80, 100));
+        jTextField2.setEditable(false);
+        jTextField2.setBackground(new java.awt.Color(0, 0, 51));
+        jTextField2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 80, 210, 60));
 
-        jButton4.setText("C5");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jTextField3.setEditable(false);
+        jTextField3.setBackground(new java.awt.Color(0, 0, 51));
+        jTextField3.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jTextField3.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jTextField3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 460, 80, 100));
+        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 10, 210, 60));
 
-        jButton5.setText("C6");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButton10.setText("Editar jugada 1");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButton10ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 460, 80, 100));
+        jPanel2.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, -1, -1));
 
-        jButton6.setText("C7");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jButton9.setText("Editar jugada 1");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButton9ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 460, 80, 100));
+        jPanel2.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, -1, -1));
 
-        jButton7.setText("C2");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        jButton8.setText("SetJugada");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jButton8ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 460, 80, 100));
+        jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 260, 100, 40));
+
+        C3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/carta3.png"))); // NOI18N
+        C3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                C3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(C3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, 120, 170));
+
+        C1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/carta1.png"))); // NOI18N
+        C1.setToolTipText("");
+        C1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                C1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(C1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 120, 170));
+
+        C4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/carta4.png"))); // NOI18N
+        C4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                C4ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(C4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 400, 120, 170));
+
+        C6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/carta5.png"))); // NOI18N
+        C6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                C6ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(C6, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 400, 120, 170));
+
+        C5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/carta6.png"))); // NOI18N
+        C5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                C5ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(C5, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 400, 120, 170));
+
+        C7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/carta7.png"))); // NOI18N
+        C7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                C7ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(C7, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 400, 120, 170));
+
+        C2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/carta2.png"))); // NOI18N
+        C2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                C2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(C2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 120, 170));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/wp.png"))); // NOI18N
         jLabel2.setText("jLabel2");
@@ -128,33 +213,69 @@ public class Cliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
+    private void C3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+         setCart("c3=3des");   
+    }//GEN-LAST:event_C3ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void C1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        setCart("c1=sha256");
+    }//GEN-LAST:event_C1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void C4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+         setCart("c4=aes");   
+    }//GEN-LAST:event_C4ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void C6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C6ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+         setCart("c6=rsa");   
+    }//GEN-LAST:event_C6ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void C5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C5ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+         setCart("c5=plain");   
+    }//GEN-LAST:event_C5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void C7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C7ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+         setCart("c7=pgp");   
+    }//GEN-LAST:event_C7ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void C2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+         setCart("c2=md5");   
+    }//GEN-LAST:event_C2ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        if(setMsg){
+        if(jugada==0){
+            jTextField3.setText(jTextField1.getText());
+            jugada++;
+        }else{
+             jTextField2.setText(jTextField1.getText());
+        }
+         jTextField1.setText(null);
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        jTextField3.setText(null);
+        jugada=0;
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        jTextField2.setText(null);
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,20 +307,29 @@ public class Cliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cliente().setVisible(true);
+                Cliente window = new Cliente();
+                window.setLocationRelativeTo(null);
+                window.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton C1;
+    private javax.swing.JButton C2;
+    private javax.swing.JButton C3;
+    private javax.swing.JButton C4;
+    private javax.swing.JButton C5;
+    private javax.swing.JButton C6;
+    private javax.swing.JButton C7;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
