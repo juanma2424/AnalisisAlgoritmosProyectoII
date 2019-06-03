@@ -169,14 +169,16 @@ void AESEncrypt(unsigned char *message, unsigned char *expandedKey, unsigned cha
 	}
 }
 
-int main()
+void encryp(string msg)
 {
 
 	cout << "=============================" << endl;
 	cout << " 128-bit AES Encryption Tool   " << endl;
 	cout << "=============================" << endl;
 
-	char message[1024] = "algo............................................................................";
+
+	char message[1024] ;
+	strcpy( message, msg.c_str());
 
 	cout << "Enter the message to encrypt: ";
 	//cin.getline(message, sizeof(message));
@@ -188,7 +190,7 @@ int main()
 	int paddedMessageLen = originalLen; // largo del mensaje
 
 	if ((paddedMessageLen % 16) != 0)
-	{														 // si existe un paddedMessageLen que multiblicado por un N me de 16
+	{																											 // si existe un paddedMessageLen que multiblicado por un N me de 16
 		paddedMessageLen = (paddedMessageLen / 16 + 1) * 16; // el nuevo valor de la variable sera el ajuste para que (paddedMessageLen % 16) == 0
 	}
 
@@ -209,7 +211,7 @@ int main()
 	unsigned char *encryptedMessage = new unsigned char[paddedMessageLen]; //el puntero encryptedMessage apunta a un arreglo de chars de paddedMessageLen de largo
 
 	string str;
-	ifstream infile;							   // flujo de entrada para operar en archivos.
+	ifstream infile;															 // flujo de entrada para operar en archivos.
 	infile.open("keyfile", ios::in | ios::binary); // abre el archivo
 
 	if (infile.is_open())
@@ -225,28 +227,26 @@ int main()
 
 	unsigned char key[16]; // llave de 16 chars
 	int i = 0;
-	unsigned int a;//4104
+	unsigned int a; //4104
 
-	while (hex_chars_stream >> hex >> a)//  (X_X)
+	while (hex_chars_stream >> hex >> a) //  (X_X)
 	{
 		key[i] = a;
 		i++;
 	}
 
+	unsigned char expandedKey[176]; //  (X_X) why 176?
 
-
-	unsigned char expandedKey[176];//  (X_X) why 176?
-
-    //h (llave ,arreglo 176) 
+	//h (llave ,arreglo 176)
 	KeyExpansion(key, expandedKey);
 
-	for (int i = 0; i < paddedMessageLen; i += 16)// largo del mensaje de 16 en 16 
+	for (int i = 0; i < paddedMessageLen; i += 16) // largo del mensaje de 16 en 16
 	{
 		// (mensaje + i (16), arraychar[176], arraychar[largodelmns])
 		AESEncrypt(paddedMessage + i, expandedKey, encryptedMessage + i);
 	}
 
-    // mensaje encriptado en hex
+	// mensaje encriptado en hex
 	cout << "Encrypted message in hex:" << endl;
 	for (int i = 0; i < paddedMessageLen; i++)
 	{
@@ -272,6 +272,4 @@ int main()
 	// Free memory
 	delete[] paddedMessage;
 	delete[] encryptedMessage;
-
-	return 0;
 }

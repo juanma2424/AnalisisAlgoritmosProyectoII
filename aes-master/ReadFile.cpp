@@ -2,18 +2,18 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <iostream>
 #include <cstring>
-#include <fstream>
 #include <sstream>
+#include "structures.h"
+#include "encrypt.cpp"
 using namespace std;
 
+string conjuros[100];
 void read()
 {
     string line;
     string str;
     ifstream myfile("test.txt");
-    string conjuros[100];
     int i = 0;
 
     if (myfile.is_open())
@@ -26,21 +26,23 @@ void read()
             {
                 conjuros[i] = str;
                 i++;
-
-                // cout << "\n------------------------------------" << '\n';
-                // cout << "\n"
-                //      << str << '\n';
-                // cout << "\n------------------------------------" << '\n';
                 str = "";
             }
-            //cout << line <<" X"<< '\n';
         }
         myfile.close();
         cout << i ;
-        
     }
-
     else
         cout << "Unable to open file";
+}
 
+
+int main()
+{
+    read();
+    for (int i = 0; i < 101; i++)
+    {
+       encryp(conjuros[i]);
+    }
+    
 }
