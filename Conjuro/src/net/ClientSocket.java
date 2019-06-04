@@ -19,13 +19,11 @@ public class ClientSocket extends Observable implements Constants, Runnable {
 
     public ClientSocket(Socket pSocket) {
         client = pSocket;
-        initReaders(0);
     }
 
     public ClientSocket(String pIp, int pPort) {
         try {
             client = new Socket(pIp, pPort);
-            initReaders(1);
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());
         }
@@ -34,10 +32,10 @@ public class ClientSocket extends Observable implements Constants, Runnable {
     public void run() {
         while (isListening) {
             try {
-                String msgData = (String)inputReader.readObject();
-                System.out.println(msgData);
+                String msgData = (String) inputReader.readObject();
                 ConjuroMsg msg = new ConjuroMsg(msgData);
-                System.out.println("El nombre es: "+msg.getValue("Nombress"));
+                System.out.println("El nombre es: " + msg.getValue("Nombre"));
+                System.out.println("El nombre2 es: " + msg.getValue("nombre2"));
                 this.notifyObservers(msg);
                 Thread.sleep(THREAD_SLEEP_TIME);
             } catch (Exception ex) {
@@ -51,7 +49,7 @@ public class ClientSocket extends Observable implements Constants, Runnable {
         try {
             outputWriter.writeObject(pMsg.getStringMsg());
             outputWriter.flush();
-            outputWriter.close();
+            //outputWriter.close();
 
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());
@@ -69,18 +67,14 @@ public class ClientSocket extends Observable implements Constants, Runnable {
         }
     }
 
-    private void initReaders(int servidor) {
+    private void initReaders() {
         if (client != null) {
             try {
                 isListening = true;
-                if(servidor == 0){
-                    inputReader = new ObjectInputStream(client.getInputStream());
-                    Thread newthread = new Thread(this);
-                    newthread.start();
-                }
-                else{
-                    outputWriter = new ObjectOutputStream(client.getOutputStream());
-                }
+                outputWriter = new ObjectOutputStream(client.getOutputStream());
+                inputReader = new ObjectInputStream(client.getInputStream());
+                Thread newthread = new Thread(this);
+                newthread.start();
             } catch (Exception ex) {
                 Logger.Log(ex.getMessage());
             }

@@ -43,7 +43,7 @@ public class ServerNet implements Constants, Runnable {
         while (isListening) {
             try {
                 Socket newSocket = serversocket.accept();
-
+                
                 ClientSocket client = new ClientSocket(newSocket);
                 client.addObserver(this.observer);
                 clients.add(client);
