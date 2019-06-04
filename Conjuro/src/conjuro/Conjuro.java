@@ -18,11 +18,16 @@ public class Conjuro {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        ConjuroComms prueba = new ConjuroComms();
-        if( 1 == 0)
-            prueba.iniciarJuegoNuevo();
-        else
-        prueba.conectarAJuego("172.19.49.37");
+//        ConjuroComms prueba = new ConjuroComms();
+//        if( 1 == 0)
+//            prueba.iniciarJuegoNuevo();
+//        else
+//        prueba.conectarAJuego("172.19.49.37");
+//    }
+        for (int i = 0; i < 201; i++) {
+            System.out.print("a");
+        }
+        System.out.println("");
     }
     
 }
