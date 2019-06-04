@@ -16,7 +16,9 @@ import javax.crypto.spec.SecretKeySpec;
 import java.util.Random;
 import static lib.Constants.*;
 
-class AES {
+class AES implements IAlgorithm {
+    
+    
 
     byte[] skey = new byte[1000];
     String skeyString;
@@ -44,7 +46,10 @@ class AES {
 //        }
 //
 //    }
-    public void encrypt(String pdata, String pkey) {
+    
+    
+  
+    public String encrypt(String pdata, String pkey) {
         try {
             generateSymmetricKey();// genera llave simetrica
             inputMessage = pdata;
@@ -56,18 +61,20 @@ class AES {
         } catch (Exception e) {
             System.out.println(e);
         }
+        return encryptedData;
 
     }
 
-    public void decrypt(String pdata, String pkey) {
+    public String decrypt(String pdata, String pkey) {
         try {
             byte[] dbyte = decrypt(raw, this.AUXebyte);// dato desencriptado
             String decryptedMessage = new String(dbyte);
             System.out.println("Decrypted message " + decryptedMessage);;// mensaje desencriptado
+            return decryptedMessage;
         } catch (Exception e) {
             System.out.println(e);
         }
-
+       return "";
     }
 
     void generateSymmetricKey() {

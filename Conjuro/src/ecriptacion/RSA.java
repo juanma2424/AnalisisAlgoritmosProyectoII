@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Random;
 
-public class RSA {
+public class RSA implements IAlgorithm {
     public byte[] encryptedAUX ;
     public String auxdata; 
     private BigInteger p;
@@ -88,7 +88,7 @@ public class RSA {
         return (new BigInteger(message)).modPow(d, N).toByteArray();
     }
 
-    public void encrypt(String pdata, String pkey) {
+    public String encrypt(String pdata, String pkey) {
         System.out.println("msg : "+ pdata);
         bytesToString(pdata.getBytes());
         byte[] encrypted = encryptRSA(pdata.getBytes());
@@ -96,9 +96,10 @@ public class RSA {
         System.out.println("en " + encrypted); 
         auxdata = bytesToString(pdata.getBytes());
         System.out.println("String in Bytes: "+ bytesToString(pdata.getBytes()));
+        return  auxdata;
     }
 
-    public void decrypt(String pdata, String pkey) {
+    public String decrypt(String pdata, String pkey) {
         //System.out.println("pdata " + pdata);
         try{ 
             byte[] b = pdata.getBytes();
@@ -112,6 +113,7 @@ public class RSA {
         byte[] decrypted = decryptRSA(encrypted);
         System.out.println("Decrypting Bytes: " + bytesToString(decrypted));
         System.out.println("Decrypted String: " + new String(decrypted));
+        return decrypted.toString();
     }
 
 }

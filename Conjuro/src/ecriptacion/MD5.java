@@ -11,7 +11,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException; 
   
 // Java program to calculate MD5 hash value 
-public class MD5 { 
+public class MD5 implements IAlgorithm  { 
     public static String getMd5(String input) 
     { 
         try { 
@@ -40,9 +40,14 @@ public class MD5 {
         } 
     }
     
-     public void encrypt(String pdata, String pkey) {
+     public String encrypt(String pdata, String pkey) {
          System.out.println(""+getMd5(pdata));
+         return getMd5(pdata);
      }
+     
+      public String decrypt(String pText, String pKey){
+        return pText;
+    }
   
     // Driver code 
     public static void main(String args[]) throws NoSuchAlgorithmException 
