@@ -26,10 +26,31 @@ public class Card {
         key1 = pKey1;
         key2 = pKey2;
         type = pType;
+        generateDescripEncrypted();
     }
     
     private void generateDescripEncrypted(){
         IAlgorithm alg = Security.generateAlgorithm(type);
         descriptionEncryted = alg.encrypt(description, key1);  
+    }
+    
+    public String getName(){
+        return name;
+    }
+    
+    public String getDescription(){
+        return description;
+    }
+    
+    public String getDescriptionEncryted(){
+        return descriptionEncryted;
+    }
+    
+    public String getKey1(){
+        return key1;
+    }
+    
+    public String getKey2(){
+        return key2;
     }
 }
