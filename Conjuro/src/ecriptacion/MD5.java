@@ -4,7 +4,7 @@
  * and open the template in the editor.
  * https://www.geeksforgeeks.org/md5-hash-in-java/
  */
-package codigosEncriptacion;
+package ecriptacion;
 
 import java.math.BigInteger; 
 import java.security.MessageDigest; 

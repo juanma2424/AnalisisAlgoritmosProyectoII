@@ -4,7 +4,7 @@
  * and open the template in the editor.
  *https://www.sanfoundry.com/java-program-implement-rsa-algorithm/
  */
-package codigosEncriptacion;
+package ecriptacion;
 
 import java.io.DataInputStream;
 import java.io.IOException;

@@ -5,7 +5,7 @@
  * https://slogix.in/how-to-encrypt-and-decrypt-data-using-aes-in-java#Source-code
  * https://www.tutorialspoint.com/java_cryptography/java_cryptography_keygenerator.htm
  */
-package codigosEncriptacion;
+package ecriptacion;
 
 import javax.swing.*;
 import java.security.SecureRandom;
