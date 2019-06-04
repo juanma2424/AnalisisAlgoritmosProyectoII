@@ -40,11 +40,10 @@ void read()
 int main()
 {
     read();
-   
     for (int i = 0; i < 101; i++)
     {
        //encryp("aaaa");
-       encryp(conjuros[38]);
+       encryp(conjuros[i]);
        break;
     }
 

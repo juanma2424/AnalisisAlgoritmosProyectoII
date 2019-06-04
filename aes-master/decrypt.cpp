@@ -159,9 +159,9 @@ void AESDecrypt(unsigned char *encryptedMessage, unsigned char *expandedKey, uns
 int main()
 {
 
-	cout << "=============================" << endl;
-	cout << " 128-bit AES Decryption Tool " << endl;
-	cout << "=============================" << endl;
+	// cout << "=============================" << endl;
+	// cout << " 128-bit AES Decryption Tool " << endl;
+	// cout << "=============================" << endl;
 
 	// Read in the message from message.aes
 	string msgstr;
@@ -172,9 +172,6 @@ int main()
 	{
 		getline(infile, msgstr); // The first line of file is the message
 		cout << "Read in encrypted message from message.aes" << endl;
-		cout << '\n';
-		cout << msgstr.size();
-		cout << '\n';
 		infile.close();
 	}
 
@@ -182,9 +179,7 @@ int main()
 		cout << "Unable to open file";
 
 	char *msg = new char[msgstr.size() + 1];
-	cout << '\n';
-	cout << &msg;
-	cout << '\n';
+
 
 	strcpy(msg, msgstr.c_str());
 
