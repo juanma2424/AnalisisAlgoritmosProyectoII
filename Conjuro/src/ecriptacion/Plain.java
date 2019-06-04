@@ -9,7 +9,7 @@ package ecriptacion;
  *
  * @author adri-
  */
-public class Plain extends Security {
+public class Plain implements IAlgorithm {
     
     public Plain(){
         

@@ -9,7 +9,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Sha256 extends Security{
+public class Sha256 implements IAlgorithm{
     
     public String encrypt(String pText, String pKey){
         String hashText = "";

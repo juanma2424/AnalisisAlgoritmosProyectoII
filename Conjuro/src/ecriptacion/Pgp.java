@@ -9,7 +9,7 @@ package ecriptacion;
  *
  * @author adri-
  */
-public class Pgp extends Security{
+public class Pgp implements IAlgorithm{
     
     public String encrypt(String pText, String pKey){
         PGPFileProcessor pgpFile = new PGPFileProcessor();

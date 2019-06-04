@@ -9,11 +9,26 @@ package ecriptacion;
  *
  * @author adri-
  */
-public abstract class Security {
+public class Security {
     
-    public abstract String encrypt(String pText, String pKey);
-    
-    public abstract String decrypt(String pText, String pKey);
+    public static IAlgorithm generateAlgorithm(String pType){
+        switch(pType){
+            case "Plain":
+                return new Plain();
+            case "Sha256":
+                return new Sha256();
+            case "TresDes":
+                return new TresDes();
+            case "Pgp":
+                return new Pgp();
+            case "Md5":
+                return new Sha256();
+            case "Aes":
+                return new Sha256();
+            default:
+                return new Sha256();         
+        }
+    }
     
     
 }
