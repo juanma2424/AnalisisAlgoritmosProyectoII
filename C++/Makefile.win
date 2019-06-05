@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = FileManagement.o GenerateBook.o main.o Sha256.o encrypt.o decrypt.o Structure.o
-LINKOBJ  = FileManagement.o GenerateBook.o main.o Sha256.o encrypt.o decrypt.o Structure.o
+OBJ      = FileManagement.o GenerateBook.o main.o Sha256.o Structure.o Encrypt.o Decrypt.o
+LINKOBJ  = FileManagement.o GenerateBook.o main.o Sha256.o Structure.o Encrypt.o Decrypt.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -std=c++11
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
@@ -36,11 +36,11 @@ main.o: main.cpp
 Sha256.o: Sha256.cpp
 	$(CPP) -c Sha256.cpp -o Sha256.o $(CXXFLAGS)
 
-encrypt.o: encrypt.cpp
-	$(CPP) -c encrypt.cpp -o encrypt.o $(CXXFLAGS)
-
-decrypt.o: decrypt.cpp
-	$(CPP) -c decrypt.cpp -o decrypt.o $(CXXFLAGS)
-
 Structure.o: Structure.cpp
 	$(CPP) -c Structure.cpp -o Structure.o $(CXXFLAGS)
+
+Encrypt.o: Encrypt.cpp
+	$(CPP) -c Encrypt.cpp -o Encrypt.o $(CXXFLAGS)
+
+Decrypt.o: Decrypt.cpp
+	$(CPP) -c Decrypt.cpp -o Decrypt.o $(CXXFLAGS)

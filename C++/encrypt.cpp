@@ -1,10 +1,10 @@
-//cout << "\n--------------\n";
-
 #include <iostream>
 #include <cstring>
 #include <fstream>
 #include <sstream>
 #include "Structure.h"
+#include "Encrypt.h"
+
 Structure stke = Structure();
 
 using namespace std;
@@ -16,7 +16,7 @@ using namespace std;
  * (estado,subclave)
  * entra un estado u una Subclave y se unen en una nueva mediante un XOR binario 
  */
-void AddRoundKey(unsigned char *state, unsigned char *roundKey)
+void Encrypt::AddRoundKey(unsigned char *state, unsigned char *roundKey)
 {
 	for (int i = 0; i < 16; i++)
 	{
@@ -31,7 +31,7 @@ void AddRoundKey(unsigned char *state, unsigned char *roundKey)
  * entra un estado y se codifica con la primer fila de la tabla S 
  */
 //SubBytes
-void SubByte(unsigned char *state)
+void Encrypt::SubByte(unsigned char *state)
 {
 	for (int i = 0; i < 16; i++)
 	{
@@ -41,7 +41,7 @@ void SubByte(unsigned char *state)
 
 // Desplazar a la izquierda rotacion correspondiente a las columnas
 // entra un estado sale la tabla con el shif hecho
-void ShiftRow(unsigned char *state)
+void Encrypt::ShiftRow(unsigned char *state)
 {
 	unsigned char tmp[16];
 
@@ -87,7 +87,7 @@ void ShiftRow(unsigned char *state)
 //  * | 3 | 1 | 1 | 2 |
 //  * 
 //  */
-void MixColumns(unsigned char *state)
+void Encrypt::MixColumns(unsigned char *state)
 {
 	unsigned char tmp[16];
 
@@ -121,7 +121,7 @@ void MixColumns(unsigned char *state)
 //  * El número de rondas se define en AESEncrypt ()
 //  * sub proceso
 //  */
-void Rounds(unsigned char *state, unsigned char *key)
+void Encrypt::Rounds(unsigned char *state, unsigned char *key)
 {
 	SubByte(state);
 	ShiftRow(state);
@@ -131,7 +131,7 @@ void Rounds(unsigned char *state, unsigned char *key)
 //
 //// Igual que Round () excepto que no mezcla columnas
 //// proceso final
-void FinalRound(unsigned char *state, unsigned char *key)
+void Encrypt::FinalRound(unsigned char *state, unsigned char *key)
 {
 	SubByte(state);
 	ShiftRow(state);
@@ -143,7 +143,7 @@ void FinalRound(unsigned char *state, unsigned char *key)
 // *  (Mensaje a encriptar ,expandedKey ,encryptedMessage )
 // *  (mensaje + i (16), arraychar[176], arraychar[largodelmns])
 // */
-void AESEncrypt(unsigned char *message, unsigned char *expandedKey, unsigned char *encryptedMessage)
+void Encrypt::AESEncrypt(unsigned char *message, unsigned char *expandedKey, unsigned char *encryptedMessage)
 {
 
 	unsigned char state[16]; // Almacena los primeros 16 bytes del mensaje original
@@ -171,7 +171,7 @@ void AESEncrypt(unsigned char *message, unsigned char *expandedKey, unsigned cha
 	}
 }
 
-void encryp(string msg)
+void Encrypt::encryp(string msg)
 {
 
 	// cout << "=============================" << endl;
@@ -276,3 +276,4 @@ void encryp(string msg)
 
 
 }
+

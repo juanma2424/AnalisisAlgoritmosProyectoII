@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include "Structure.h"
+#include "Decrypt.h"
 //
 using namespace std;
 
@@ -14,7 +15,7 @@ Structure stu = Structure();
 
 
 
-void SubRoundKey(unsigned char *state, unsigned char *roundKey)
+void Decrypt::SubRoundKey(unsigned char *state, unsigned char *roundKey)
 {
 	for (int i = 0; i < 16; i++)
 	{
@@ -34,7 +35,7 @@ void SubRoundKey(unsigned char *state, unsigned char *roundKey)
  * | 1 | 1 | 2 | 3 |
  * | 3 | 1 | 1 | 2 |
  */
-void InverseMixColumns(unsigned char *state)
+void Decrypt::InverseMixColumns(unsigned char *state)
 {
 	unsigned char tmp[16];
 
@@ -65,7 +66,7 @@ void InverseMixColumns(unsigned char *state)
 }
 
 // Desplaza las filas a la derecha (en lugar de a la izquierda) para el descifrado
-void ShiftRows(unsigned char *state)
+void Decrypt::ShiftRows(unsigned char *state)
 {
 	unsigned char tmp[16];
 
@@ -102,7 +103,7 @@ void ShiftRows(unsigned char *state)
 /* Realizar sustitución a cada uno de los 16 bytes.
  * Utiliza caja S inversa como tabla de búsqueda
  */
-void SubBytes(unsigned char *state)
+void Decrypt::SubBytes(unsigned char *state)
 {
 	for (int i = 0; i < 16; i++)
 	{ // Realizar sustitución a cada uno de los 16 bytes
@@ -114,7 +115,7 @@ void SubBytes(unsigned char *state)
  * El número de rondas se define en AESDecrypt ()
 // * No en vano, los pasos son los pasos de encriptación pero invertidos.
 // */
-void Round(unsigned char *state, unsigned char *key)
+void Decrypt::Round(unsigned char *state, unsigned char *key)
 {
 	SubRoundKey(state, key);
 	InverseMixColumns(state);
@@ -123,7 +124,7 @@ void Round(unsigned char *state, unsigned char *key)
 }
 
 // Igual que Round () pero no InverseMixColumns
-void InitialRound(unsigned char *state, unsigned char *key)
+void Decrypt::InitialRound(unsigned char *state, unsigned char *key)
 {
 	SubRoundKey(state, key);
 	ShiftRows(state);
@@ -133,7 +134,7 @@ void InitialRound(unsigned char *state, unsigned char *key)
 /* La función de descifrado AES
  * Organiza todos los pasos de descifrado en una función
  */
-void AESDecrypt(unsigned char *encryptedMessage, unsigned char *expandedKey, unsigned char *decryptedMessage)
+void Decrypt::AESDecrypt(unsigned char *encryptedMessage, unsigned char *expandedKey, unsigned char *decryptedMessage)
 {
 	unsigned char state[16]; // Stores the first 16 bytes of encrypted message
 
@@ -160,7 +161,7 @@ void AESDecrypt(unsigned char *encryptedMessage, unsigned char *expandedKey, uns
 	}
 }
 
-void decrypt()
+void Decrypt::decryptData()
 {
 
 	// cout << "=============================" << endl;
@@ -254,3 +255,4 @@ void decrypt()
 
 	
 }
+#include "Decrypt.h"
