@@ -211,18 +211,18 @@ string Encrypt::encryp(string msg)
 
 	unsigned char *encryptedMessage = new unsigned char[paddedMessageLen]; //el puntero encryptedMessage apunta a un arreglo de chars de paddedMessageLen de largo
 
-	string str;
-	ifstream infile;															 // flujo de entrada para operar en archivos.
-	infile.open("keyfile", ios::in | ios::binary); // abre el archivo
-
-	if (infile.is_open())
-	{
-		getline(infile, str); // La primera línea de archivo debe ser la clave guardad en str
-		infile.close();
-	}
-
-	else
-		cout << "Unable to open file";
+	string str ="00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff";
+//	ifstream infile;															 // flujo de entrada para operar en archivos.
+//	infile.open("keyfile", ios::in | ios::binary); // abre el archivo
+//
+//	if (infile.is_open())
+//	{
+//		getline(infile, str); // La primera línea de archivo debe ser la clave guardad en str
+//		infile.close();
+//	}
+//
+//	else
+//		cout << "Unable to open file";
 
 	istringstream hex_chars_stream(str); //Clase de flujo de entrada para operar en cadenas
 
@@ -249,11 +249,11 @@ string Encrypt::encryp(string msg)
 
 	// mensaje encriptado en hex
 //	cout << "Encrypted message in hex:" << endl;
-	for (int i = 0; i < paddedMessageLen; i++)
-	{
-		cout << hex << (int)encryptedMessage[i];
-		cout << " ";
-	}
+//	for (int i = 0; i < paddedMessageLen; i++)
+//	{
+//		cout << hex << (int)encryptedMessage[i];
+//		cout << " ";
+//	}
 
 	cout << endl;
 	
@@ -263,15 +263,15 @@ string Encrypt::encryp(string msg)
 	cout<< sName;
 	
 		cout<<"\n--------------------------------\n";
-	char *data = (char *)encryptedMessage;
-	int size = 200;
-	std::string myString(data, size);
-	
-		cout<<"\n-----------200---------------------\n";
-	cout<< myString;
-
-
-	cout<<"\n--------------------------------\n";
+//	char *data = (char *)encryptedMessage;
+//	int size = 200;
+//	std::string myString(data, size);
+//	
+//		cout<<"\n-----------200---------------------\n";
+//	cout<< myString;
+//
+//
+//	cout<<"\n--------------------------------\n";
 
 	
 	
@@ -292,8 +292,8 @@ string Encrypt::encryp(string msg)
 	// Free memory
 	delete[] paddedMessage;
 	delete[] encryptedMessage;
-	cout<<"\n--------------------------------\n";
-	cout<<"\n--------------------------------\n";
+//	cout<<"\n--------------------------------\n";
+//	cout<<"\n--------------------------------\n";
 	return sName;
 
 

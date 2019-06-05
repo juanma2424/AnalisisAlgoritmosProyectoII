@@ -240,13 +240,13 @@ void Decrypt::decryptData(string pData)
 		AESDecrypt(encryptedMessage + i, expandedKey, decryptedMessage + i);
 	}
 
-	cout << "Decrypted message in hex:" << endl;
-	for (int i = 0; i < messageLen; i++)
-	{
-		cout << hex << (int)decryptedMessage[i];
-		cout << " ";
-	}
-	cout << endl;
+//	cout << "Decrypted message in hex:" << endl;
+//	for (int i = 0; i < messageLen; i++)
+//	{
+//		cout << hex << (int)decryptedMessage[i];
+//		cout << " ";
+//	}
+//	cout << endl;
 	cout << "Decrypted message: ";
 	for (int i = 0; i < messageLen; i++)
 	{

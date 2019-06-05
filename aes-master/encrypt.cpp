@@ -6,6 +6,7 @@
 #include <sstream>
 #include "structures.h"
 
+
 using namespace std;
 
 /* Sirve como la ronda inicial durante el cifrado
