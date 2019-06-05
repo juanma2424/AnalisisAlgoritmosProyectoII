@@ -12,7 +12,7 @@ class Encrypt
 		void Rounds(unsigned char *state, unsigned char *key);
 		void FinalRound(unsigned char *state, unsigned char *key);
 		void AESEncrypt(unsigned char *message, unsigned char *expandedKey, unsigned char *encryptedMessage);
-		void encryp(std::string msg);
+		std::string encryp(std::string msg);
 		
 	protected:
 };

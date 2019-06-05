@@ -5,7 +5,6 @@ class Decrypt
 {
 	public:
 		Decrypt(){}
-		
 		void SubRoundKey(unsigned char *state, unsigned char *roundKey);
 		void InverseMixColumns(unsigned char *state);
 		void ShiftRows(unsigned char *state);
@@ -13,7 +12,7 @@ class Decrypt
 		void Round(unsigned char *state, unsigned char *key);
 		void InitialRound(unsigned char *state, unsigned char *key);
 		void AESDecrypt(unsigned char *encryptedMessage, unsigned char *expandedKey, unsigned char *decryptedMessage);
-		void decryptData();
+		void decryptData(std::string);
 	protected:
 };
 

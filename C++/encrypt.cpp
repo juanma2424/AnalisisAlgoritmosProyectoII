@@ -171,7 +171,7 @@ void Encrypt::AESEncrypt(unsigned char *message, unsigned char *expandedKey, uns
 	}
 }
 
-void Encrypt::encryp(string msg)
+string Encrypt::encryp(string msg)
 {
 
 	// cout << "=============================" << endl;
@@ -256,23 +256,25 @@ void Encrypt::encryp(string msg)
 	}
 
 	cout << endl;
+	
+	string sName((char*) encryptedMessage);
 
-	// Write the encrypted string out to file "message.aes"
-	ofstream outfile;
-	outfile.open("message.aes", ios::out | ios::binary);
-	if (outfile.is_open())
-	{
-		outfile << encryptedMessage;
-		outfile.close();
-	//	cout << "Wrote encrypted message to file message.aes" << endl;
-	}
+//	// Write the encrypted string out to file "message.aes"
+//	ofstream outfile;
+//	outfile.open("message.aes", ios::out | ios::binary);
+//	if (outfile.is_open())
+//	{
+//		outfile << encryptedMessage;
+//		outfile.close();
+//	//	cout << "Wrote encrypted message to file message.aes" << endl;
+//	}
 
-	else
-		cout << "Unable to open file";
+
 
 	// Free memory
 	delete[] paddedMessage;
 	delete[] encryptedMessage;
+	return sName;
 
 
 }

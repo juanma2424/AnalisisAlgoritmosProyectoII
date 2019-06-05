@@ -23,19 +23,19 @@ void Decrypt::SubRoundKey(unsigned char *state, unsigned char *roundKey)
 		state[i] ^= roundKey[i];
 	}
 }
-
-/* InverseMixColumns usa las tablas de consulta mul9, mul11, mul13, mul14
- * Desmezcla las columnas invirtiendo el efecto de MixColumns en el cifrado
- * | 14 | 11 | 13 | 9  |
- * | 9  | 14 | 11 | 13 |
- * | 13 | 9  | 14 | 11 |
- * | 11 | 13 | 9  | 14 |
- //////////////////////////////////
- * | 2 | 3 | 1 | 1 |
- * | 1 | 2 | 3 | 1 |
- * | 1 | 1 | 2 | 3 |
- * | 3 | 1 | 1 | 2 |
- */
+//
+///* InverseMixColumns usa las tablas de consulta mul9, mul11, mul13, mul14
+// * Desmezcla las columnas invirtiendo el efecto de MixColumns en el cifrado
+// * | 14 | 11 | 13 | 9  |
+// * | 9  | 14 | 11 | 13 |
+// * | 13 | 9  | 14 | 11 |
+// * | 11 | 13 | 9  | 14 |
+// //////////////////////////////////
+// * | 2 | 3 | 1 | 1 |
+// * | 1 | 2 | 3 | 1 |
+// * | 1 | 1 | 2 | 3 |
+// * | 3 | 1 | 1 | 2 |
+// */
 void Decrypt::InverseMixColumns(unsigned char *state)
 {
 	unsigned char tmp[16];
@@ -66,7 +66,7 @@ void Decrypt::InverseMixColumns(unsigned char *state)
 	}
 }
 
-// Desplaza las filas a la derecha (en lugar de a la izquierda) para el descifrado
+//// Desplaza las filas a la derecha (en lugar de a la izquierda) para el descifrado
 void Decrypt::ShiftRows(unsigned char *state)
 {
 	unsigned char tmp[16];
@@ -132,9 +132,9 @@ void Decrypt::InitialRound(unsigned char *state, unsigned char *key)
 	SubBytes(state);
 }
 
-/* La función de descifrado AES
- * Organiza todos los pasos de descifrado en una función
- */
+///* La función de descifrado AES
+// * Organiza todos los pasos de descifrado en una función
+// */
 void Decrypt::AESDecrypt(unsigned char *encryptedMessage, unsigned char *expandedKey, unsigned char *decryptedMessage)
 {
 	unsigned char state[16]; // Stores the first 16 bytes of encrypted message
@@ -162,7 +162,7 @@ void Decrypt::AESDecrypt(unsigned char *encryptedMessage, unsigned char *expande
 	}
 }
 
-void Decrypt::decryptData()
+void Decrypt::decryptData(string pData)
 {
 
 	// cout << "=============================" << endl;
@@ -170,19 +170,19 @@ void Decrypt::decryptData()
 	// cout << "=============================" << endl;
 
 	// Read in the message from message.aes
-	string msgstr ="";
-	ifstream infile;
-	infile.open("message.aes", ios::in | ios::binary);
-
-	if (infile.is_open())
-	{
-		getline(infile, msgstr); // The first line of file is the message
-		cout << "Read in encrypted message from message.aes" << endl;
-		infile.close();
-	}
-
-	else
-		cout << "Unable to open file";
+	string msgstr =pData;
+//	ifstream infile;
+//	infile.open("message.aes", ios::in | ios::binary);
+//
+//	if (infile.is_open())
+//	{
+//		getline(infile, msgstr); // The first line of file is the message
+//		cout << "Read in encrypted message from message.aes" << endl;
+//		infile.close();
+//	}
+//
+//	else
+//		cout << "Unable to open file";
 
 	char *msg = new char[msgstr.size() + 1];
 
