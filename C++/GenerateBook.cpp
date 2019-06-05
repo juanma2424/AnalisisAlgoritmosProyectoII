@@ -18,8 +18,8 @@ void GenerateBook::makeBook()
 	    	conjuro = text.substr(i*LENGTH_CONJURO,LENGTH_CONJURO);
 	    	
 	    //	book[1][i] = sha256(conjuro);
-	    	 encpt.encryp(conjuro);
-	    	 //a.decryptData();
+	    	 string data = encpt.encryp(conjuro);
+	    	 a.decryptData(data);
 	    	
 	    	 
 	    	 break;
