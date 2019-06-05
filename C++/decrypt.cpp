@@ -5,13 +5,14 @@
 #include "Structure.h"
 #include "Decrypt.h"
 //
+Structure stu = Structure();
 using namespace std;
 
 /* Se usa en Round () y sirve como la ronda final durante el descifrado
  * SubRoundKey es simplemente un XOR de un bloque de 128 bits con la clave de 128 bits.
  * Así que básicamente hace lo mismo que AddRoundKey en el cifrado
  */
-Structure stu = Structure();
+
 
 
 

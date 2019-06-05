@@ -1,15 +1,15 @@
 #include "GenerateBook.h"
-#include "Encrypt.h"
+
 #include "Decrypt.h"
 	
+ Decrypt a = Dencrypt();	
 
 void GenerateBook::makeBook()
 {
 
 	string conjuro;
-    Decrypt a = Dencrypt();
-    
-	Encrypt encpt = Encrypt();
+   
+//	Encrypt encpt = Encrypt();
    
 	
 	#pragma omp parallel
@@ -19,8 +19,8 @@ void GenerateBook::makeBook()
 	    	conjuro = text.substr(i*LENGTH_CONJURO,LENGTH_CONJURO);
 	    	
 	    //	book[1][i] = sha256(conjuro);
-	    	 encpt.encryp(conjuro);
-	    	 a.decryptData();
+	    //	 encpt.encryp(conjuro);
+	    	// a.decryptData();
 	    	
 	    	 
 	    	 break;

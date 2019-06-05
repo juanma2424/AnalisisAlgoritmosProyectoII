@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0000000000000000000000000
-UnitCount=11
+UnitCount=13
 
 [VersionInfo]
 Major=1
@@ -121,7 +121,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit9]
-FileName=decrypt.cpp
+FileName=Structure.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -131,7 +131,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit10]
-FileName=Structure.h
+FileName=Encrypt.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -141,10 +141,27 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit12]
-FileName=Structure.cpp
+FileName=Decrypt.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
 
 [Unit11]
-FileName=Structure.cpp
+FileName=Encrypt.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit13]
+FileName=Decrypt.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -154,7 +171,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit8]
-FileName=encrypt.cpp
+FileName=Structure.h
 CompileCpp=1
 Folder=
 Compile=1

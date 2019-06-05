@@ -5,6 +5,7 @@ class Decrypt
 {
 	public:
 		Decrypt(){}
+		
 		void SubRoundKey(unsigned char *state, unsigned char *roundKey);
 		void InverseMixColumns(unsigned char *state);
 		void ShiftRows(unsigned char *state);
