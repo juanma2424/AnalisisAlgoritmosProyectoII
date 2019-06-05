@@ -258,6 +258,24 @@ string Encrypt::encryp(string msg)
 	cout << endl;
 	
 	string sName((char*) encryptedMessage);
+	
+		cout<<"\n------------line--------------------\n";
+	cout<< sName;
+	
+		cout<<"\n--------------------------------\n";
+	char *data = (char *)encryptedMessage;
+	int size = 200;
+	std::string myString(data, size);
+	
+		cout<<"\n-----------200---------------------\n";
+	cout<< myString;
+
+
+	cout<<"\n--------------------------------\n";
+
+	
+	
+
 
 //	// Write the encrypted string out to file "message.aes"
 //	ofstream outfile;
@@ -269,11 +287,13 @@ string Encrypt::encryp(string msg)
 //	//	cout << "Wrote encrypted message to file message.aes" << endl;
 //	}
 
-
+	
 
 	// Free memory
 	delete[] paddedMessage;
 	delete[] encryptedMessage;
+	cout<<"\n--------------------------------\n";
+	cout<<"\n--------------------------------\n";
 	return sName;
 
 
