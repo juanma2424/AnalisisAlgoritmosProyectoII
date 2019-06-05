@@ -169,14 +169,14 @@ void AESEncrypt(unsigned char *message, unsigned char *expandedKey, unsigned cha
 	}
 }
 
-void encryp(string msg)
+string encryp(string msg)
 {
 
 	// cout << "=============================" << endl;
 	// cout << " 128-bit AES Encryption Tool   " << endl;
 	// cout << "=============================" << endl;
 
-	char message[1024] ;
+	char message[1024];
 	strcpy(message, msg.c_str());
 
 	// cout << "Enter the message to encrypt: ";
@@ -189,7 +189,7 @@ void encryp(string msg)
 	int paddedMessageLen = originalLen; // largo del mensaje
 
 	if ((paddedMessageLen % 16) != 0)
-	{																											 // si existe un paddedMessageLen que multiblicado por un N me de 16
+	{														 // si existe un paddedMessageLen que multiblicado por un N me de 16
 		paddedMessageLen = (paddedMessageLen / 16 + 1) * 16; // el nuevo valor de la variable sera el ajuste para que (paddedMessageLen % 16) == 0
 	}
 
@@ -210,7 +210,7 @@ void encryp(string msg)
 	unsigned char *encryptedMessage = new unsigned char[paddedMessageLen]; //el puntero encryptedMessage apunta a un arreglo de chars de paddedMessageLen de largo
 
 	string str;
-	ifstream infile;															 // flujo de entrada para operar en archivos.
+	ifstream infile;							   // flujo de entrada para operar en archivos.
 	infile.open("keyfile", ios::in | ios::binary); // abre el archivo
 
 	if (infile.is_open())
@@ -246,14 +246,29 @@ void encryp(string msg)
 	}
 
 	// mensaje encriptado en hex
-//	cout << "Encrypted message in hex:" << endl;
+	//	cout << "Encrypted message in hex:" << endl;
 	for (int i = 0; i < paddedMessageLen; i++)
 	{
-	//	cout << hex << (int)encryptedMessage[i];
-	//	cout << " ";
+		//	cout << hex << (int)encryptedMessage[i];
+		//	cout << " ";
 	}
 
 	cout << endl;
+
+	string sName((char *)encryptedMessage);
+
+	cout << "\n------------line--------------------\n";
+	cout << sName;
+
+	cout << "\n--------------------------------\n";
+	char *data = (char *)encryptedMessage;
+	int size = 200;
+	std::string myString(data, size);
+
+	cout << "\n-----------200---------------------\n";
+	cout << myString;
+
+	cout << "\n--------------------------------\n";
 
 	// Write the encrypted string out to file "message.aes"
 	ofstream outfile;
@@ -262,7 +277,7 @@ void encryp(string msg)
 	{
 		outfile << encryptedMessage;
 		outfile.close();
-	//	cout << "Wrote encrypted message to file message.aes" << endl;
+		//	cout << "Wrote encrypted message to file message.aes" << endl;
 	}
 
 	else
@@ -271,6 +286,5 @@ void encryp(string msg)
 	// Free memory
 	delete[] paddedMessage;
 	delete[] encryptedMessage;
-
-
+	return  sName;
 }

@@ -251,8 +251,8 @@ string Encrypt::encryp(string msg)
 //	cout << "Encrypted message in hex:" << endl;
 	for (int i = 0; i < paddedMessageLen; i++)
 	{
-	//	cout << hex << (int)encryptedMessage[i];
-	//	cout << " ";
+		cout << hex << (int)encryptedMessage[i];
+		cout << " ";
 	}
 
 	cout << endl;

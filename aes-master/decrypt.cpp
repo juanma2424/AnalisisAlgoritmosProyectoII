@@ -180,12 +180,9 @@ int main()
 
 	char *msg = new char[msgstr.size() + 1];
 
-
 	strcpy(msg, msgstr.c_str());
 
 	int n = strlen((const char *)msg);
-
-	
 
 	unsigned char *encryptedMessage = new unsigned char[n];
 	for (int i = 0; i < n; i++)
@@ -197,19 +194,21 @@ int main()
 	delete[] msg;
 
 	// Read in the key
-	string keystr;
-	ifstream keyfile;
-	keyfile.open("keyfile", ios::in | ios::binary);
+	string keystr ="00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff";
+	// Read in the key
+	// string keystr;
+	// ifstream keyfile;
+	// keyfile.open("keyfile", ios::in | ios::binary);
 
-	if (keyfile.is_open())
-	{
-		getline(keyfile, keystr); // The first line of file should be the key
-		cout << "Read in the 128-bit key from keyfile" << endl;
-		keyfile.close();
-	}
+	// if (keyfile.is_open())
+	// {
+	// 	getline(keyfile, keystr); // The first line of file should be the key
+	// 	cout << "Read in the 128-bit key from keyfile" << endl;
+	// 	keyfile.close();
+	// }
 
-	else
-		cout << "Unable to open file";
+	// else
+	// 	cout << "Unable to open file";
 
 	istringstream hex_chars_stream(keystr);
 	unsigned char key[16];

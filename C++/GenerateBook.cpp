@@ -16,10 +16,10 @@ void GenerateBook::makeBook()
         #pragma omp for 
         for(int i = 0; i < 100; i++){
 	    	conjuro = text.substr(i*LENGTH_CONJURO,LENGTH_CONJURO);
-	    	
 	    //	book[1][i] = sha256(conjuro);
 	    	 string data = encpt.encryp(conjuro);
-	    	 //a.decryptData(;
+	    	 cout<<data;
+	    	 //a.decryptData(data);
 	    	
 	    	 
 	    	 break;

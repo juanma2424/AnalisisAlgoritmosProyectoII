@@ -43,7 +43,9 @@ int main()
     for (int i = 0; i < 101; i++)
     {
        //encryp("aaaa");
-       encryp(conjuros[i]);
+       string data = encryp( "Else±orylase±oraDursley,quevivÝaneneln·mero4dePrivetDrive,estabanorgullososdedecirqueeranmuynormales,afortunadamente.Eranlas·ltimaspersonasqueseesperarÝaencontrarrelacionadasconalgoextra±oomisterioso,");     
+        
+       //Decr(data);
        break;
     }
 
