@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/codigosEncriptacion/AES.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/GUI/Cliente.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/GUI/GameLogic.java</file>
+            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/ecriptacion/RSA.java</file>
+            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/ecriptacion/MD5.java</file>
+            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/ecriptacion/Plain.java</file>
         </group>
     </open-files>
 </project-private>
