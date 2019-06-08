@@ -1,0 +1,49 @@
+# Project: AnalisisII
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = FileManagement.o GenerateBook.o main.o Sha256.o Structure.o Encrypt.o Decrypt.o AES.o
+LINKOBJ  = FileManagement.o GenerateBook.o main.o Sha256.o Structure.o Encrypt.o Decrypt.o AES.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -L"C:/Program Files/OpenSSL-Win64/lib" -static-libgcc -std=c++11
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files/OpenSSL-Win64/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"C:/Program Files/OpenSSL-Win64/include"
+BIN      = AnalisisII.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+FileManagement.o: FileManagement.cpp
+	$(CPP) -c FileManagement.cpp -o FileManagement.o $(CXXFLAGS)
+
+GenerateBook.o: GenerateBook.cpp
+	$(CPP) -c GenerateBook.cpp -o GenerateBook.o $(CXXFLAGS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+Sha256.o: Sha256.cpp
+	$(CPP) -c Sha256.cpp -o Sha256.o $(CXXFLAGS)
+
+Structure.o: Structure.cpp
+	$(CPP) -c Structure.cpp -o Structure.o $(CXXFLAGS)
+
+Encrypt.o: Encrypt.cpp
+	$(CPP) -c Encrypt.cpp -o Encrypt.o $(CXXFLAGS)
+
+Decrypt.o: Decrypt.cpp
+	$(CPP) -c Decrypt.cpp -o Decrypt.o $(CXXFLAGS)
+
+AES.o: AES.cpp
+	$(CPP) -c AES.cpp -o AES.o $(CXXFLAGS)
