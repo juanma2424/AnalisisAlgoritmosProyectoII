@@ -17,7 +17,7 @@ class GenerateBook
 	private:
 		void makeBook();
 		string text;
-		string book[2][100];
+		string book[3][100];
 		const int LENGTH_CONJURO = 200;
 };
 

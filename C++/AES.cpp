@@ -5,8 +5,11 @@
 #include <stdlib.h> 
 #include <iomanip>
 #include <sstream>
+#include <string> 
+
 
 using namespace std;
+string keym;
 
 AES::AES(int keyLen = 256)
 {
@@ -32,6 +35,29 @@ AES::AES(int keyLen = 256)
   blockBytesLen = 4 * this->Nb * sizeof(unsigned char);
 }
 
+string AES::getkey(){
+	return keym;
+}
+
+
+string AES::encriptAES(unsigned char po[])
+{
+  AES aes(256);
+
+  unsigned char* keydata = aes.newKey(); 
+  unsigned char key[] = {keydata[0],keydata[1],keydata[2],keydata[3],keydata[4],keydata[5],keydata[6],keydata[7],
+                         keydata[8],keydata[9],keydata[10],keydata[11],keydata[12],keydata[13],keydata[14],keydata[15],
+						 keydata[16],keydata[17],keydata[18],keydata[19],keydata[20],keydata[21],keydata[22],keydata[23],
+						 keydata[24],keydata[25],keydata[26],keydata[27],keydata[28], keydata[29],keydata[30]};
+  unsigned int len = 0;
+  unsigned char *out = aes.EncryptECB(po, 208 * sizeof(unsigned char), key, len);
+ // unsigned char *innew = aes.DecryptECB(out, 208 * sizeof(unsigned char), key, len);
+  //cout << innew << endl;
+  string strOut((char*) out);
+  delete[] out;
+  //delete[] innew;
+  return strOut;
+}
 
 
 
@@ -44,10 +70,18 @@ unsigned char* AES::newKey(){
 //   int min = 1 + ltm->tm_min;
 //   int sec = 1 + ltm->tm_sec; 
 	int numkeys[31];
+	keym = "";
 	for(int indexTime= 0; indexTime<31;indexTime++){
 	    int sec = 1 + ltm->tm_sec; 
 		int numKey = (rand()%1000)+1+sec;
-		numkeys[indexTime] = numKey ;
+		numkeys[indexTime] = numKey;
+		std::string out_string;
+		std::stringstream ss;
+		ss << numKey;
+		out_string = ss.str();
+		
+		keym = keym+out_string+",";
+		
 		}
 		 unsigned char outkey [31] = {numkeys[0],numkeys[1],numkeys[2],numkeys[3],numkeys[4],numkeys[5],numkeys[6],numkeys[7],
 									  numkeys[8],numkeys[9],numkeys[10],numkeys[11],numkeys[12],numkeys[13],numkeys[14],numkeys[15], 
