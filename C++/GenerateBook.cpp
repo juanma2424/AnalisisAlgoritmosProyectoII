@@ -34,7 +34,7 @@ void GenerateBook::makeBook()
 	    	cout<<"\n";	
 			cout<<"----------------------KEY-AES-----------------------------"<<endl;
 	    //	book[0][i] = aes.encriptAES((unsigned char*)conjuro.c_str()); 
-	    //	cout<<aes.getKey();
+	    	cout<<aes.getKey();
 			cout<<"\n-------------------------------------------------------"<<endl; 
 			cout<<"\n";
 	    	cout<<"\n";	    	 

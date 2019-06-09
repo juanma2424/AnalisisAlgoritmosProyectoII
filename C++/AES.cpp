@@ -5,12 +5,9 @@
 #include <stdlib.h> 
 #include <iomanip>
 #include <sstream>
-#include <string> 
-
 
 using namespace std;
-string keym;
-
+string auxkey;
 AES::AES(int keyLen = 256)
 {
   this->Nb = 4;
@@ -35,15 +32,48 @@ AES::AES(int keyLen = 256)
   blockBytesLen = 4 * this->Nb * sizeof(unsigned char);
 }
 
-string AES::getkey(){
-	return keym;
+ string AES::getKey(){
+ 	return auxkey;
+ }
+
+
+
+
+unsigned char* AES::newKey(){
+
+	 time_t now = time(0);
+     tm *ltm = localtime(&now);
+//   int min = 1 + ltm->tm_min;
+//   int sec = 1 + ltm->tm_sec; 
+	int numkeys[31];
+	auxkey = "";
+	for(int indexTime= 0; indexTime<31;indexTime++){
+	    int sec = 1 + ltm->tm_sec; 
+		int numKey = (rand()%1000)+1+sec;
+		numkeys[indexTime] = numKey ;
+		
+		string out_string;
+		stringstream ss;
+		ss << numKey;
+		out_string = ss.str();
+		
+		auxkey =  auxkey + out_string +",";	
+		cout<<out_string;
+				
+		
+		}
+		 unsigned char outkey [31] = {numkeys[0],numkeys[1],numkeys[2],numkeys[3],numkeys[4],numkeys[5],numkeys[6],numkeys[7],
+									  numkeys[8],numkeys[9],numkeys[10],numkeys[11],numkeys[12],numkeys[13],numkeys[14],numkeys[15], 
+									  numkeys[16],numkeys[17],numkeys[18],numkeys[19],numkeys[20],numkeys[21],numkeys[22],numkeys[23],
+									 numkeys[24],numkeys[25],numkeys[26],numkeys[27],numkeys[28],numkeys[29],numkeys[30]
+									 };
+	    return  outkey;
 }
 
 
 string AES::encriptAES(unsigned char po[])
 {
   AES aes(256);
-
   unsigned char* keydata = aes.newKey(); 
   unsigned char key[] = {keydata[0],keydata[1],keydata[2],keydata[3],keydata[4],keydata[5],keydata[6],keydata[7],
                          keydata[8],keydata[9],keydata[10],keydata[11],keydata[12],keydata[13],keydata[14],keydata[15],
@@ -57,38 +87,6 @@ string AES::encriptAES(unsigned char po[])
   delete[] out;
   //delete[] innew;
   return strOut;
-}
-
-
-
-
-
-unsigned char* AES::newKey(){
-
-	 time_t now = time(0);
-     tm *ltm = localtime(&now);
-//   int min = 1 + ltm->tm_min;
-//   int sec = 1 + ltm->tm_sec; 
-	int numkeys[31];
-	keym = "";
-	for(int indexTime= 0; indexTime<31;indexTime++){
-	    int sec = 1 + ltm->tm_sec; 
-		int numKey = (rand()%1000)+1+sec;
-		numkeys[indexTime] = numKey;
-		std::string out_string;
-		std::stringstream ss;
-		ss << numKey;
-		out_string = ss.str();
-		
-		keym = keym+out_string+",";
-		
-		}
-		 unsigned char outkey [31] = {numkeys[0],numkeys[1],numkeys[2],numkeys[3],numkeys[4],numkeys[5],numkeys[6],numkeys[7],
-									  numkeys[8],numkeys[9],numkeys[10],numkeys[11],numkeys[12],numkeys[13],numkeys[14],numkeys[15], 
-									  numkeys[16],numkeys[17],numkeys[18],numkeys[19],numkeys[20],numkeys[21],numkeys[22],numkeys[23],
-									 numkeys[24],numkeys[25],numkeys[26],numkeys[27],numkeys[28],numkeys[29],numkeys[30]
-									 };
-	    return  outkey;
 }
 
 

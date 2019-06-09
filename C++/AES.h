@@ -2,7 +2,7 @@
 #define AES_H
 #include<cstring>
 #include <iostream>
-
+#include <string>
 using namespace std;
 
 class AES
@@ -62,16 +62,14 @@ public:
   
   string encriptAES(unsigned char po[]);
   
+  string getKey();
+
   unsigned char *EncryptECB(unsigned char in[], unsigned int inLen, unsigned  char key[], unsigned int &outLen);
 
   unsigned char *DecryptECB(unsigned char in[], unsigned int inLen, unsigned  char key[], unsigned int &outLen);
 
   unsigned char *newKey(); 
   
- 
-   int allkeys[100];
-   string getkey();
-//  int numkeys = 0;
 
 };
 
