@@ -14,23 +14,7 @@ public class MyFileReader {
     private String[] conjuroAES = new String[CANT_SAVE];
     private String[] conjuroSHA = new String[CANT_SAVE];
     private String[] keys = new String[CANT_SAVE];
-    private String[] dataPlay = new String[3];
-
-    public String[] getDataPlay() {
-        return dataPlay;
-    }
-
-    public String[] getConjuroAES() {
-        return conjuroAES;
-    }
-
-    public String[] getConjuroSHA() {
-        return conjuroSHA;
-    }
-
-    public String[] getKeys() {
-        return keys;
-    }
+    private String[] dataPlay = new String[CANT_DATA_PLAY];
 
     public void readConjuro(String pPathBook, String pPathkeys) throws java.io.IOException {
 
@@ -42,8 +26,8 @@ public class MyFileReader {
         BufferedReader bufferKey = new BufferedReader(new FileReader(pPathkeys));
         readLinebyLine = bufferBook.readLine();
 
-        int indexAES = 0;
-        int indexSHA = 0;
+        int indexAES = DATA_CERO;
+        int indexSHA = DATA_CERO;
         while (!(LIMIT_FILE).equals(readLinebyLine)) {
 
             if ((LIMIT_ENCRYPTATION_AES).equals(readLinebyLine)) {
@@ -70,25 +54,36 @@ public class MyFileReader {
         }
         bufferBook.close();
         bufferKey.close();
+        makeDataPlay();
     }
 
     private void makeDataPlay() {
-
         Random r = new Random();
-        int intPost = r.nextInt((99 - 0) + 1) + 0;
-        dataPlay[0] = conjuroAES[intPost];
-        dataPlay[1] = conjuroSHA[intPost];
-        dataPlay[2] = keys[intPost];
+        int intPost = r.nextInt((MAX_DATA_PLAY - MIN_DATA_PLAY) + DATA_ONE) + MIN_DATA_PLAY;
+        dataPlay[DATA_CERO] = conjuroAES[intPost];
+        dataPlay[DATA_ONE] = conjuroSHA[intPost];
+        dataPlay[DATA_TWO] = keys[intPost];
+    }
+    //------------------------GETS-------------------------//
+    public String[] getDataPlay() {
+        return dataPlay;
+    }
 
+    public String[] getConjuroAES() {
+        return conjuroAES;
+    }
+
+    public String[] getConjuroSHA() {
+        return conjuroSHA;
+    }
+
+    public String[] getKeys() {
+        return keys;
     }
 
     public static void main(String[] args) throws java.io.IOException {
         MyFileReader a = new MyFileReader();
         a.readConjuro("C:\\Users\\USER\\Desktop\\Nueva carpeta\\Conjuro.txt", "C:\\Users\\USER\\Desktop\\Nueva carpeta\\Save.txt");
-        a.makeDataPlay();
-        System.out.println(a.getDataPlay()[0]);
-        System.out.println(a.getDataPlay()[1]);
-        System.out.println(a.getDataPlay()[2]);
     }
 
 }

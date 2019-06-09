@@ -19,7 +19,10 @@ public interface Constants {
     public static int CANT_SAVE = 100;
     public static int CANT_DATA_PLAY = 3;
     public static int MAX_DATA_PLAY = 99;
-    public static int MIN_DATA_PLAY = 99;
+    public static int MIN_DATA_PLAY = 0;
+    public static int DATA_CERO = 0;
+    public static int DATA_ONE = 1;
+    public static int DATA_TWO = 2;
     
     //---------------STRINGS---------------------//
     public static String MESSAGE_SEPARATOR = ",";
