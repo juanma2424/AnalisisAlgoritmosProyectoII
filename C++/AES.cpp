@@ -46,9 +46,8 @@ unsigned char* AES::newKey(){
 	int numkeys[31];
 	for(int indexTime= 0; indexTime<31;indexTime++){
 	    int sec = 1 + ltm->tm_sec; 
-		int numKey = (rand()%1000)+1 *sec;
+		int numKey = (rand()%1000)+1+sec;
 		numkeys[indexTime] = numKey ;
-		cout<<numKey <<"\n";
 		}
 		 unsigned char outkey [31] = {numkeys[0],numkeys[1],numkeys[2],numkeys[3],numkeys[4],numkeys[5],numkeys[6],numkeys[7],
 									  numkeys[8],numkeys[9],numkeys[10],numkeys[11],numkeys[12],numkeys[13],numkeys[14],numkeys[15], 
