@@ -19,25 +19,31 @@ public class MyFileReader {
         BufferedReader bufferKey = new BufferedReader(new FileReader(pPathkeys));
         readLinebyLine = bufferBook.readLine();
         
-
-        while (!("END").equals(readLinebyLine)) {
+        int i =0;
+        while (!("X-X-X").equals(readLinebyLine)) {
 
             if (("X--X").equals(readLinebyLine)) {
                 System.out.println("encip " + buildStr);
                 readKey =  bufferKey.readLine();
-                System.out.println("");
                 System.out.println("key " +readKey);
-                buildStr = "";
-                readLinebyLine = bufferBook.readLine();
+                buildStr = "";  
+                //i++;
             }
-            if (("X---X").equals(readLinebyLine)) {
+            if (("X-Y-X").equals(readLinebyLine)) {
                 System.out.println("Sha " + buildStr);
                 buildStr = "";
-                readLinebyLine = bufferBook.readLine();
+                i++;
             }
-            buildStr = buildStr + readLinebyLine;//build strg
+            if(!("X---X").equals(readLinebyLine)&&!("X--X").equals(readLinebyLine)){
+                 buildStr = buildStr + readLinebyLine;//build strg
+            }
             readLinebyLine = bufferBook.readLine();// skip lines
+            
         }
+         System.out.println("--------------------apagar " + i);
+         bufferBook.close();
+         bufferKey.close();
+        
 
     }
 

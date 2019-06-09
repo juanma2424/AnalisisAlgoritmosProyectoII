@@ -23,11 +23,11 @@ void GenerateBook::makeBook()
 	    	file.write(aes.encriptAES((unsigned char*)conjuro.c_str()),"conjuro");
 	    	file.write("X--X","conjuro");
 	     	file.write(sha256(conjuro),"conjuro");
-	     	file.write("X---X","conjuro");
+	     	file.write("X-Y-X","conjuro");
 	    	file.write(aes.getKey(),"save"); 	 
 	    }
-		file.write("END","save"); 
-		file.write("END","conjuro");   	
+		file.write("X-X-X","save"); 
+		file.write("X-X-X","conjuro");   	
 	    file.closeWrite();
 	}
 }
