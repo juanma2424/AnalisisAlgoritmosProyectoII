@@ -34,10 +34,10 @@ void FileManagement::closeWrite(){
 }
 
 void FileManagement::write(string text, string pPath){
-	if(pPath=="save"){
-		save << text + "\n";
+	if(pPath=="conjuro"){
+		conjuro << text + "\n";
 	}else{
-	   conjuro << text + "\n";
+	   save << text + "\n";
 	}
 }
 string FileManagement::getText()

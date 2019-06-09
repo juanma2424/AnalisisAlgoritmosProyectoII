@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0000000000000000000000000
-UnitCount=10
+UnitCount=9
 
 [VersionInfo]
 Major=1
@@ -121,7 +121,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit9]
-FileName=AES.h
+FileName=AES.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -141,11 +141,12 @@ BuildCmd=
 CompileCpp=1
 
 [Unit8]
-FileName=Untitled1
+FileName=AES.h
 Folder=
 Compile=1
 Link=1
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
+CompileCpp=1
 
