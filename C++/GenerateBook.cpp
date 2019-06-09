@@ -11,14 +11,15 @@ void TestECB(unsigned char po[])
   AES aes(256);
 
 
-  
-  unsigned char key[] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x011,
-    0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f };
-
+  unsigned char* keydata = aes.newKey(); 
+  unsigned char key[] = {keydata[0],keydata[1],keydata[2],keydata[3],keydata[4],keydata[5],keydata[6],keydata[7],
+                         keydata[8],keydata[9],keydata[10],keydata[11],keydata[12],keydata[13],keydata[14],keydata[15],
+						 keydata[16],keydata[17],keydata[18],keydata[19],keydata[20],keydata[21],keydata[22],keydata[23],
+						 keydata[24],keydata[25],keydata[26],keydata[27],keydata[28], keydata[29],keydata[30]};
   unsigned int len = 0;
   unsigned char *out = aes.EncryptECB(po, 208 * sizeof(unsigned char), key, len);
   unsigned char *innew = aes.DecryptECB(out, 208 * sizeof(unsigned char), key, len);
-  cout << innew << endl;
+  //cout << innew << endl;
   delete[] out;
   delete[] innew;
 }
@@ -40,13 +41,10 @@ void GenerateBook::makeBook()
         #pragma omp for 
         for(int i = 0; i < 100; i++){
         	
-        	string to = 
-			TestECB((unsigned char*)to.c_str()); 
-	    
-	    //	book[1][i] = sha256(conjuro);
-	    	
-	    	 
-	    	 break;
+        	string to = "hola";
+			TestECB((unsigned char*)to.c_str());  	 
+	    	break;
+	    	 //	book[1][i] = sha256(conjuro);
 	    	//book[0][i] = Aes(conjuro);
 	    }	
 	}
