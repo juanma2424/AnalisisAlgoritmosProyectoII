@@ -6,6 +6,7 @@
 package files;
 
 import java.io.*;
+import static lib.Constants.*;
 
 public class MyFileReader {
 
@@ -14,90 +15,38 @@ public class MyFileReader {
         String readLinebyLine;
         String readKey;
         String buildStr = "";
-      
+
         BufferedReader bufferBook = new BufferedReader(new FileReader(pPathBook));
         BufferedReader bufferKey = new BufferedReader(new FileReader(pPathkeys));
         readLinebyLine = bufferBook.readLine();
-        
-        int i =0;
-        while (!("X-X-X").equals(readLinebyLine)) {
 
-            if (("X--X").equals(readLinebyLine)) {
+        while (!(LIMIT_FILE).equals(readLinebyLine)) {
+
+            if ((LIMIT_ENCRYPTATION_AES).equals(readLinebyLine)) {
                 System.out.println("encip " + buildStr);
-                readKey =  bufferKey.readLine();
-                System.out.println("key " +readKey);
-                buildStr = "";  
-                //i++;
+                readKey = bufferKey.readLine();
+                System.out.println("key " + readKey);
+                buildStr = "";
             }
-            if (("X-Y-X").equals(readLinebyLine)) {
+            if ((LIMIT_ENCRYPTATION_SHA256).equals(readLinebyLine)) {
                 System.out.println("Sha " + buildStr);
                 buildStr = "";
-                i++;
             }
-            if(!("X---X").equals(readLinebyLine)&&!("X--X").equals(readLinebyLine)){
-                 buildStr = buildStr + readLinebyLine;//build strg
+            if (!(LIMIT_ENCRYPTATION_SHA256).equals(readLinebyLine)
+                    && !(LIMIT_ENCRYPTATION_AES).equals(readLinebyLine)) {
+                buildStr = buildStr + readLinebyLine;//build strg
             }
             readLinebyLine = bufferBook.readLine();// skip lines
-            
-        }
-         System.out.println("--------------------apagar " + i);
-         bufferBook.close();
-         bufferKey.close();
-        
 
+        }
+        bufferBook.close();
+        bufferKey.close();
     }
 
-   public static void main (String[] args) throws java.io.IOException
-    {
-// "C:\\Users\\USER\\Desktop\\Nueva carpeta\\Conjuro.txt"
+    public static void main(String[] args) throws java.io.IOException {
         MyFileReader a = new MyFileReader();
-        a.readConjuro("C:\\Users\\USER\\Desktop\\Nueva carpeta\\Conjuro.txt","C:\\Users\\USER\\Desktop\\Nueva carpeta\\Save.txt");
-        
-        
-        
-//        String s1;
-//        String saux = "";
-//        boolean aes = true;
-// 
-//        // Cargamos el buffer con el contenido del archivo
-//        BufferedReader br = new BufferedReader (new FileReader ("C:\\Users\\USER\\Desktop\\Nueva carpeta\\Conjuro.txt"));
-// 
-//        // Leemos la primera linea
-//        s1 = br.readLine();
-//     
-//        while(!("END").equals( s1)){
-//            
-//            if(("X--X").equals(s1)){
-//                System.out.println("encip "+saux);
-//                saux="";
-//                s1 = br.readLine();
-//            }
-//            if(("X---X").equals(s1)){
-//               System.out.println("Sha "+saux);
-//               saux="";
-//               s1 = br.readLine();
-//            }
-//            saux = saux + s1;
-//            s1 = br.readLine();
-//        }
-//        System.out.println("ajaaa " +  saux);
-// 
-////        System.out.println ("La primera linea del archivo es: " + s1);
-////        System.out.println ("La linea tiene " + s1.length() + " caracteres");
-//// 
-////        System.out.println ();
-////        System.out.println ("Separando la linea en trozos tenemos las siguientes palabras:");
-//// 
-////        int numTokens = 0;
-////        StringTokenizer st = new StringTokenizer (s1);
-//// 
-////        // bucle por todas las palabras
-////        while (st.hasMoreTokens())
-////        {
-////            s2 = st.nextToken();
-////            numTokens++;
-////            System.out.println ("    Palabra " + numTokens + " es: " + s2);
-////        }
- }
+        a.readConjuro("C:\\Users\\USER\\Desktop\\Nueva carpeta\\Conjuro.txt", "C:\\Users\\USER\\Desktop\\Nueva carpeta\\Save.txt");
+
+    }
 
 }

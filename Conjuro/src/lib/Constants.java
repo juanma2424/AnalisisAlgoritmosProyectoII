@@ -17,4 +17,7 @@ public interface Constants {
     public static int THREAD_SLEEP_TIME = 50;
     public static String MESSAGE_SEPARATOR = ",";
     public static String MESSAGE_VALUES_SEPARATOR = "=";
+    public static String LIMIT_ENCRYPTATION_AES = "X--X";
+    public static String LIMIT_ENCRYPTATION_SHA256 = "X-Y-X";
+    public static String LIMIT_FILE = "X-X-X";
 }

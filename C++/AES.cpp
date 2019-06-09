@@ -43,13 +43,14 @@ unsigned char* AES::newKey(){
 
 	 time_t now = time(0);
      tm *ltm = localtime(&now);
-//   int min = 1 + ltm->tm_min;
+   
 //   int sec = 1 + ltm->tm_sec; 
 	int numkeys[31];
 	auxkey = "";
 	for(int indexTime= 0; indexTime<31;indexTime++){
+		int min = 1 + ltm->tm_min;
 	    int sec = 1 + ltm->tm_sec; 
-		int numKey = (rand()%1000)+1+sec;
+		int numKey = (rand()%1000)+1+sec+min;
 		numkeys[indexTime] = numKey ;
 		
 		string out_string;
