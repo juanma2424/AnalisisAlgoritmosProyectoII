@@ -56,8 +56,12 @@ unsigned char* AES::newKey(){
 		stringstream ss;
 		ss << numKey;
 		out_string = ss.str();
+		if(indexTime<=29){
+				auxkey =  auxkey + out_string +",";	
+		}else{
+				auxkey =  auxkey + out_string ;	
+		}
 		
-		auxkey =  auxkey + out_string +",";	
 		
 		}
 		 unsigned char outkey [31] = {numkeys[0],numkeys[1],numkeys[2],numkeys[3],numkeys[4],numkeys[5],numkeys[6],numkeys[7],
