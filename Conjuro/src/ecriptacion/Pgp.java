@@ -5,25 +5,27 @@
  */
 package ecriptacion;
 
-/**
- *
- * @author adri-
- */
-public class Pgp implements IAlgorithm{
-    
-    public String encrypt(String pText, String pKey){
+import lib.Logger;
+
+
+public class Pgp implements IAlgorithm {
+    private String key1;
+    private String key2;
+
+    public String encrypt(String pText) {
         PGPFileProcessor pgpFile = new PGPFileProcessor();
         try {
-            pgpFile.setKeyFile(pKey);
+            pgpFile.setKeyFile("");
             pgpFile.setInputFile("C:\\Users\\adri-\\Downloads\\Nueva carpeta (2)\\certificado-llave\\texto-prueba.txt");
             pgpFile.setOutputFile("C:\\Users\\adri-\\Downloads\\Nueva carpeta (2)\\certificado-llave\\final.gpg");
             pgpFile.encrypt();
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            Logger.Log(ex.getMessage());
         }
         return pText;
     }
-    
-    public String decrypt(String pText, String pKey){
+
+    public String decrypt(String pText, String pKey) {
         try {
             PGPFileProcessor pgpFile = new PGPFileProcessor();
             pgpFile.setKeyFile(pKey);
@@ -31,9 +33,17 @@ public class Pgp implements IAlgorithm{
             pgpFile.setInputFile("C:\\Users\\adri-\\Downloads\\Nueva carpeta (2)\\certificado-llave\\final.gpg");
             pgpFile.setOutputFile("C:\\Users\\adri-\\Downloads\\Nueva carpeta (2)\\certificado-llave\\salida.txt");
             pgpFile.decrypt();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            Logger.Log(ex.getMessage());
         }
         return pText;
+    }
+
+    public String getKey1() {
+        return key1;
+    }
+
+    public String getKey2() {
+        return key2;
     }
 }

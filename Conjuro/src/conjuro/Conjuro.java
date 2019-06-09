@@ -6,6 +6,7 @@
 package conjuro;
 
 import conjuronet.ConjuroComms;
+import ecriptacion.RSA;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -33,6 +34,8 @@ public class Conjuro {
         PGP b = new PGP();
         b.encriptar();
         b.desencriptar();
+        //RSA j = new RSA();
+        //j.decrypt(j.encrypt("hola me llamos ad"), "");
         
         
     }

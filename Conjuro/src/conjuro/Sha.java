@@ -7,7 +7,7 @@ package conjuro;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import lib.Logger;
 
 /**
  *
@@ -37,11 +37,8 @@ public class Sha {
             }
 
             System.out.println(hashtext);
-        } // For specifying wrong message digest algorithms 
-        catch (NoSuchAlgorithmException e) {
-            System.out.println("Exception thrown"
-                    + " for incorrect algorithm: " + e);
-
+        } catch (Exception ex) {
+            Logger.Log(ex.getMessage());
         }
     }
 
