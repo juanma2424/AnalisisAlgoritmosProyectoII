@@ -10,10 +10,14 @@ using namespace std;
 class FileManagement
 {
 	public:
+		FileManagement(){
+		}
 		FileManagement(char pPath[]){
 			text = readFile(pPath);
 		}
-		
+		void write(string text);
+		void openWrite();
+		void closeWrite();
 		string getText();
 	private:
 		string readFile(char pPath[]);

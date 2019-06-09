@@ -3,21 +3,20 @@
 #include <iostream>
 #include <cassert>
 #include <cstring>
+#include "FileManagement.h"
 
 using namespace std;
-
-
-
-
 
 
 void GenerateBook::makeBook()
 {
 	string conjuro;
+	FileManagement file = FileManagement();
 	 AES aes(256);
 	#pragma omp parallel
     {
         #pragma omp for 
+        file.openWrite();
         for(int i = 0; i < 100; i++){
 	    	conjuro = text.substr(i*LENGTH_CONJURO,LENGTH_CONJURO);
 	    	cout<<"----------------------sha256-----------------------------"<<endl;
@@ -33,12 +32,15 @@ void GenerateBook::makeBook()
 			cout<<"\n";
 	    	cout<<"\n";	
 			cout<<"----------------------KEY-AES-----------------------------"<<endl;
-	    //	book[0][i] = aes.encriptAES((unsigned char*)conjuro.c_str()); 
-	    	cout<<aes.getKey();
+	    	book[2][i] = aes.getKey();
+	    	file.write(aes.getKey());
+	    	file.write("|");
+	    	//cout<<aes.getKey();
 			cout<<"\n-------------------------------------------------------"<<endl; 
 			cout<<"\n";
 	    	cout<<"\n";	    	 
 	    }	
+	    file.closeWrite();
 	}
 }
 	

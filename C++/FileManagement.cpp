@@ -1,5 +1,5 @@
 #include "FileManagement.h"
-
+ofstream myfile;
 string FileManagement::readFile(char pPath[])
 {
 	string line = "";
@@ -14,7 +14,17 @@ string FileManagement::readFile(char pPath[])
    	fe.close();
    	return line;
 }
+void FileManagement::openWrite(){
+	myfile.open ("Save.txt");
+}
 
+void FileManagement::closeWrite(){
+	myfile.close();
+}
+
+void FileManagement::write(string text){
+  myfile << text + "\n";
+}
 string FileManagement::getText()
 {
 	return text;
