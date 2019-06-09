@@ -58,8 +58,6 @@ unsigned char* AES::newKey(){
 		out_string = ss.str();
 		
 		auxkey =  auxkey + out_string +",";	
-		cout<<out_string;
-				
 		
 		}
 		 unsigned char outkey [31] = {numkeys[0],numkeys[1],numkeys[2],numkeys[3],numkeys[4],numkeys[5],numkeys[6],numkeys[7],
