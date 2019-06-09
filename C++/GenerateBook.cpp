@@ -24,8 +24,10 @@ void GenerateBook::makeBook()
 	    	file.write("X--X","conjuro");
 	     	file.write(sha256(conjuro),"conjuro");
 	     	file.write("X---X","conjuro");
-	    	file.write(aes.getKey(),"save");    	 
-	    }	
+	    	file.write(aes.getKey(),"save"); 	 
+	    }
+		file.write("END","save"); 
+		file.write("END","conjuro");   	
 	    file.closeWrite();
 	}
 }
