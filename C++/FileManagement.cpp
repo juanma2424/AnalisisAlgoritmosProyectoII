@@ -1,5 +1,6 @@
 #include "FileManagement.h"
-ofstream myfile;
+ofstream save;
+ofstream conjuro;
 string FileManagement::readFile(char pPath[])
 {
 	string line = "";
@@ -15,15 +16,29 @@ string FileManagement::readFile(char pPath[])
    	return line;
 }
 void FileManagement::openWrite(){
-	myfile.open ("Save.txt");
+	save.open ("Save.txt");
+	conjuro.open("Conjuro.txt");
+	
 }
 
+void FileManagement::CleanFiles(){
+	 ofstream clean;
+	 clean.open("Save.txt", std::ofstream::out | std::ofstream::trunc);
+	 clean.open("Conjuro.txt", std::ofstream::out | std::ofstream::trunc);
+	 clean.close();
+	
+}
 void FileManagement::closeWrite(){
-	myfile.close();
+       save.close();
+	   conjuro.close();	
 }
 
-void FileManagement::write(string text){
-  myfile << text + "\n";
+void FileManagement::write(string text, string pPath){
+	if(pPath=="save"){
+		save << text + "\n";
+	}else{
+	   conjuro << text + "\n";
+	}
 }
 string FileManagement::getText()
 {

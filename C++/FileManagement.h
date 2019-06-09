@@ -15,9 +15,10 @@ class FileManagement
 		FileManagement(char pPath[]){
 			text = readFile(pPath);
 		}
-		void write(string text);
+		void write(string text,string pPath);
 		void openWrite();
 		void closeWrite();
+		void CleanFiles();
 		string getText();
 	private:
 		string readFile(char pPath[]);
