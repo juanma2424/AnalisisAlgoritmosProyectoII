@@ -23,6 +23,9 @@ public interface Constants {
     public static int DATA_CERO = 0;
     public static int DATA_ONE = 1;
     public static int DATA_TWO = 2;
+    public static int TOTAL_CARDS = 7;
+    public static int JUGADA_NUMBER = 3;
+    public static int RSA_LENGTH_KEY = 1024;
     
     //---------------STRINGS---------------------//
     public static String MESSAGE_SEPARATOR = ",";
@@ -30,5 +33,6 @@ public interface Constants {
     public static String LIMIT_ENCRYPTATION_AES = "X--X";
     public static String LIMIT_ENCRYPTATION_SHA256 = "X-Y-X";
     public static String LIMIT_FILE = "X-X-X";
-
+    public static String LIMIT_DESCRIPTION = "-FinText-";
+    public static String LIMIT_NAME = "-FinName-";
 }

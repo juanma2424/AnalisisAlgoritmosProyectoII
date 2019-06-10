@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ecriptacion;
+package encriptacion;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import lib.Logger;
 
 /**
  *
@@ -18,10 +17,10 @@ public class Security {
         
         IAlgorithm cls = null;
         try {
-            Class clss = Class.forName(pType);
+            Class clss = Class.forName("encriptacion."+pType);
             cls = (IAlgorithm)clss.newInstance();  
         } catch (Exception ex) {
-            Logger.getLogger(Security.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.Log(ex.getMessage());
         }
         
         return cls;

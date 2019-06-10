@@ -3,15 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ecriptacion;
+package encriptacion;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import lib.Logger;
 
 public class Sha256 implements IAlgorithm{
     private String key1;
     private String key2;
+    
+    public Sha256(){
+        key1 = "";
+        key2 = "";
+    }
     
     public String encrypt(String pText){
         String hashText = "";
@@ -36,11 +41,8 @@ public class Sha256 implements IAlgorithm{
             }
 
             System.out.println(pText);
-        } // For specifying wrong message digest algorithms 
-        catch (NoSuchAlgorithmException e) {
-            System.out.println("Exception thrown"
-                    + " for incorrect algorithm: " + e);
-
+        }catch (Exception ex) {
+            Logger.Log(ex.getMessage());
         }
         return hashText;
     }

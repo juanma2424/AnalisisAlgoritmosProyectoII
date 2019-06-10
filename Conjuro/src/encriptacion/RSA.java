@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ecriptacion;
+package encriptacion;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -12,20 +12,22 @@ import java.security.KeyFactory;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import javax.crypto.Cipher;
+import lib.Constants;
 import lib.Logger;
 
-public class RSA implements IAlgorithm{
+public class RSA implements IAlgorithm, Constants {
 
     private KeyPairGenerator keyGen;
     private String privateKey;
     private String publicKey;
     private Cipher cipher;
 
-    public RSA(int pKeyLength) {
+    public RSA() {
         try {
             this.keyGen = KeyPairGenerator.getInstance("RSA");
-            this.keyGen.initialize(pKeyLength);
+            this.keyGen.initialize(RSA_LENGTH_KEY);
             this.cipher = Cipher.getInstance("RSA");
+            createKeys();
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());
         }
@@ -59,7 +61,7 @@ public class RSA implements IAlgorithm{
         return result;
     }
 
-    public void createKeys() {
+    private void createKeys() {
         KeyPair pair = this.keyGen.generateKeyPair();
         this.privateKey = Base64.getEncoder().encodeToString(pair.getPrivate().getEncoded());
         this.publicKey = Base64.getEncoder().encodeToString(pair.getPublic().getEncoded());
@@ -71,14 +73,5 @@ public class RSA implements IAlgorithm{
 
     public String getKey1() {
         return this.publicKey;
-    }
-
-    public static void main(String[] args) {
-        RSA gk;
-        gk = new RSA(1024);
-        gk.createKeys();
-        String m = gk.encrypt("Hola como estas");
-        System.out.println(m);
-        System.out.println(gk.decrypt(m, gk.getKey2()));
     }
 }

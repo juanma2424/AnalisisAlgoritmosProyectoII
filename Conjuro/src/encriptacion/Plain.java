@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ecriptacion;
+package encriptacion;
 
 /**
  *
@@ -14,7 +14,8 @@ public class Plain implements IAlgorithm {
     private String key2;
     
     public Plain(){
-        
+        key1 = "";
+        key2 = "";
     }
     
     public String encrypt(String pText){

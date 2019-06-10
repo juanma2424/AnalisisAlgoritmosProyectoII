@@ -5,8 +5,8 @@
  */
 package logic;
 
-import ecriptacion.IAlgorithm;
-import ecriptacion.Security;
+import encriptacion.IAlgorithm;
+import encriptacion.Security;
 
 public class Card {
     private String name;
@@ -25,7 +25,7 @@ public class Card {
     
     private void generateDescripEncrypted(){
         IAlgorithm alg = Security.generateAlgorithm(type);
-        descriptionEncryted = alg.encrypt(description);  
+        descriptionEncryted = alg.encrypt(description); 
         key1 = alg.getKey1();
         key2 = alg.getKey2();
     }

@@ -16,4 +16,14 @@ public class Player {
         name = pName;
     }
     
+    public Player(){
+    }
+    
+    public void setName(String pName){
+        name = pName;
+    }
+    
+    public String getName(){
+        return name;
+    }
 }

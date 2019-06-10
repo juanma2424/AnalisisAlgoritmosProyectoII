@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ecriptacion;
+package encriptacion;
 
 import java.security.MessageDigest;
 import java.util.Arrays;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import lib.Logger;
 import org.apache.commons.codec.binary.Base64;
 
 public class TresDes implements IAlgorithm {
@@ -17,7 +18,8 @@ public class TresDes implements IAlgorithm {
     private String key2;
 
     public TresDes() {
-
+        key1 = "";
+        key2 = "";
     }
 
     public String encrypt(String pText) {
@@ -25,7 +27,7 @@ public class TresDes implements IAlgorithm {
         String encryptedResult = "";
         try {
             md = MessageDigest.getInstance("md5");
-            byte[] digestOfPassword = md.digest("".getBytes("utf-8"));
+            byte[] digestOfPassword = md.digest("fdsfsd".getBytes("utf-8"));
             byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
 
             for (int j = 0, k = 16; j < 8;) {
@@ -42,9 +44,8 @@ public class TresDes implements IAlgorithm {
 
             encryptedResult = new String(base64Bytes);
         } catch (Exception ex) {
-            lib.Logger.Log(ex.getMessage());
+            Logger.Log(ex.getMessage());
         }
-        System.out.println(encryptedResult);
         return encryptedResult;
     }
 
@@ -70,11 +71,9 @@ public class TresDes implements IAlgorithm {
 
             encryptedResult = new String(plainText, "UTF-8");
         } catch (Exception ex) {
-            lib.Logger.Log(ex.getMessage());
+            Logger.Log(ex.getMessage());
         }
-        System.out.println(encryptedResult);
         return encryptedResult;
-
     }
 
     public String getKey1() {
