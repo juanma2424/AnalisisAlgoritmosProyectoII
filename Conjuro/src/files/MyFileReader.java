@@ -39,7 +39,7 @@ public class MyFileReader {
         try {
             File searchFile = new File("");
             searchFile.getAbsoluteFile().getParentFile().getAbsolutePath();
-            String path = searchFile.getAbsoluteFile().getParentFile().getAbsolutePath() + PATH_PLAY_DATA ;
+            String path = searchFile.getAbsoluteFile().getParentFile().getAbsolutePath() + PATH_PLAY_DATA;
 
             FileWriter fileWriter = new FileWriter(path);
             PrintWriter printWriter = new PrintWriter(fileWriter);

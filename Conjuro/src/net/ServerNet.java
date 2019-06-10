@@ -9,6 +9,8 @@ import lib.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
+import static lib.Constants.PORT_NUMBER;
+import static lib.Constants.THREAD_SLEEP_TIME;
 
 public class ServerNet implements Constants, Runnable {
 
@@ -43,7 +45,7 @@ public class ServerNet implements Constants, Runnable {
         while (isListening) {
             try {
                 Socket newSocket = serversocket.accept();
-
+                
                 ClientSocket client = new ClientSocket(newSocket);
                 client.addObserver(this.observer);
                 clients.add(client);

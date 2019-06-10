@@ -6,6 +6,7 @@
 package conjuronet;
 
 import lib.*;
+import static lib.Constants.PORT_NUMBER;
 import net.*;
 
 public class ConjuroComms implements IObserver, Constants {
@@ -19,8 +20,7 @@ public class ConjuroComms implements IObserver, Constants {
     public void conectarAJuego(String pHost) {
         client = new ClientSocket(pHost, PORT_NUMBER);
         client.addObserver(this);
-        //ConjuroMsg msg = new ConjuroMsg("0,Nombre=juanmaa,nombre2=jm");
-        ConjuroMsg msg = new ConjuroMsg("0,Nombre=juanmaa,n=j1");
+        ConjuroMsg msg = new ConjuroMsg("0,Nombre=Tomatoes");
         client.sendMessage(msg);
     }
 
