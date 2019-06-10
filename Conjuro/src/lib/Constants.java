@@ -23,6 +23,8 @@ public interface Constants {
     public static int DATA_CERO = 0;
     public static int DATA_ONE = 1;
     public static int DATA_TWO = 2;
+    public static int MAX_KEYS = 100;
+    
     
     //---------------STRINGS---------------------//
     public static String MESSAGE_SEPARATOR = ",";
