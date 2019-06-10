@@ -16,10 +16,10 @@ import lib.Logger;
 
 class AES implements IAlgorithm, Constants {
 
-    byte[] skey = new byte[1000];
-    String skeyString;
-    byte[] raw;
-    String inputMessage, encryptedData, decryptedMessage;
+    private byte[] skey = new byte[1000];
+    private String skeyString;
+    private byte[] raw;
+    private String inputMessage, encryptedData, decryptedMessage;
     private byte[] AUXebyte;
     private String key1;
     private String key2;
@@ -52,7 +52,7 @@ class AES implements IAlgorithm, Constants {
         return "";
     }
 
-    void generateSymmetricKey() {
+    private void generateSymmetricKey() {
         try {
             Random r = new Random();// crrea un objeto de tipo random
             int num = r.nextInt(LIMIT_RANDOM);// random de 0 a 10000
