@@ -37,8 +37,11 @@ public class MyFileReader {
 
     public void write() {
         try {
+            File searchFile = new File("");
+            searchFile.getAbsoluteFile().getParentFile().getAbsolutePath();
+            String path = searchFile.getAbsoluteFile().getParentFile().getAbsolutePath() + PATH_PLAY_DATA ;
 
-            FileWriter fileWriter = new FileWriter("C:\\Users\\USER\\Documents\\GitHub\\AnalisisAlgoritmosProyectoII\\C++\\DataPlay.txt");
+            FileWriter fileWriter = new FileWriter(path);
             PrintWriter printWriter = new PrintWriter(fileWriter);
             printWriter.println(getDataKey());
             printWriter.close();
@@ -48,9 +51,14 @@ public class MyFileReader {
     }
 
     public static void main(String[] args) throws java.io.IOException {
-        MyFileReader a = new MyFileReader();
-        a.readConjuro("C:\\Users\\USER\\Desktop\\Nueva carpeta\\Save.txt");
-        a.write();
+
+        File searchFile = new File("");
+        searchFile.getAbsoluteFile().getParentFile().getAbsolutePath();
+        String path = searchFile.getAbsoluteFile().getParentFile().getAbsolutePath() + PATH_KEY;
+
+        MyFileReader My = new MyFileReader();
+        My.readConjuro(path);
+        My.write();
     }
 
 }
