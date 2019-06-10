@@ -20,6 +20,7 @@ class FileManagement
 		void closeWrite();
 		void CleanFiles();
 		string getText();
+		void readSecret();
 	private:
 		string readFile(char pPath[]);
 		string text;

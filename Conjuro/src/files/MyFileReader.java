@@ -2,6 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+C:\Users\USER\Documents\GitHub\AnalisisAlgoritmosProyectoII\C++
  */
 package files;
 
@@ -64,6 +65,7 @@ public class MyFileReader {
         dataPlay[DATA_ONE] = conjuroSHA[intPost];
         dataPlay[DATA_TWO] = keys[intPost];
     }
+
     //------------------------GETS-------------------------//
     public String[] getDataPlay() {
         return dataPlay;
@@ -81,9 +83,30 @@ public class MyFileReader {
         return keys;
     }
 
+    public void write() {
+        try {
+             
+            FileWriter fileWriter = new FileWriter("C:\\Users\\USER\\Documents\\GitHub\\AnalisisAlgoritmosProyectoII\\C++\\DataPlay.txt");
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            //printWriter.println(LIMIT_FILE);
+            printWriter.println(getDataPlay()[DATA_CERO]);
+            printWriter.println("X--X");
+            printWriter.println(getDataPlay()[DATA_ONE]);
+            printWriter.println("X-Y-X");
+            printWriter.println(getDataPlay()[DATA_TWO]);
+            printWriter.println("X-X-X");
+            printWriter.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public static void main(String[] args) throws java.io.IOException {
         MyFileReader a = new MyFileReader();
         a.readConjuro("C:\\Users\\USER\\Desktop\\Nueva carpeta\\Conjuro.txt", "C:\\Users\\USER\\Desktop\\Nueva carpeta\\Save.txt");
+        a.write();
+
     }
 
 }

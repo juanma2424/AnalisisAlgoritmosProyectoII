@@ -21,6 +21,26 @@ void FileManagement::openWrite(){
 	
 }
 
+
+
+void FileManagement::readSecret(){
+  string line;
+  ifstream myfile ("DataPLay.txt");
+  if (myfile.is_open())
+  {
+    while ( getline (myfile,line) != "X-X-X" )
+    {
+      cout << line << '\n';
+    }
+    myfile.close();
+  }
+
+}
+
+
+
+
+
 void FileManagement::CleanFiles(){
 	 ofstream clean;
 	 clean.open("Save.txt", std::ofstream::out | std::ofstream::trunc);

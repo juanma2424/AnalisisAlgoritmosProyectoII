@@ -127,10 +127,6 @@ unsigned char * AES::DecryptECB(unsigned char in[], unsigned int inLen, unsigned
 
 
 
-
-
-
-
 unsigned char * AES::PaddingNulls(unsigned char in[], unsigned int inLen, unsigned int alignLen)
 {
   unsigned char * alignIn = new unsigned char[alignLen];
