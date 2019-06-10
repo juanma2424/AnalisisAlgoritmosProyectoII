@@ -42,15 +42,6 @@ import org.bouncycastle.openpgp.PGPSecretKeyRingCollection;
  */
 public class PGPUtil {
 
-    
-    // 1. Genero pub y priv con rsa
-    // 2. Encrypto el texto con llave privDES 
-    // 3. Encrypto privDes con pub 
-    // 4. Retorno key1, priv y key2 key un malo
-    
-    // 5. Cuando quiero probar la carta
-    // 6. Trato de decifrar la llave con key1 o key2
-    // 7. Cuando ya obtengo el privDes valido, entonces hago decrypt del texto y si lo logre entonces es PGP
     @SuppressWarnings("unchecked")
     public static PGPPublicKey readPublicKey(InputStream in) throws IOException, PGPException {
         in = org.bouncycastle.openpgp.PGPUtil.getDecoderStream(in);

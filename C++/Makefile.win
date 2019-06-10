@@ -4,11 +4,11 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o Sha256.o GenerateBook.o FileManagement.o decrypt.o encrypt.o Structure.o
-LINKOBJ  = main.o Sha256.o GenerateBook.o FileManagement.o decrypt.o encrypt.o Structure.o
-LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -L"C:/Program Files/OpenSSL-Win64/lib" -static-libgcc -std=c++11
-INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files/OpenSSL-Win64/include"
-CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"C:/Program Files/OpenSSL-Win64/include"
+OBJ      = FileManagement.o GenerateBook.o main.o Sha256.o AES.o
+LINKOBJ  = FileManagement.o GenerateBook.o main.o Sha256.o AES.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -std=c++11
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
 BIN      = AnalisisII.exe
 CXXFLAGS = $(CXXINCS) 
 CFLAGS   = $(INCS) 
@@ -24,23 +24,17 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
 
+FileManagement.o: FileManagement.cpp
+	$(CPP) -c FileManagement.cpp -o FileManagement.o $(CXXFLAGS)
+
+GenerateBook.o: GenerateBook.cpp
+	$(CPP) -c GenerateBook.cpp -o GenerateBook.o $(CXXFLAGS)
+
 main.o: main.cpp
 	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
 
 Sha256.o: Sha256.cpp
 	$(CPP) -c Sha256.cpp -o Sha256.o $(CXXFLAGS)
 
-GenerateBook.o: GenerateBook.cpp
-	$(CPP) -c GenerateBook.cpp -o GenerateBook.o $(CXXFLAGS)
-
-FileManagement.o: FileManagement.cpp
-	$(CPP) -c FileManagement.cpp -o FileManagement.o $(CXXFLAGS)
-
-decrypt.o: decrypt.cpp
-	$(CPP) -c decrypt.cpp -o decrypt.o $(CXXFLAGS)
-
-encrypt.o: encrypt.cpp
-	$(CPP) -c encrypt.cpp -o encrypt.o $(CXXFLAGS)
-
-Structure.o: Structure.cpp
-	$(CPP) -c Structure.cpp -o Structure.o $(CXXFLAGS)
+AES.o: AES.cpp
+	$(CPP) -c AES.cpp -o AES.o $(CXXFLAGS)

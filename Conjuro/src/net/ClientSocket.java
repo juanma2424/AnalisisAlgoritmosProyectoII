@@ -13,17 +13,20 @@ import conjuronet.*;
 public class ClientSocket extends Observable implements Constants, Runnable {
 
     private Socket client;
+    private Socket clientServidor;
     private ObjectInputStream inputReader;
     private ObjectOutputStream outputWriter;
     private boolean isListening = false;
 
     public ClientSocket(Socket pSocket) {
         client = pSocket;
+        initReaders(0);
     }
 
     public ClientSocket(String pIp, int pPort) {
         try {
             client = new Socket(pIp, pPort);
+            initReaders(1);
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());
         }
@@ -33,10 +36,11 @@ public class ClientSocket extends Observable implements Constants, Runnable {
         while (isListening) {
             try {
                 String msgData = (String) inputReader.readObject();
+                //System.out.println(msgData);
                 ConjuroMsg msg = new ConjuroMsg(msgData);
                 System.out.println("El nombre es: " + msg.getValue("Nombre"));
-                System.out.println("El nombre2 es: " + msg.getValue("nombre2"));
                 this.notifyObservers(msg);
+            
                 Thread.sleep(THREAD_SLEEP_TIME);
             } catch (Exception ex) {
                 Logger.Log(ex.getMessage());
@@ -48,8 +52,8 @@ public class ClientSocket extends Observable implements Constants, Runnable {
     public void sendMessage(ConjuroMsg pMsg) {
         try {
             outputWriter.writeObject(pMsg.getStringMsg());
-            outputWriter.flush();
             //outputWriter.close();
+            outputWriter.flush();
 
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());
@@ -67,7 +71,7 @@ public class ClientSocket extends Observable implements Constants, Runnable {
         }
     }
 
-    private void initReaders() {
+    private void initReaders(int servidor) {
         if (client != null) {
             try {
                 isListening = true;
@@ -75,6 +79,7 @@ public class ClientSocket extends Observable implements Constants, Runnable {
                 inputReader = new ObjectInputStream(client.getInputStream());
                 Thread newthread = new Thread(this);
                 newthread.start();
+
             } catch (Exception ex) {
                 Logger.Log(ex.getMessage());
             }

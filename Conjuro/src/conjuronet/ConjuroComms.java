@@ -19,7 +19,8 @@ public class ConjuroComms implements IObserver, Constants {
     public void conectarAJuego(String pHost) {
         client = new ClientSocket(pHost, PORT_NUMBER);
         client.addObserver(this);
-        ConjuroMsg msg = new ConjuroMsg("0,Nombre=Tomatoes");
+        //ConjuroMsg msg = new ConjuroMsg("0,Nombre=juanmaa,nombre2=jm");
+        ConjuroMsg msg = new ConjuroMsg("0,Nombre=juanmaa,n=j1");
         client.sendMessage(msg);
     }
 
