@@ -8,10 +8,6 @@ package logic;
 import ecriptacion.IAlgorithm;
 import ecriptacion.Security;
 
-/**
- *
- * @author adri-
- */
 public class Card {
     private String name;
     private String description;
@@ -20,18 +16,18 @@ public class Card {
     private String key2;
     private String type;
     
-    public Card(String pName, String pDescription, String pKey1, String pKey2, String pType){
+    public Card(String pName, String pDescription,String pType){
         name = pName;
         description = pDescription;
-        key1 = pKey1;
-        key2 = pKey2;
         type = pType;
         generateDescripEncrypted();
     }
     
     private void generateDescripEncrypted(){
         IAlgorithm alg = Security.generateAlgorithm(type);
-        descriptionEncryted = alg.encrypt(description, key1);  
+        descriptionEncryted = alg.encrypt(description);  
+        key1 = alg.getKey1();
+        key2 = alg.getKey2();
     }
     
     public String getName(){

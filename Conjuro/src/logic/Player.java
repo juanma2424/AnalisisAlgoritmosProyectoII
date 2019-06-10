@@ -3,20 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ecriptacion;
+package logic;
 
 /**
  *
  * @author adri-
  */
-public interface IAlgorithm {
+public class Player {
+    private String name;
     
-    public String encrypt(String pText);
-    
-    public String decrypt(String pText, String pKey);
-
-    public String getKey1();
-    
-    public String getKey2();
+    public Player(String pName){
+        name = pName;
+    }
     
 }

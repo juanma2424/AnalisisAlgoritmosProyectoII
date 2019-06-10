@@ -5,6 +5,9 @@
  */
 package ecriptacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author adri-
@@ -12,23 +15,15 @@ package ecriptacion;
 public class Security {
     
     public static IAlgorithm generateAlgorithm(String pType){
-        switch(pType){
-            case "Plain":
-                return new Plain();
-            case "Sha256":
-                return new Sha256();
-            case "TresDes":
-                return new TresDes();
-            case "Pgp":
-                return new Pgp();
-            case "Md5":
-                return new Sha256();
-            case "Aes":
-                return new Sha256();
-            default:
-                return new Sha256();         
+        
+        IAlgorithm cls = null;
+        try {
+            Class clss = Class.forName(pType);
+            cls = (IAlgorithm)clss.newInstance();  
+        } catch (Exception ex) {
+            Logger.getLogger(Security.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    
+        
+        return cls;
+    }  
 }

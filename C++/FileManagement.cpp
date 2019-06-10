@@ -25,10 +25,11 @@ void FileManagement::openWrite(){
 
 void FileManagement::readSecret(){
   string line;
+  cout<<"1";
   ifstream myfile ("DataPLay.txt");
   if (myfile.is_open())
   {
-    while ( getline (myfile,line) != "X-X-X" )
+    while ( getline (myfile,line) )
     {
       cout << line << '\n';
     }

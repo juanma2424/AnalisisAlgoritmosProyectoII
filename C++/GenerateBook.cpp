@@ -12,7 +12,9 @@ void GenerateBook::makeBook()
 {
 	string conjuro;
 	FileManagement file = FileManagement();
+	cout<<"1";
     file.readSecret();
+   	cout<<"2";
 //	 AES aes(256);
 //	#pragma omp parallel
 //    {

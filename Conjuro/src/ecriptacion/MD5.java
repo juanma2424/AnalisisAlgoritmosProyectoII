@@ -55,4 +55,19 @@ public class MD5 implements IAlgorithm  {
           MD5 md5 = new MD5(); 
           md5.encrypt("hola", "0"); 
     } 
+
+    @Override
+    public String encrypt(String pText) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getKey1() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getKey2() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 } 
