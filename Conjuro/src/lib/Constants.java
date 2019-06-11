@@ -16,6 +16,7 @@ public interface Constants {
     public static int DATA_TWO = 2;
     public static int TOTAL_CARDS = 7;
     public static int JUGADA_NUMBER = 3;
+    public static int LENGTH_KEY = 64;
     public static int RSA_LENGTH_KEY = 1024;
     
     //---------------STRINGS---------------------//

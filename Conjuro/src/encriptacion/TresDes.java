@@ -2,19 +2,21 @@ package encriptacion;
 
 import java.security.MessageDigest;
 import java.util.Arrays;
+import java.util.Random;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import lib.Constants;
 import lib.Logger;
 import org.apache.commons.codec.binary.Base64;
 
-public class TresDes implements IAlgorithm {
+public class TresDes implements IAlgorithm, Constants {
     private String key1;
     private String key2;
 
     public TresDes() {
-        key1 = "";
-        key2 = "";
+        key1 = generateKey();
+        key2 = generateKey();
     }
 
     public String encrypt(String pText) {
@@ -22,13 +24,13 @@ public class TresDes implements IAlgorithm {
         String encryptedResult = "";
         try {
             md = MessageDigest.getInstance("md5");
-            byte[] digestOfPassword = md.digest("fdsfsd".getBytes("utf-8"));
+            byte[] digestOfPassword = md.digest(key1.getBytes("utf-8"));
             byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
 
             for (int j = 0, k = 16; j < 8;) {
                 keyBytes[k++] = keyBytes[j++];
             }
-
+            
             SecretKey secretKey = new SecretKeySpec(keyBytes, "DESede");
             Cipher cipher = Cipher.getInstance("DESede/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
@@ -69,6 +71,17 @@ public class TresDes implements IAlgorithm {
             Logger.Log(ex.getMessage());
         }
         return encryptedResult;
+    }
+    
+    private String generateKey(){
+        Random rnd = new Random();
+        String key = "";
+        for(int i = 0; i < LENGTH_KEY; i++){
+            key += (char)(rnd.nextInt(26)+65);
+            if(rnd.nextInt(4) < 1)
+                key += rnd.nextInt(10);
+        }
+        return key;
     }
 
     public String getKey1() {

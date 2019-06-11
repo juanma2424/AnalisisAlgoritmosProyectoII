@@ -15,7 +15,6 @@ public class ConjuroMsg implements Constants {
         
         if (msgValues != null && msgValues.length > 0) {
             type = MessageType.values()[Integer.parseInt(msgValues[0])];
-            //type = MessageType.values()[1];
 
             values = new Hashtable<String, String>();
 

@@ -15,8 +15,8 @@ class AES implements IAlgorithm, Constants {
     private String key2;
     
     public AES(){
-        generateSymmetricKey();// genera llave simetrica
-        key2 = "";
+        key1 = generateSymmetricKey();// genera llave simetrica
+        key2 = generateSymmetricKey();
     }
     
     public String encrypt(String pText) {
@@ -54,16 +54,18 @@ class AES implements IAlgorithm, Constants {
         return decryptedMessage;
     }
 
-    private void generateSymmetricKey() {
+    private String generateSymmetricKey() {
+        String key = "";
         try {
             Random r = new Random();// crea un objeto de tipo random
             int num = r.nextInt(LIMIT_RANDOM);// random de 0 a 10000
             String knum = String.valueOf(num);// devuelve la representación de cadena del argumento num tostring
             byte[] knumb = Base64.getDecoder().decode(knum);// codifica knum en una secuencia de bytes
-            key1 = Base64.getEncoder().encodeToString(getRawKey(knumb));// de bytes a strg
+            key = Base64.getEncoder().encodeToString(getRawKey(knumb));// de bytes a strg
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());
         }
+        return key;
     }
 
     //resive una secuencia de bytes

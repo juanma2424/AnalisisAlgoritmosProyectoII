@@ -2,15 +2,17 @@ package encriptacion;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.util.Random;
+import lib.Constants;
 import lib.Logger;
 
-public class Sha256 implements IAlgorithm{
+public class Sha256 implements IAlgorithm, Constants{
     private String key1;
     private String key2;
     
     public Sha256(){
-        key1 = "";
-        key2 = "";
+        key1 = generateKey();
+        key2 = generateKey();
     }
     
     public String encrypt(String pText){
@@ -34,8 +36,6 @@ public class Sha256 implements IAlgorithm{
             while (hashText.length() < 32) {
                 pText = "0" + pText;
             }
-
-            System.out.println(pText);
         }catch (Exception ex) {
             Logger.Log(ex.getMessage());
         }
@@ -44,6 +44,17 @@ public class Sha256 implements IAlgorithm{
     
     public String decrypt(String pText, String pKey){
         return pText;
+    }
+    
+    private String generateKey(){
+        Random rnd = new Random();
+        String key = "";
+        for(int i = 0; i < LENGTH_KEY; i++){
+            key += (char)(rnd.nextInt(26)+65);
+            if(rnd.nextInt(4) < 1)
+                key += rnd.nextInt(10);
+        }
+        return key;
     }
 
     public String getKey1() {

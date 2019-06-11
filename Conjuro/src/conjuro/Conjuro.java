@@ -1,5 +1,6 @@
 package conjuro;
 
+import java.util.Random;
 import logic.Controller;
 
 public class Conjuro {
