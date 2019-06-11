@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package encriptacion;
 
 import java.math.BigInteger;
@@ -59,4 +54,3 @@ public class Sha256 implements IAlgorithm{
         return key2;
     }
 }
-

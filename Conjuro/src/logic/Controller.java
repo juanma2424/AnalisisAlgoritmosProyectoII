@@ -1,49 +1,45 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package logic;
 
+import conjuronet.ConjuroComms;
 import files.ReadFile;
-import java.util.StringTokenizer;
 import lib.Constants;
 
-/**
- *
- * @author adri-
- */
 public class Controller implements Constants {
-
-    private Player jugador;
-    private Card[] deck;
-    private Card[] jugada1;
-    private Card[] jugada2;
+    private GameLogic game;
     private int numCards;
+    private ConjuroComms comms;
 
     public Controller() {
-        jugador = new Player();
-        deck = new Card[TOTAL_CARDS];
-        jugada1 = new Card[JUGADA_NUMBER];
-        jugada2 = new Card[JUGADA_NUMBER];
+        game = new GameLogic();
         numCards = 0;
+        comms = new ConjuroComms();
     }
 
     public void insertName(String pName) {
-        jugador.setName(pName);
+        game.setName(pName);
     }
 
     public boolean selectCard(int pType, boolean pJugada) {
-        if (numCards < 6) {
-            if (pJugada) {
-                jugada1[numCards % JUGADA_NUMBER] = deck[pType];
-            } else {
-                jugada2[numCards % JUGADA_NUMBER] = deck[pType];
-            }
+        if (numCards < TOTAL_CARDS-1) {
+            game.setSelectedCard(pType, numCards % JUGADA_NUMBER, pJugada);
             numCards++;
             return true;
         }
         return false;
+    }
+    
+    public boolean startGame(){
+        if(game.getName().isEmpty())
+            return false;
+        comms.iniciarJuegoNuevo();
+        return true;
+    }
+    
+    public boolean searchGame(){
+        if(game.getName().isEmpty())
+            return false;
+        comms.conectarAJuego(HOST);
+        return true;
     }
 
     public void generateCard() {
@@ -55,11 +51,8 @@ public class Controller implements Constants {
         String[] parts;
         while (count < TOTAL_CARDS) {
             parts = description[count].split(LIMIT_NAME);
-            deck[count] = new Card(parts[0],parts[1],types[count]);
-            System.out.println("Nombre: "+ deck[count].getName() + " Description: "+deck[count].getDescription() + "Tipo: " + types[count]);
+            game.insertCard(parts[0], parts[1], types[count], count);
             count++;
         }
-
     }
-
 }

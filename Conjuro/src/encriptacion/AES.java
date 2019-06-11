@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package encriptacion;
 
 import java.security.SecureRandom;
@@ -20,14 +15,13 @@ class AES implements IAlgorithm, Constants {
     private String key2;
     
     public AES(){
-        key1 = "";
+        generateSymmetricKey();// genera llave simetrica
         key2 = "";
     }
     
     public String encrypt(String pText) {
         String result = "";
         try {
-            generateSymmetricKey();// genera llave simetrica
             byte[] pTextB = pText.getBytes("UTF-8"); // obtienen el dato de la gui y codifica en una secuencia de bytes 
             
             SecretKeySpec skeySpec = new SecretKeySpec(Base64.getDecoder().decode(key1), "AES");// Crea el objeto SecretKey pasa la clave y el algoritmo "AES"

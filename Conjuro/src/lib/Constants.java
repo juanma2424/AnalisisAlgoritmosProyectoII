@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lib;
 
-/**
- *
- * @author adri-
- */
 public interface Constants {
 
      //---------------INTS---------------------//
@@ -35,4 +26,5 @@ public interface Constants {
     public static String LIMIT_FILE = "X-X-X";
     public static String LIMIT_DESCRIPTION = "-FinText-";
     public static String LIMIT_NAME = "-FinName-";
+    public static String HOST = "192.78.12";
 }

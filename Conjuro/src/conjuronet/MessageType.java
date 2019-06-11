@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package conjuronet;
 
 public enum MessageType {
     PLAYER_NAME(0),
-    CARDS_SELECTED(1);
-
+    CARDS_SELECTED(1),
+    CONJURO(2),
+    CARD_FOUND(3),
+    DEFEAT(4);
+    
+    
     public int value;
 
     MessageType(int pValue) {

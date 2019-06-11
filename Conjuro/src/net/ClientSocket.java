@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package net;
 
 import java.net.Socket;
@@ -13,20 +8,19 @@ import conjuronet.*;
 public class ClientSocket extends Observable implements Constants, Runnable {
 
     private Socket client;
-    private Socket clientServidor;
     private ObjectInputStream inputReader;
     private ObjectOutputStream outputWriter;
     private boolean isListening = false;
 
     public ClientSocket(Socket pSocket) {
         client = pSocket;
-        initReaders(0);
+        initReaders();
     }
 
     public ClientSocket(String pIp, int pPort) {
         try {
             client = new Socket(pIp, pPort);
-            initReaders(1);
+            initReaders();
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());
         }
@@ -52,9 +46,7 @@ public class ClientSocket extends Observable implements Constants, Runnable {
     public void sendMessage(ConjuroMsg pMsg) {
         try {
             outputWriter.writeObject(pMsg.getStringMsg());
-            //outputWriter.close();
             outputWriter.flush();
-
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());
         }
@@ -71,7 +63,7 @@ public class ClientSocket extends Observable implements Constants, Runnable {
         }
     }
 
-    private void initReaders(int servidor) {
+    private void initReaders() {
         if (client != null) {
             try {
                 isListening = true;
