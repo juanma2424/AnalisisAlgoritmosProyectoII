@@ -3,20 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/net/ServerNet.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/net/ClientSocket.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/lib/Logger.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/GUI/Login.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/files/MyFileReader.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/conjuronet/ConjuroComms.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/logic/Controller.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/lib/Constants.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/lib/Observable.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/conjuro/Conjuro.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/logic/GameLogic.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/GUI/Cliente.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/logic/Player.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/AnalisisAlgoritmosProyectoII/Conjuro/src/logic/Card.java</file>
+            <file>file:/C:/Users/USER/Desktop/AnalisisAlgoritmosProyectoII-JuanMa/Conjuro/src/GUI/Cliente.java</file>
         </group>
     </open-files>
 </project-private>
