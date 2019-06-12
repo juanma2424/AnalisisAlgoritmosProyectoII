@@ -48,7 +48,7 @@ public class MD5 implements IAlgorithm, Constants{
         if(pText.equals(encrypt(text))){
             return text;
         }
-        return pText;
+        return encrypt(pText);
     }
     
     private String generateKey(){

@@ -85,7 +85,7 @@ public class GameLogic implements Constants {
         Card[] jugada = jugada1.clone();
         int typeCard;
         for (int index = 0; index < JUGADA_NUMBER*2; index++) {
-            typeCard = decodeCard(jugadaCont[index%JUGADA_NUMBER], types.get(jugada[index%JUGADA_NUMBER]));
+            typeCard = decodeCard(jugadaCont[index%JUGADA_NUMBER], types.get(jugada[index%JUGADA_NUMBER].getType()));
             jugadaCont[index%JUGADA_NUMBER].setType(typeCard);
             globalController.discoverCard(typeCard);
             if (index == JUGADA_NUMBER - 1) {
@@ -113,7 +113,7 @@ public class GameLogic implements Constants {
             pType++;
         }
         pType--;
-        return pType;
+        return pType%TOTAL_CARDS;
     }
 
     public void cleanMove(int pData) {

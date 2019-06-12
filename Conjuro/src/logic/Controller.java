@@ -106,8 +106,8 @@ public class Controller implements Constants, Runnable {
     public void sendController() {
         login.setController(this);
     }
-    
-    public void setGetCards(){
+
+    public void setGetCards() {
         getCards = true;
     }
 
@@ -119,35 +119,36 @@ public class Controller implements Constants, Runnable {
     public void setCartTXT() {
 
     }
-    
-    public void findCard(int pType){
+
+    public void findCard(int pType) {
         String[] types = {"Sha256", "MD5", "TresDes", "AES", "Plain", "RSA", "Pgp"};
         window.appendFindCards(types[pType]);
     }
-    
-    public void discoverCard(int pType){
-        String msg = "3,Type="+pType;
+
+    public void discoverCard(int pType) {
+        String msg = "3,Type=" + pType;
         comms.sendMessage(msg);
     }
-    
-    public void discoverHalfKey(){
-        
+
+    public void discoverHalfKey() {
+
     }
 
-    public void discoverAllKey(){
-        
+    public void discoverAllKey() {
+
     }
-    
+
     @Override
     public void run() {
-        while (!decrypt && !getCards) {
+        while (!decrypt || !getCards) {
             try {
                 Thread.sleep(THREAD_SLEEP_TIME);
             } catch (Exception ex) {
                 Logger.Log(ex.getMessage());
             }
         }
-        
+        game.initDecode();
+
     }
 
     public void initWindow() {

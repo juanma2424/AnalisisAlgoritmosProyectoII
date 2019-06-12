@@ -50,22 +50,16 @@ public class TresDes implements IAlgorithm, Constants {
         String encryptedResult = "";
         try {
             byte[] message = Base64.decodeBase64(pText.getBytes("utf-8"));
-
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] digestOfPassword = md.digest(pKey.getBytes("utf-8"));
             byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
-
             for (int j = 0, k = 16; j < 8;) {
                 keyBytes[k++] = keyBytes[j++];
             }
-
             SecretKey secretKey = new SecretKeySpec(keyBytes, "DESede");
-
             Cipher decipher = Cipher.getInstance("DESede/ECB/PKCS5Padding");
             decipher.init(Cipher.DECRYPT_MODE, secretKey);
-
             byte[] plainText = decipher.doFinal(message);
-
             encryptedResult = new String(plainText, "UTF-8");
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());
@@ -94,5 +88,5 @@ public class TresDes implements IAlgorithm, Constants {
     
     public void setText(String pText){
         
-    }
+    }  
 }

@@ -319,11 +319,11 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void appendMoves(String pMove){
-        jTextArea1.append(pMove);
+        jTextArea1.append(pMove+"\n");
     }
     
     public void appendFindCards(String pType){
-        jTextArea2.append(pType);
+        jTextArea2.append(pType+"\n");
     }
 
     /**

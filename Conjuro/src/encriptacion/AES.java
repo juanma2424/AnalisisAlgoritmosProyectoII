@@ -49,6 +49,7 @@ class AES implements IAlgorithm, Constants {
             byte[] decrypted = cipher.doFinal(org.apache.commons.codec.binary.Base64.decodeBase64(pText.getBytes()));
             decryptedMessage = new String(decrypted,"UTF-8");
         } catch (Exception ex) {
+            System.out.println("Error de AES Dragon");
             Logger.Log(ex.getMessage());
         }
         return decryptedMessage;
