@@ -8,9 +8,8 @@ import conjuronet.*;
 public class ClientSocket extends Observable implements Constants, Runnable {
 
     private Socket client;
-    private boolean globalBool ;
-    private ObjectInputStream inputReader;
-    private ObjectOutputStream outputWriter;
+    private DataInputStream inputReader;
+    private DataOutputStream outputWriter;
     private boolean isListening = false;
 
     public ClientSocket(Socket pSocket) {
@@ -36,23 +35,23 @@ public class ClientSocket extends Observable implements Constants, Runnable {
     public void run() {
         while (isListening) {
             try {
-                String msgData = (String) inputReader.readObject();
+                String msgData = inputReader.readUTF();
                 //System.out.println(msgData);
                 ConjuroMsg msg = new ConjuroMsg(msgData);
-                System.out.println("El nombre es: " + msg.getValue("Nombre"));
+                System.out.println(msgData);
+                //System.out.println("El nombre es: " + msg.getValue("Nombre"));
                 this.notifyObservers(msg);
             
                 Thread.sleep(THREAD_SLEEP_TIME);
             } catch (Exception ex) {
                 Logger.Log(ex.getMessage());
             }
-            break;
         }
     }
 
     public void sendMessage(ConjuroMsg pMsg) {
         try {
-            outputWriter.writeObject(pMsg.getStringMsg());
+            outputWriter.writeUTF(pMsg.getStringMsg());
             outputWriter.flush();
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());
@@ -74,8 +73,8 @@ public class ClientSocket extends Observable implements Constants, Runnable {
         if (client != null) {
             try {
                 isListening = true;
-                outputWriter = new ObjectOutputStream(client.getOutputStream());
-                inputReader = new ObjectInputStream(client.getInputStream());
+                outputWriter = new DataOutputStream(client.getOutputStream());
+                inputReader = new DataInputStream(client.getInputStream());
                 Thread newthread = new Thread(this);
                 newthread.start();
 

@@ -16,7 +16,7 @@ public class Controller implements Constants {
         game = new GameLogic();
 
         numCards = 0;
-        comms = new ConjuroComms();
+        comms = new ConjuroComms(this);
 
         login = new Login();
         sendController();
@@ -37,9 +37,24 @@ public class Controller implements Constants {
         }
         return false;
     }
+    
+    public void sendMoves(){
+        Card[] select = game.getJugada1().clone();
+        String msg = "1,";
+        for (int index = 0; index < 6; index++) {
+            msg += "Name"+index+"=" + select[index%3].getName() + ",Description"+index+"=" + select[index%3].getDescription() + ",DescripEncryp"+index+"=" + select[index%3].getDescripEncrypted() + ",Key1"+index+"=" + select[index%3].getKey1() + ",Key2"+index+"=" + select[index%3].getKey2()+",";
+            if(index == 2){
+                select = game.getJugada2();
+            }
+        }
+        msg = msg.substring(0, msg.length()-1);
+        System.out.println("////"+msg);
+        comms.sendMessage(msg);
+    }
 
     public void startGame() {
         comms.iniciarJuegoNuevo();
+        generateCard();
     }
 
     public void searchGame() {
@@ -47,7 +62,13 @@ public class Controller implements Constants {
             login.getConnect();
         }else{
             login.initGame();
+            generateCard();
         }
+    }
+    
+    public void setCardCont(String pName, String pDescription, String pDescripEncrypted, String pKey1, String pKey2, int pPos, boolean pJugada) {
+        System.out.println("Name4=" + pName + ",Description=" + pDescription + ",DescripEncryp=" + pDescripEncrypted + ",Key1=" + pKey1 + ",Key2=" + pKey2 + "dsd");
+        game.setSelectedCardCont(pName, pDescription, pDescripEncrypted, pKey1, pKey2, pPos, pJugada);
     }
 
     public void generateCard() {
@@ -67,4 +88,13 @@ public class Controller implements Constants {
     public void sendController() {
         login.setController(this);
     }
+    
+    
+     public void cleanMove(int pData){
+         game.cleanMove(pData);
+     }
+     
+     public void setCartTXT(){
+         
+     }  
 }

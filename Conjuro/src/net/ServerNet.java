@@ -1,5 +1,6 @@
 package net;
 
+import conjuronet.ConjuroComms;
 import lib.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -38,8 +39,10 @@ public class ServerNet implements Constants, Runnable {
         while (isListening) {
             try {
                 Socket newSocket = serversocket.accept();
-
+                
                 ClientSocket client = new ClientSocket(newSocket);
+                ConjuroComms ConComms = (ConjuroComms) this.observer;
+                ConComms.setClientServer(client);
                 client.addObserver(this.observer);
                 clients.add(client);
                 System.out.println(clients);
