@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lib;
 
-/**
- *
- * @author adri-
- */
 public interface Constants {
 
      //---------------INTS---------------------//
@@ -23,8 +14,11 @@ public interface Constants {
     public static int DATA_CERO = 0;
     public static int DATA_ONE = 1;
     public static int DATA_TWO = 2;
+    public static int TOTAL_CARDS = 7;
+    public static int JUGADA_NUMBER = 3;
+    public static int LENGTH_KEY = 64;
+    public static int RSA_LENGTH_KEY = 1024;
     public static int MAX_KEYS = 100;
-    
     
     //---------------STRINGS---------------------//
     public static String MESSAGE_SEPARATOR = ",";
@@ -32,7 +26,9 @@ public interface Constants {
     public static String LIMIT_ENCRYPTATION_AES = "X--X";
     public static String LIMIT_ENCRYPTATION_SHA256 = "X-Y-X";
     public static String LIMIT_FILE = "X-X-X";
+    public static String LIMIT_DESCRIPTION = "-FinText-";
+    public static String LIMIT_NAME = "-FinName-";
+    public static String HOST = "192.78.12";
     public static String PATH_KEY = "\\C++\\Save.txt";
     public static String PATH_PLAY_DATA = "\\C++\\DataPlay.txt";
-
 }

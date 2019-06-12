@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package logic;
 
-import ecriptacion.IAlgorithm;
-import ecriptacion.Security;
+import encriptacion.IAlgorithm;
+import encriptacion.Security;
 
 public class Card {
     private String name;
     private String description;
-    private String descriptionEncryted;
+    private String descripEncrypted;
     private String key1;
     private String key2;
     private String type;
@@ -23,9 +18,17 @@ public class Card {
         generateDescripEncrypted();
     }
     
+    public Card(String pName, String pDescription, String pDescripEncrypted, String pKey1, String pKey2){
+        name = pName;
+        description = pDescription;
+        descripEncrypted = pDescripEncrypted;
+        key1 = pKey1;
+        key2 = pKey2;
+    }
+    
     private void generateDescripEncrypted(){
         IAlgorithm alg = Security.generateAlgorithm(type);
-        descriptionEncryted = alg.encrypt(description);  
+        descripEncrypted = alg.encrypt(description); 
         key1 = alg.getKey1();
         key2 = alg.getKey2();
     }
@@ -38,8 +41,8 @@ public class Card {
         return description;
     }
     
-    public String getDescriptionEncryted(){
-        return descriptionEncryted;
+    public String getDescripEncrypted(){
+        return descripEncrypted;
     }
     
     public String getKey1(){
@@ -48,5 +51,9 @@ public class Card {
     
     public String getKey2(){
         return key2;
+    }
+    
+    public String getType(){
+        return type;
     }
 }

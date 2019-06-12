@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package files;
 
 import java.io.BufferedReader;
@@ -10,11 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import lib.Logger;
 
-/**
- *
- * @author adri-
- */
 public class FileManagement {
 
     public void readFile(String pPath) {
@@ -31,8 +23,8 @@ public class FileManagement {
                 text += linea;
             }
             fr.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            Logger.Log(ex.getMessage());
         }
     }
     
@@ -47,8 +39,8 @@ public class FileManagement {
             pw.println(pText);
             
             fichero.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            Logger.Log(ex.getMessage());
         }   
     }
 }

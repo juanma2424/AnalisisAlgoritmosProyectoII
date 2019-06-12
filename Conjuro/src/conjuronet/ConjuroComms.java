@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package conjuronet;
 
 import lib.*;
-import static lib.Constants.PORT_NUMBER;
 import net.*;
 
 public class ConjuroComms implements IObserver, Constants {
@@ -20,8 +14,8 @@ public class ConjuroComms implements IObserver, Constants {
     public void conectarAJuego(String pHost) {
         client = new ClientSocket(pHost, PORT_NUMBER);
         client.addObserver(this);
-        ConjuroMsg msg = new ConjuroMsg("0,Nombre=Tomatoes");
-        client.sendMessage(msg);
+        /*ConjuroMsg msg = new ConjuroMsg("0,Nombre=juanmaa,n=j1");
+        client.sendMessage(msg);*/
     }
 
     public void iniciarJuegoNuevo() {

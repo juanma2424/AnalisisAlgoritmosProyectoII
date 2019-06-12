@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package conjuronet;
 
 import java.util.*;
 import lib.Constants;
-import static lib.Constants.MESSAGE_SEPARATOR;
-import static lib.Constants.MESSAGE_VALUES_SEPARATOR;
 
 public class ConjuroMsg implements Constants {
 
@@ -27,6 +20,7 @@ public class ConjuroMsg implements Constants {
 
             for (int valuesIndex = 1; valuesIndex < msgValues.length; valuesIndex++) {
                 String[] keyMap = msgValues[valuesIndex].split(MESSAGE_VALUES_SEPARATOR);
+                System.out.println(keyMap[0]);
                 values.put(keyMap[0], keyMap[1]);
             }
         }

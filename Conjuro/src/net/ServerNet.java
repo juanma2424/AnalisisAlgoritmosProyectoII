@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package net;
 
 import lib.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
-import static lib.Constants.PORT_NUMBER;
-import static lib.Constants.THREAD_SLEEP_TIME;
 
 public class ServerNet implements Constants, Runnable {
 
@@ -45,7 +38,7 @@ public class ServerNet implements Constants, Runnable {
         while (isListening) {
             try {
                 Socket newSocket = serversocket.accept();
-                
+
                 ClientSocket client = new ClientSocket(newSocket);
                 client.addObserver(this.observer);
                 clients.add(client);
