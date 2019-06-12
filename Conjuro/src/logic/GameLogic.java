@@ -21,19 +21,19 @@ public class GameLogic implements Constants {
         jugada1 = new Card[JUGADA_NUMBER];
         jugada2 = new Card[JUGADA_NUMBER];
     }
-    
-    public void setName(String pName){
+
+    public void setName(String pName) {
         jugador.setName(pName);
     }
 
-    public String getName(){
+    public String getName() {
         return jugador.getName();
     }
-    
-    public void setNameContr(String pName){
+
+    public void setNameContr(String pName) {
         contrincante.setName(pName);
     }
-    
+
     public void insertCard(String pName, String pDescription, String pType, int pPos) {
         deck[pPos] = new Card(pName, pDescription, pType);
     }
@@ -45,7 +45,7 @@ public class GameLogic implements Constants {
             jugada2[pPos] = deck[pType];
         }
     }
-    
+
     public void setSelectedCardCont(String pName, String pDescription, String pDescripEncrypted, String pKey1, String pKey2, int pPos, boolean pJugada) {
         if (pJugada) {
             jugadaCont1[pPos] = new Card(pName, pDescription, pDescripEncrypted, pKey1, pKey2);
@@ -53,16 +53,16 @@ public class GameLogic implements Constants {
             jugadaCont2[pPos] = new Card(pName, pDescription, pDescripEncrypted, pKey1, pKey2);
         }
     }
-    
-    public int decodeCard(Card pCard, int pType){
-        String[] types = {"Sha256","MD5","TresDes","AES","Plain","RSA","Pgp"};
+
+    public int decodeCard(Card pCard, int pType) {
+        String[] types = {"Sha256", "MD5", "TresDes", "AES", "Plain", "RSA", "Pgp"};
         boolean found = true;
         IAlgorithm alg;
         String text;
-        while(found){
-            alg = Security.generateAlgorithm(types[pType%TOTAL_CARDS]);
+        while (found) {
+            alg = Security.generateAlgorithm(types[pType % TOTAL_CARDS]);
             text = alg.decrypt(pCard.getDescripEncrypted(), pCard.getKey1());
-            if(text.equals(pCard.getDescription())){
+            if (text.equals(pCard.getDescription())) {
                 pType++;
                 break;
             }
@@ -72,5 +72,20 @@ public class GameLogic implements Constants {
         }
         pType--;
         return pType;
+    }
+
+    public void cleanMove(int pData) {
+        if (pData == 0) {
+            for (int index = 0; index < 3; index++) {
+                jugada1[index] = null;
+            }
+
+        } else {
+
+            for (int index = 0; index < 3; index++) {
+                jugada2[index] = null;
+            }
+        }
+
     }
 }

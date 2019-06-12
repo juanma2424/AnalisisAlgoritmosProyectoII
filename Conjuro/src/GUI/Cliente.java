@@ -10,8 +10,9 @@ public class Cliente extends javax.swing.JFrame {
     private int click = 0;
     private int jugada = 0;
     private boolean setMsg = true;
-    private Controller globalController ;
-    
+    private int globalJugada = 0;
+    private Controller globalController;
+
     public Cliente(Controller pController) {
         initComponents();
         globalController = pController;
@@ -26,26 +27,28 @@ public class Cliente extends javax.swing.JFrame {
         jButton9.setEnabled(false);
         jButton10.setEnabled(false);
     }
-    
-    private void setCart(String Pdata){
+
+    private void setCart(String Pdata) {
         String auxGettxt;
         click++;
-        if(setMsg ){
-        if(jTextField1.getText().length()!=0 ){
-             auxGettxt = jTextField1.getText();
-             jTextField1.setText(auxGettxt+","+Pdata); 
-             if (click==3) jButton8.setEnabled(true);//setMsg=true;
-        }else{
-             jTextField1.setText(Pdata);
-        }
-        if(click>3 ){
-            jTextField1.setText(Pdata);
-            jButton8.setEnabled(false);//setMsg=false;
-            click =1;
-        }
+        if (setMsg) {
+            if (jTextField1.getText().length() != 0) {
+                auxGettxt = jTextField1.getText();
+                jTextField1.setText(auxGettxt + "," + Pdata);
+                if (click == 3) {
+                    jButton8.setEnabled(true);//setMsg=true;
+                }
+            } else {
+                jTextField1.setText(Pdata);
+            }
+            if (click > 3) {
+                jTextField1.setText(Pdata);
+                jButton8.setEnabled(false);//setMsg=false;
+                click = 1;
+            }
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -206,55 +209,62 @@ public class Cliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void C3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C3ActionPerformed
         // TODO add your handling code here:
-         setCart("c3=3des");   
+        setCart("c3=3des");
     }//GEN-LAST:event_C3ActionPerformed
 
     private void C1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C1ActionPerformed
         // TODO add your handling code here:
+        if (globalJugada < 3) {
+            globalController.selectCard(0, true);
+        } else {
+            globalController.selectCard(0, false);
+        }
+        globalController.selectCard(0, true);
+        globalJugada++;
         setCart("c1=sha256");
     }//GEN-LAST:event_C1ActionPerformed
 
     private void C4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C4ActionPerformed
         // TODO add your handling code here:
-         setCart("c4=aes");   
+        setCart("c4=aes");
     }//GEN-LAST:event_C4ActionPerformed
 
     private void C6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C6ActionPerformed
         // TODO add your handling code here:
-         setCart("c6=rsa");   
+        setCart("c6=rsa");
     }//GEN-LAST:event_C6ActionPerformed
 
     private void C5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C5ActionPerformed
         // TODO add your handling code here:
-         setCart("c5=plain");   
+        setCart("c5=plain");
     }//GEN-LAST:event_C5ActionPerformed
 
     private void C7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C7ActionPerformed
         // TODO add your handling code here:
-         setCart("c7=pgp");   
+        setCart("c7=pgp");
     }//GEN-LAST:event_C7ActionPerformed
 
     private void C2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C2ActionPerformed
         // TODO add your handling code here:
-         setCart("c2=md5");   
+        setCart("c2=md5");
     }//GEN-LAST:event_C2ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        
-        if(jugada==0){
+
+        if (jugada == 0) {
             jTextField3.setText(jTextField1.getText());
             jugada++;
             jButton9.setEnabled(true);
-        }else{
-             jTextField2.setText(jTextField1.getText());
-             jButton10.setEnabled(true);
-             setMsg = false;
+        } else {
+            jTextField2.setText(jTextField1.getText());
+            jButton10.setEnabled(true);
+            setMsg = false;
         }
-         jTextField1.setText(null);
+        jTextField1.setText(null);
         jButton8.setEnabled(false);
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -265,16 +275,18 @@ public class Cliente extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
         jTextField3.setText(null);
-        jugada=0;
+        jugada = 0;
         jButton9.setEnabled(false);
-         setMsg = true;
+        setMsg = true;
+        cleanMove(0);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
         jTextField2.setText(null);
         jButton9.setEnabled(false);
-         setMsg = true;
+        setMsg = true;
+         cleanMove(1);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
@@ -307,11 +319,17 @@ public class Cliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               
+
             }
         });
     }
 
+    
+    public void  cleanMove(int pData){
+       globalJugada =  globalJugada - 3;
+       globalController.cleanMove(pData);
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton C1;
     private javax.swing.JButton C2;

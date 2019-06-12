@@ -40,6 +40,7 @@ public class Controller implements Constants {
 
     public void startGame() {
         comms.iniciarJuegoNuevo();
+        generateCard();
     }
 
     public void searchGame() {
@@ -47,6 +48,7 @@ public class Controller implements Constants {
             login.getConnect();
         }else{
             login.initGame();
+            generateCard();
         }
     }
 
@@ -67,4 +69,9 @@ public class Controller implements Constants {
     public void sendController() {
         login.setController(this);
     }
+    
+    
+     public void cleanMove(int pData){
+         game.cleanMove(pData);
+     }
 }
