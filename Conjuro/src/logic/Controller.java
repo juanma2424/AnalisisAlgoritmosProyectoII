@@ -13,18 +13,15 @@ public class Controller implements Constants {
     Login login;
 
     public Controller() {
-        System.out.println("xx");
         game = new GameLogic();
-        System.out.println("xxx");
+
         numCards = 0;
         comms = new ConjuroComms();
-        System.out.println("ar");
-        login = new Login();
 
+        login = new Login();
+        sendController();
         login.setLocationRelativeTo(null);
         login.setVisible(true);
-
-        System.out.println("ab");
 
     }
 
@@ -48,6 +45,8 @@ public class Controller implements Constants {
     public void searchGame() {
         if (!comms.conectarAJuego(HOST)) {
             login.getConnect();
+        }else{
+            login.initGame();
         }
     }
 
@@ -63,5 +62,9 @@ public class Controller implements Constants {
             game.insertCard(parts[0], parts[1], types[count], count);
             count++;
         }
+    }
+
+    public void sendController() {
+        login.setController(this);
     }
 }

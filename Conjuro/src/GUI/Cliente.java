@@ -1,5 +1,7 @@
 package GUI;
 
+import logic.Controller;
+
 public class Cliente extends javax.swing.JFrame {
 
     /**
@@ -8,8 +10,11 @@ public class Cliente extends javax.swing.JFrame {
     private int click = 0;
     private int jugada = 0;
     private boolean setMsg = true;
-    public Cliente() {
+    private Controller globalController ;
+    
+    public Cliente(Controller pController) {
         initComponents();
+        globalController = pController;
         C1.setToolTipText("Name: C1 | Tipe: Sha256 |desc cifrada | desc no cifrada| key1 | key2");
         C2.setToolTipText("Name: C2 | Tipe: MD5 |desc cifrada | desc no cifrada| key1 | key2");
         C3.setToolTipText("Name: C3 | Tipe: 3DES |desc cifrada | desc no cifrada| key1 | key2");
@@ -302,9 +307,7 @@ public class Cliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Cliente window = new Cliente();
-                window.setLocationRelativeTo(null);
-                window.setVisible(true);
+               
             }
         });
     }

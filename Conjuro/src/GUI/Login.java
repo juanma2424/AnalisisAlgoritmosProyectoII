@@ -18,6 +18,7 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     Controller globalController;
+
     public Login() {
         initComponents();
     }
@@ -98,13 +99,15 @@ public class Login extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.globalController.searchGame();
-           
+        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.globalController.insertName(jTextField1.getText());
         this.globalController.startGame();
+        initGame();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -137,28 +140,29 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
 //                Login window = new Login();
 //                window.setLocationRelativeTo(null);
 //                window.setVisible(true);
-                
             }
         });
     }
-    
-    
-    public void setController(Controller pController){
-       this.globalController =  pController; 
+
+    public void setController(Controller pController) {
+        this.globalController = pController;
+    }
+
+    public void getConnect() {
+        JOptionPane.showMessageDialog(null, "No hay servidores");
     }
     
-    public void getConnect(){
-      JOptionPane.showMessageDialog(null, "No hay servidores");
+    public  void initGame(){
+        Cliente window = new Cliente(globalController);
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
+        this.dispose();
     }
-    
-    
-    
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
