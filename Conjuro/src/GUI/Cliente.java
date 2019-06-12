@@ -105,7 +105,7 @@ public class Cliente extends javax.swing.JFrame {
         jTextArea2.setRows(5);
         jScrollPane3.setViewportView(jTextArea2);
 
-        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 190, 100));
+        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 180, 120));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -315,6 +315,8 @@ public class Cliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         globalController.sendMoves();
         jButton1.setEnabled(false);
+        editMoveTwo.setEnabled(false);
+        editMoveOne.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void appendMoves(String pMove){

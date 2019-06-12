@@ -4,6 +4,7 @@ import GUI.Cliente;
 import GUI.Login;
 import conjuronet.ConjuroComms;
 import files.ReadFile;
+import java.util.Random;
 import lib.Constants;
 import lib.Logger;
 
@@ -49,10 +50,17 @@ public class Controller implements Constants, Runnable {
     public void sendMoves() {
         Card[] select = game.getJugada1().clone();
         String msg = "1,";
-
+        Random rand = new Random();
+        String key1;
+        String key2;
         for (int index = 0; index < 6; index++) {
-
-            msg += "Name" + index + "=" + select[index % 3].getName() + ",Description" + index + "=" + select[index % 3].getDescription() + ",DescripEncryp" + index + "=" + select[index % 3].getDescripEncrypted() + ",Key1" + index + "=" + select[index % 3].getKey1() + ",Key2" + index + "=" + select[index % 3].getKey2() + ",";
+            key1 = select[index % 3].getKey1();
+            key2 = select[index % 3].getKey2();
+            if(rand.nextInt() < 0.5){
+                key1 = select[index % 3].getKey2();
+                key2 = select[index % 3].getKey1();
+            }
+            msg += "Name" + index + "=" + select[index % 3].getName() + ",Description" + index + "=" + select[index % 3].getDescription() + ",DescripEncryp" + index + "=" + select[index % 3].getDescripEncrypted() + ",Key1" + index + "=" + key1 + ",Key2" + index + "=" + key2 + ",";
             if (index == 2) {
                 select = game.getJugada2();
             }
