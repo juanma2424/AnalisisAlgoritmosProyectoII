@@ -8,6 +8,7 @@ import conjuronet.*;
 public class ClientSocket extends Observable implements Constants, Runnable {
 
     private Socket client;
+    private boolean globalBool ;
     private ObjectInputStream inputReader;
     private ObjectOutputStream outputWriter;
     private boolean isListening = false;
@@ -17,13 +18,19 @@ public class ClientSocket extends Observable implements Constants, Runnable {
         initReaders();
     }
 
-    public ClientSocket(String pIp, int pPort) {
+    public ClientSocket() {
+       
+    }
+    
+    public boolean makeClient(String pIp, int pPort) {
         try {
             client = new Socket(pIp, pPort);
             initReaders();
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());
+            return false;
         }
+        return true;
     }
 
     public void run() {

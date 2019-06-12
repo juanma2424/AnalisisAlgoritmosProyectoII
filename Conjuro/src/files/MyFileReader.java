@@ -50,15 +50,15 @@ public class MyFileReader {
         }
     }
 
-    public static void main(String[] args) throws java.io.IOException {
-
-        File searchFile = new File("");
-        searchFile.getAbsoluteFile().getParentFile().getAbsolutePath();
-        String path = searchFile.getAbsoluteFile().getParentFile().getAbsolutePath() + PATH_KEY;
-
-        MyFileReader My = new MyFileReader();
-        My.readConjuro(path);
-        My.write();
-    }
+//    public static void main(String[] args) throws java.io.IOException {
+//
+//        File searchFile = new File("");
+//        searchFile.getAbsoluteFile().getParentFile().getAbsolutePath();
+//        String path = searchFile.getAbsoluteFile().getParentFile().getAbsolutePath() + PATH_KEY;
+//
+//        MyFileReader My = new MyFileReader();
+//        My.readConjuro(path);
+//        My.write();
+//    }
 
 }

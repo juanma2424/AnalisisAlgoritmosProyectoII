@@ -1,18 +1,28 @@
 package logic;
 
+import GUI.Login;
 import conjuronet.ConjuroComms;
 import files.ReadFile;
 import lib.Constants;
 
 public class Controller implements Constants {
+
     private GameLogic game;
     private int numCards;
     private ConjuroComms comms;
+    Login login;
 
     public Controller() {
         game = new GameLogic();
+
         numCards = 0;
         comms = new ConjuroComms();
+
+        login = new Login();
+        sendController();
+        login.setLocationRelativeTo(null);
+        login.setVisible(true);
+
     }
 
     public void insertName(String pName) {
@@ -20,30 +30,28 @@ public class Controller implements Constants {
     }
 
     public boolean selectCard(int pType, boolean pJugada) {
-        if (numCards < TOTAL_CARDS-1) {
+        if (numCards < TOTAL_CARDS - 1) {
             game.setSelectedCard(pType, numCards % JUGADA_NUMBER, pJugada);
             numCards++;
             return true;
         }
         return false;
     }
-    
-    public boolean startGame(){
-        if(game.getName().isEmpty())
-            return false;
+
+    public void startGame() {
         comms.iniciarJuegoNuevo();
-        return true;
     }
-    
-    public boolean searchGame(){
-        if(game.getName().isEmpty())
-            return false;
-        comms.conectarAJuego(HOST);
-        return true;
+
+    public void searchGame() {
+        if (!comms.conectarAJuego(HOST)) {
+            login.getConnect();
+        }else{
+            login.initGame();
+        }
     }
 
     public void generateCard() {
-        String[] types = {"Sha256","MD5","TresDes","AES","Plain","RSA","Pgp"};
+        String[] types = {"Sha256", "MD5", "TresDes", "AES", "Plain", "RSA", "Pgp"};
         ReadFile fr = new ReadFile();
         String text = fr.readDescription();
         String[] description = text.split(LIMIT_DESCRIPTION);
@@ -54,5 +62,9 @@ public class Controller implements Constants {
             game.insertCard(parts[0], parts[1], types[count], count);
             count++;
         }
+    }
+
+    public void sendController() {
+        login.setController(this);
     }
 }
