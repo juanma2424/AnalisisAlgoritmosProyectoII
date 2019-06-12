@@ -24,6 +24,7 @@ public class Cliente extends javax.swing.JFrame {
         C6.setToolTipText("Name: C6 | Tipe: RSA |desc cifrada | desc no cifrada| key1 | key2");
         C7.setToolTipText("Name: C7 | Tipe: PGP |desc cifrada | desc no cifrada| key1 | key2");
         sendMove.setEnabled(false);
+        jButton1.setEnabled(false);
         editMoveOne.setEnabled(false);
         editMoveTwo.setEnabled(false);
     }
@@ -262,6 +263,9 @@ public class Cliente extends javax.swing.JFrame {
         selectMove();
         textMove.setText(null);// CLEAN
         sendMove.setEnabled(false);
+        if (readyMoveOne && readyMoveTwo) {
+            jButton1.setEnabled(true);
+        }
         avalibleORNot(true);
     }//GEN-LAST:event_sendMoveActionPerformed
 
@@ -271,7 +275,9 @@ public class Cliente extends javax.swing.JFrame {
 
     private void editMoveOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMoveOneActionPerformed
         // TODO add your handling code here:
+        jButton1.setEnabled(false);
         jTextField3.setText(null);
+        textMove.setText(null);
         editMoveOne.setEnabled(false);
         readyMoveOne = false;///
         cleanMove(0);
@@ -280,8 +286,10 @@ public class Cliente extends javax.swing.JFrame {
 
     private void editMoveTwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMoveTwoActionPerformed
         // TODO add your handling code here:
+        jButton1.setEnabled(false);
         avalibleORNot(true);
         jTextField2.setText(null);
+        textMove.setText(null);
         editMoveTwo.setEnabled(false);
         readyMoveTwo = false;///
         cleanMove(1);
@@ -331,7 +339,12 @@ public class Cliente extends javax.swing.JFrame {
     }
 
     private void cleanMove(int pData) {
-        globalJugada = globalJugada - 3;
+        if(globalJugada == 6)
+            globalJugada = globalJugada - 3;
+        else{
+            globalJugada = 0;
+        }
+        this.globalClicks = 0;
         globalController.cleanMove(pData);
 
     }
@@ -361,9 +374,11 @@ public class Cliente extends javax.swing.JFrame {
     }
 
     private void setText(String pData, javax.swing.JButton jData) {
-        setCart(pData);
-        jData.setEnabled(false);
-        text();
+        if (!readyMoveOne || !readyMoveTwo) {
+            setCart(pData);
+            jData.setEnabled(false);
+            text();
+        }
     }
 
     private void text() {
