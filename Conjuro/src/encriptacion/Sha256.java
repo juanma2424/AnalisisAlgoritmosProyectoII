@@ -9,10 +9,12 @@ import lib.Logger;
 public class Sha256 implements IAlgorithm, Constants{
     private String key1;
     private String key2;
+    private String text;
     
     public Sha256(){
         key1 = generateKey();
         key2 = generateKey();
+        text = "";
     }
     
     public String encrypt(String pText){
@@ -42,7 +44,10 @@ public class Sha256 implements IAlgorithm, Constants{
         return hashText;
     }
     
-    public String decrypt(String pText, String pKey){
+    public String decrypt(String pText, String pKey) {
+        if(pText.equals(encrypt(text))){
+            return text;
+        }
         return pText;
     }
     
@@ -63,5 +68,9 @@ public class Sha256 implements IAlgorithm, Constants{
 
     public String getKey2() {
         return key2;
+    }
+    
+    public void setText(String pText){
+        text = pText;
     }
 }

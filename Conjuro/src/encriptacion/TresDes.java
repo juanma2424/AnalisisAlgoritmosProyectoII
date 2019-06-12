@@ -91,4 +91,8 @@ public class TresDes implements IAlgorithm, Constants {
     public String getKey2() {
         return key2;
     }
+    
+    public void setText(String pText){
+        
+    }
 }

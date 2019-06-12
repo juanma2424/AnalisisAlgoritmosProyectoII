@@ -1,31 +1,31 @@
 Pikachu-FinName-El usa un rayo laser bien poderoso
 
 acaba con los de agua.
+
 -FinText-
-Charmander-FinName-Pokemon estilo fuego de quema hasta las pelotas
+
+Boolbasur-FinName-Pokemon estilo fuego de quema hasta las pelotas
+
 -FinText-
-Pikachu-FinName-El usa un rayo laser bien poderoso
+
+Wartoortle-FinName-El usa un rayo laser bien poderoso
 acaba con los de agua.
+
 -FinText-
+
 Charmander-FinName-Pokemon estilo fuego de quema hasta las pelotas
+
 -FinText-
-Pikachu-FinName-El usa un rayo laser bien poderoso
+
+SloowPoked-FinName-El usa un rayo laser bien poderoso
 acaba con los de agua.
+
 -FinText-
-Charmander-FinName-Pokemon estilo fuego de quema hasta las pelotas
+
+EVEE-FinName-Pokemon estilo fuego de quema hasta las pelotas
+
 -FinText-
-Pikachu-FinName-El usa un rayo laser bien poderoso
+
+UNBREON-FinName-El usa un rayo laser bien poderoso
 acaba con los de agua.
--FinText-
-Charmander-FinName-Pokemon estilo fuego de quema hasta las pelotas
--FinText-
-Pikachu-FinName-El usa un rayo laser bien poderoso
-acaba con los de agua.
--FinText-
-Charmander-FinName-Pokemon estilo fuego de quema hasta las pelotas
--FinText-
-Pikachu-FinName-El usa un rayo laser bien poderoso
-acaba con los de agua.
--FinText-
-Charmander-FinName-Pokemon estilo fuego de quema hasta las pelotas
 -FinText-

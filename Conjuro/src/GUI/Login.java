@@ -157,9 +157,7 @@ public class Login extends javax.swing.JFrame {
     }
     
     public  void initGame(){
-        Cliente window = new Cliente(globalController);
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
+        globalController.initWindow();
         this.dispose();
     }
 

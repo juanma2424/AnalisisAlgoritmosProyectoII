@@ -45,7 +45,12 @@ public class ConjuroComms implements IObserver, Constants {
                     else
                         globalController.setCardCont(msg.getValue("Name" + index), msg.getValue("Description" + index), msg.getValue("DescripEncryp" + index), msg.getValue("Key1" + index), msg.getValue("Key2" + index),index%3,false);
                 }
+                globalController.setGetCards();
 
+                break;
+            }
+            case CARD_FOUND: {
+                globalController.findCard(Integer.parseInt(msg.getValue("Type")));
                 break;
             }
             default: {
