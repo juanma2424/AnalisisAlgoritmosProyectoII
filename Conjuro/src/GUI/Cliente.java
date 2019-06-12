@@ -12,10 +12,12 @@ public class Cliente extends javax.swing.JFrame {
     private boolean readyMoveTwo = false;
     private int globalJugada = 0;
     private Controller globalController;
+    private guiLogic glogic;
 
     public Cliente(Controller pController) {
         initComponents();
         globalController = pController;
+        glogic = new guiLogic();
         C1.setToolTipText("Name: C1 | Tipe: Sha256 |desc cifrada | desc no cifrada| key1 | key2");
         C2.setToolTipText("Name: C2 | Tipe: MD5 |desc cifrada | desc no cifrada| key1 | key2");
         C3.setToolTipText("Name: C3 | Tipe: 3DES |desc cifrada | desc no cifrada| key1 | key2");

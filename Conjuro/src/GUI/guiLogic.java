@@ -25,6 +25,10 @@ public class guiLogic {
     private javax.swing.JButton C5;
     private javax.swing.JButton C6;
     private javax.swing.JButton C7;
+    
+    public guiLogic(Controller pController){
+        globalController = pController;
+    }
 
     private void setCart(String pData,javax.swing.JTextField textMove,javax.swing.JButton sendMove) {
         String lastTexMove;
