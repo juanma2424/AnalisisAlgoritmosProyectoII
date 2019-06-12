@@ -44,6 +44,7 @@ public class ClientSocket extends Observable implements Constants, Runnable {
             
                 Thread.sleep(THREAD_SLEEP_TIME);
             } catch (Exception ex) {
+                stop();
                 Logger.Log(ex.getMessage());
             }
         }
