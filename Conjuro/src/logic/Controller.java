@@ -28,8 +28,6 @@ public class Controller implements Constants, Runnable {
         window = null;
         login = new Login();
         sendController();
-        login.setLocationRelativeTo(null);
-        login.setVisible(true);
         new Thread(this).start();
 
     }
@@ -39,7 +37,7 @@ public class Controller implements Constants, Runnable {
     }
 
     public boolean selectCard(int pType, boolean pJugada) {
-        if (numCards < TOTAL_CARDS - 1) {
+        if (numCards < SELECT_CARDS) {
             game.setSelectedCard(pType, numCards % JUGADA_NUMBER, pJugada);
             numCards++;
             return true;
@@ -53,15 +51,17 @@ public class Controller implements Constants, Runnable {
         Random rand = new Random();
         String key1;
         String key2;
-        for (int index = 0; index < 6; index++) {
-            key1 = select[index % 3].getKey1();
-            key2 = select[index % 3].getKey2();
+        int pos = 0;
+        for (int index = 0; index < SELECT_CARDS; index++) {
+            pos = index % JUGADA_NUMBER;
+            key1 = select[pos].getKey1();
+            key2 = select[pos].getKey2();
             if(rand.nextInt() < 0.5){
-                key1 = select[index % 3].getKey2();
-                key2 = select[index % 3].getKey1();
+                key1 = select[pos].getKey2();
+                key2 = select[pos].getKey1();
             }
-            msg += "Name" + index + "=" + select[index % 3].getName() + ",Description" + index + "=" + select[index % 3].getDescription() + ",DescripEncryp" + index + "=" + select[index % 3].getDescripEncrypted() + ",Key1" + index + "=" + key1 + ",Key2" + index + "=" + key2 + ",";
-            if (index == 2) {
+            msg += "Name" + index + "=" + select[pos].getName() + ",Description" + index + "=" + select[pos].getDescription() + ",DescripEncryp" + index + "=" + select[pos].getDescripEncrypted() + ",Key1" + index + "=" + key1 + ",Key2" + index + "=" + key2 + ",";
+            if (index == JUGADA_NUMBER-1) {
                 select = game.getJugada2();
             }
         }
@@ -124,10 +124,6 @@ public class Controller implements Constants, Runnable {
         numCards = 0;
     }
 
-    public void setCartTXT() {
-
-    }
-
     public void findCard(int pType) {
         String[] types = {"Sha256", "MD5", "TresDes", "AES", "Plain", "RSA", "Pgp"};
         window.appendFindCards(types[pType]);
@@ -166,8 +162,6 @@ public class Controller implements Constants, Runnable {
 
     public void initWindow() {
         window = new Cliente(this);
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
     }
 
     public void setNameContr(String pName) {

@@ -1,8 +1,9 @@
 package GUI;
 
+import lib.Constants;
 import logic.Controller;
 
-public class Cliente extends javax.swing.JFrame {
+public class Cliente extends javax.swing.JFrame implements Constants {
 
     /**
      * Creates new form Cliente
@@ -29,6 +30,8 @@ public class Cliente extends javax.swing.JFrame {
         editMoveTwo.setEnabled(false);
         jTextArea1.setEditable(false);
         jTextArea2.setEditable(false);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     private void setCart(String pData) {
@@ -40,13 +43,13 @@ public class Cliente extends javax.swing.JFrame {
             if (textMove.getText().length() != 0) {
                 lastTexMove = textMove.getText();
                 textMove.setText(lastTexMove + "," + pData);
-                if (globalClicks == 3) {//si global clicks es igual a 3
+                if (globalClicks == JUGADA_NUMBER) {//si global clicks es igual a 3
                     sendMove.setEnabled(true);//setMsg=true;
                 }
             } else {
                 textMove.setText(pData);// si es la primera vez que se escribe
             }
-            if (globalClicks > 3) {
+            if (globalClicks > JUGADA_NUMBER) {
                 textMove.setText(pData);
                 sendMove.setEnabled(false);//setMsg=false;
                 globalClicks = 1;// global click refresh
@@ -243,37 +246,37 @@ public class Cliente extends javax.swing.JFrame {
 
     private void C3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C3ActionPerformed
         // TODO add your handling code here:
-        setText("c3=3des", C3,2);
+        setText("c3=3des", C3, 2);
     }//GEN-LAST:event_C3ActionPerformed
 
     private void C1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C1ActionPerformed
         // TODO add your handling code here:
-        setText("c1=sha256", C1,0);
+        setText("c1=sha256", C1, 0);
     }//GEN-LAST:event_C1ActionPerformed
 
     private void C4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C4ActionPerformed
         // TODO add your handling code here:
-        setText("c4=aes", C4,3);
+        setText("c4=aes", C4, 3);
     }//GEN-LAST:event_C4ActionPerformed
 
     private void C6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C6ActionPerformed
         // TODO add your handling code here:
-        setText("c6=rsa", C6,5);
+        setText("c6=rsa", C6, 5);
     }//GEN-LAST:event_C6ActionPerformed
 
     private void C5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C5ActionPerformed
         // TODO add your handling code here:
-        setText("c5=plain", C5,4);
+        setText("c5=plain", C5, 4);
     }//GEN-LAST:event_C5ActionPerformed
 
     private void C7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C7ActionPerformed
         // TODO add your handling code here:
-        setText("c7=pgp", C7,6);
+        setText("c7=pgp", C7, 6);
     }//GEN-LAST:event_C7ActionPerformed
 
     private void C2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C2ActionPerformed
         // TODO add your handling code here:
-        setText("c2=md5", C2,1);
+        setText("c2=md5", C2, 1);
     }//GEN-LAST:event_C2ActionPerformed
 
     private void sendMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMoveActionPerformed
@@ -321,12 +324,12 @@ public class Cliente extends javax.swing.JFrame {
         editMoveOne.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void appendMoves(String pMove){
-        jTextArea1.append(pMove+"\n");
+    public void appendMoves(String pMove) {
+        jTextArea1.append(pMove + "\n");
     }
-    
-    public void appendFindCards(String pType){
-        jTextArea2.append(pType+"\n");
+
+    public void appendFindCards(String pType) {
+        jTextArea2.append(pType + "\n");
     }
 
     /**
@@ -365,9 +368,9 @@ public class Cliente extends javax.swing.JFrame {
     }
 
     private void cleanMove(int pData) {
-        if(globalJugada == 6)
-            globalJugada = globalJugada - 3;
-        else{
+        if (globalJugada == SELECT_CARDS) {
+            globalJugada = globalJugada - JUGADA_NUMBER;
+        } else {
             globalJugada = 0;
         }
         this.globalClicks = 0;
@@ -391,11 +394,11 @@ public class Cliente extends javax.swing.JFrame {
             editMoveOne.setEnabled(true);
             readyMoveOne = true;
         } else {
-             avalibleORNot(false);
+            avalibleORNot(false);
             jTextField2.setText(textMove.getText());
             editMoveTwo.setEnabled(true);
             readyMoveTwo = true;
-           
+
         }
     }
 
@@ -406,9 +409,9 @@ public class Cliente extends javax.swing.JFrame {
             jData.setEnabled(false);
         }
     }
-    
+
     private void selectedCard(int pCard) {
-            globalController.selectCard(pCard, !readyMoveOne);
+        globalController.selectCard(pCard, !readyMoveOne);
         globalJugada++;
     }
 
