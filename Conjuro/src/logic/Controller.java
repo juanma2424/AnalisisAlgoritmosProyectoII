@@ -74,4 +74,11 @@ public class Controller implements Constants {
      public void cleanMove(int pData){
          game.cleanMove(pData);
      }
+     
+     public void setCartTXT(){
+         
+     }
+     
+     
+     
 }

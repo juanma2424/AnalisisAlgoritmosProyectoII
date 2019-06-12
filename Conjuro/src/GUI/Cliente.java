@@ -7,9 +7,9 @@ public class Cliente extends javax.swing.JFrame {
     /**
      * Creates new form Cliente
      */
-    private int click = 0;
-    private int jugada = 0;
-    private boolean setMsg = true;
+    private int globalClicks = 0;
+    private int globalMove = 0;
+    private boolean readyTwoMoves = false;
     private int globalJugada = 0;
     private Controller globalController;
 
@@ -23,28 +23,30 @@ public class Cliente extends javax.swing.JFrame {
         C5.setToolTipText("Name: C5 | Tipe: Plain |desc cifrada | desc no cifrada| key1 | key2");
         C6.setToolTipText("Name: C6 | Tipe: RSA |desc cifrada | desc no cifrada| key1 | key2");
         C7.setToolTipText("Name: C7 | Tipe: PGP |desc cifrada | desc no cifrada| key1 | key2");
-        jButton8.setEnabled(false);
-        jButton9.setEnabled(false);
-        jButton10.setEnabled(false);
+        sendMove.setEnabled(false);
+        editMoveOne.setEnabled(false);
+        editMoveTwo.setEnabled(false);
     }
 
-    private void setCart(String Pdata) {
-        String auxGettxt;
-        click++;
-        if (setMsg) {
-            if (jTextField1.getText().length() != 0) {
-                auxGettxt = jTextField1.getText();
-                jTextField1.setText(auxGettxt + "," + Pdata);
-                if (click == 3) {
-                    jButton8.setEnabled(true);//setMsg=true;
+    private void setCart(String pData) {
+        String lastTexMove;
+        globalClicks++;
+        if (!readyTwoMoves) {
+            
+            // si ya existe algo escrito
+            if (textMove.getText().length() != 0) {
+                lastTexMove = textMove.getText();
+                textMove.setText(lastTexMove + "," + pData);
+                if (globalClicks == 3) {//si global clicks es igual a 3
+                    sendMove.setEnabled(true);//setMsg=true;
                 }
             } else {
-                jTextField1.setText(Pdata);
+                textMove.setText(pData);// si es la primera vez que se escribe
             }
-            if (click > 3) {
-                jTextField1.setText(Pdata);
-                jButton8.setEnabled(false);//setMsg=false;
-                click = 1;
+            if (globalClicks > 3) {
+                textMove.setText(pData);
+                sendMove.setEnabled(false);//setMsg=false;
+                globalClicks = 1;
             }
         }
     }
@@ -55,12 +57,13 @@ public class Cliente extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextField1 = new javax.swing.JTextField();
+        textMove = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jButton10 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        editMoveTwo = new javax.swing.JButton();
+        editMoveOne = new javax.swing.JButton();
+        sendMove = new javax.swing.JButton();
         C3 = new javax.swing.JButton();
         C1 = new javax.swing.JButton();
         C4 = new javax.swing.JButton();
@@ -78,11 +81,11 @@ public class Cliente extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(1084, 646));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setEditable(false);
-        jTextField1.setBackground(new java.awt.Color(0, 0, 51));
-        jTextField1.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(jTextField1);
+        textMove.setEditable(false);
+        textMove.setBackground(new java.awt.Color(0, 0, 51));
+        textMove.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        textMove.setForeground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setViewportView(textMove);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 420, 90));
 
@@ -103,29 +106,37 @@ public class Cliente extends javax.swing.JFrame {
         });
         jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 10, 210, 60));
 
-        jButton10.setText("Editar jugada 1");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("SEND MOVES");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, -1, -1));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 170, 150, 60));
 
-        jButton9.setText("Editar jugada 1");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        editMoveTwo.setText("Editar jugada 1");
+        editMoveTwo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                editMoveTwoActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, -1, -1));
+        jPanel2.add(editMoveTwo, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, -1, -1));
 
-        jButton8.setText("SetJugada");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        editMoveOne.setText("Editar jugada 1");
+        editMoveOne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                editMoveOneActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 260, 100, 40));
+        jPanel2.add(editMoveOne, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, -1, -1));
+
+        sendMove.setText("SetJugada");
+        sendMove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendMoveActionPerformed(evt);
+            }
+        });
+        jPanel2.add(sendMove, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 260, 100, 40));
 
         C3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/carta3.png"))); // NOI18N
         C3.addActionListener(new java.awt.event.ActionListener() {
@@ -252,42 +263,51 @@ public class Cliente extends javax.swing.JFrame {
         setCart("c2=md5");
     }//GEN-LAST:event_C2ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void sendMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMoveActionPerformed
         // TODO add your handling code here:
 
-        if (jugada == 0) {
-            jTextField3.setText(jTextField1.getText());
-            jugada++;
-            jButton9.setEnabled(true);
+        if (globalMove == 0) {
+            jTextField3.setText(textMove.getText());
+            editMoveOne.setEnabled(true);
+            globalMove++;
         } else {
-            jTextField2.setText(jTextField1.getText());
-            jButton10.setEnabled(true);
-            setMsg = false;
+            jTextField2.setText(textMove.getText());
+            editMoveTwo.setEnabled(true);
+            readyTwoMoves = true;
         }
-        jTextField1.setText(null);
-        jButton8.setEnabled(false);
-    }//GEN-LAST:event_jButton8ActionPerformed
+        textMove.setText(null);// CLEAN
+        sendMove.setEnabled(false);
+    }//GEN-LAST:event_sendMoveActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void editMoveOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMoveOneActionPerformed
         // TODO add your handling code here:
         jTextField3.setText(null);
-        jugada = 0;
-        jButton9.setEnabled(false);
-        setMsg = true;
+        globalMove = 0;
+        editMoveOne.setEnabled(false);
+        readyTwoMoves = true;
         cleanMove(0);
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_editMoveOneActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void editMoveTwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMoveTwoActionPerformed
         // TODO add your handling code here:
         jTextField2.setText(null);
-        jButton9.setEnabled(false);
-        setMsg = true;
-         cleanMove(1);
-    }//GEN-LAST:event_jButton10ActionPerformed
+        editMoveOne.setEnabled(false);
+        readyTwoMoves = true;
+        cleanMove(1);
+    }//GEN-LAST:event_editMoveTwoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        //globalController.
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -338,14 +358,15 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JButton C5;
     private javax.swing.JButton C6;
     private javax.swing.JButton C7;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton editMoveOne;
+    private javax.swing.JButton editMoveTwo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JButton sendMove;
+    private javax.swing.JTextField textMove;
     // End of variables declaration//GEN-END:variables
 }
