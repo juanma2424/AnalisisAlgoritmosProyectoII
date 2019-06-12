@@ -27,6 +27,8 @@ public class Cliente extends javax.swing.JFrame {
         jButton1.setEnabled(false);
         editMoveOne.setEnabled(false);
         editMoveTwo.setEnabled(false);
+        jTextArea1.setEditable(false);
+        jTextArea2.setEditable(false);
     }
 
     private void setCart(String pData) {
