@@ -40,7 +40,7 @@ class AES implements IAlgorithm, Constants {
         String decryptedMessage = "";
         try {
 
-            SecretKeySpec skeySpec = new SecretKeySpec(Base64.getDecoder().decode(key1), "AES");// Crea el objeto SecretKey pasa la clave y el algoritmo "AES"
+            SecretKeySpec skeySpec = new SecretKeySpec(Base64.getDecoder().decode(pKey), "AES");// Crea el objeto SecretKey pasa la clave y el algoritmo "AES"
             
             Cipher cipher = Cipher.getInstance("AES");//Crear un objeto de cifrado de tipo AES
             
