@@ -18,6 +18,7 @@ public interface Constants {
     public static int JUGADA_NUMBER = 3;
     public static int LENGTH_KEY = 64;
     public static int RSA_LENGTH_KEY = 1024;
+    public static int MAX_KEYS = 100;
     
     //---------------STRINGS---------------------//
     public static String MESSAGE_SEPARATOR = ",";
@@ -28,4 +29,6 @@ public interface Constants {
     public static String LIMIT_DESCRIPTION = "-FinText-";
     public static String LIMIT_NAME = "-FinName-";
     public static String HOST = "192.78.12";
+    public static String PATH_KEY = "\\C++\\Save.txt";
+    public static String PATH_PLAY_DATA = "\\C++\\DataPlay.txt";
 }
