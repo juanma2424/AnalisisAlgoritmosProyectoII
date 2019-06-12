@@ -8,8 +8,8 @@ public class Cliente extends javax.swing.JFrame {
      * Creates new form Cliente
      */
     private int globalClicks = 0;
-    private int globalMove = 0;
-    private boolean readyTwoMoves = false;
+    private boolean readyMoveOne = false;
+    private boolean readyMoveTwo = false;
     private int globalJugada = 0;
     private Controller globalController;
 
@@ -31,7 +31,7 @@ public class Cliente extends javax.swing.JFrame {
     private void setCart(String pData) {
         String lastTexMove;
         globalClicks++;
-        if (!readyTwoMoves) {
+        if (!readyMoveOne || !readyMoveTwo) {
 
             // si ya existe algo escrito
             if (textMove.getText().length() != 0) {
@@ -46,7 +46,8 @@ public class Cliente extends javax.swing.JFrame {
             if (globalClicks > 3) {
                 textMove.setText(pData);
                 sendMove.setEnabled(false);//setMsg=false;
-                globalClicks = 1;
+                globalClicks = 1;// global click refresh
+                avalibleORNot(true);
             }
         }
     }
@@ -223,60 +224,45 @@ public class Cliente extends javax.swing.JFrame {
 
     private void C3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C3ActionPerformed
         // TODO add your handling code here:
-        selectedCard(2);
-        setCart("c3=3des");
+        setText("c3=3des", C3);
     }//GEN-LAST:event_C3ActionPerformed
 
     private void C1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C1ActionPerformed
         // TODO add your handling code here:
-        selectedCard(0);
-        setCart("c1=sha256");
+        setText("c1=sha256", C1);
     }//GEN-LAST:event_C1ActionPerformed
 
     private void C4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C4ActionPerformed
         // TODO add your handling code here:
-        selectedCard(3);
-        setCart("c4=aes");
+        setText("c4=aes", C4);
     }//GEN-LAST:event_C4ActionPerformed
 
     private void C6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C6ActionPerformed
         // TODO add your handling code here:
-        selectedCard(5);
-        setCart("c6=rsa");
+        setText("c6=rsa", C6);
     }//GEN-LAST:event_C6ActionPerformed
 
     private void C5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C5ActionPerformed
         // TODO add your handling code here:
-        selectedCard(4);
-        setCart("c5=plain");
+        setText("c5=plain", C5);
     }//GEN-LAST:event_C5ActionPerformed
 
     private void C7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C7ActionPerformed
         // TODO add your handling code here:
-        selectedCard(6);
-        setCart("c7=pgp");
+        setText("c7=pgp", C7);
     }//GEN-LAST:event_C7ActionPerformed
 
     private void C2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C2ActionPerformed
         // TODO add your handling code here:
-        selectedCard(1);
-        setCart("c2=md5");
+        setText("c2=md5", C2);
     }//GEN-LAST:event_C2ActionPerformed
 
     private void sendMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMoveActionPerformed
         // TODO add your handling code here:
-
-        if (globalMove == 0) {
-            jTextField3.setText(textMove.getText());
-            editMoveOne.setEnabled(true);
-            globalMove++;
-        } else {
-            jTextField2.setText(textMove.getText());
-            editMoveTwo.setEnabled(true);
-            readyTwoMoves = true;
-        }
+        selectMove();
         textMove.setText(null);// CLEAN
         sendMove.setEnabled(false);
+        avalibleORNot(true);
     }//GEN-LAST:event_sendMoveActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -286,17 +272,18 @@ public class Cliente extends javax.swing.JFrame {
     private void editMoveOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMoveOneActionPerformed
         // TODO add your handling code here:
         jTextField3.setText(null);
-        globalMove = 0;
         editMoveOne.setEnabled(false);
-        readyTwoMoves = true;
+        readyMoveOne = false;///
         cleanMove(0);
+        avalibleORNot(true);
     }//GEN-LAST:event_editMoveOneActionPerformed
 
     private void editMoveTwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMoveTwoActionPerformed
         // TODO add your handling code here:
+        avalibleORNot(true);
         jTextField2.setText(null);
-        editMoveOne.setEnabled(false);
-        readyTwoMoves = true;
+        editMoveTwo.setEnabled(false);
+        readyMoveTwo = false;///
         cleanMove(1);
     }//GEN-LAST:event_editMoveTwoActionPerformed
 
@@ -307,14 +294,6 @@ public class Cliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void selectedCard(int pCard) {
-        if (globalJugada < 3) {
-            globalController.selectCard(pCard, true);
-        } else {
-            globalController.selectCard(pCard, false);
-        }
-        globalJugada++;
-    }
 
     /**
      * @param args the command line arguments
@@ -351,10 +330,50 @@ public class Cliente extends javax.swing.JFrame {
         });
     }
 
-    public void cleanMove(int pData) {
+    private void cleanMove(int pData) {
         globalJugada = globalJugada - 3;
         globalController.cleanMove(pData);
 
+    }
+
+    private void avalibleORNot(boolean pData) {
+        C1.setEnabled(pData);
+        C2.setEnabled(pData);
+        C3.setEnabled(pData);
+        C4.setEnabled(pData);
+        C5.setEnabled(pData);
+        C6.setEnabled(pData);
+        C7.setEnabled(pData);
+    }
+
+    private void selectMove() {
+        if (!readyMoveOne) {
+            jTextField3.setText(textMove.getText());
+            editMoveOne.setEnabled(true);
+            readyMoveOne = true;
+        } else {
+             avalibleORNot(false);
+            jTextField2.setText(textMove.getText());
+            editMoveTwo.setEnabled(true);
+            readyMoveTwo = true;
+           
+        }
+    }
+
+    private void setText(String pData, javax.swing.JButton jData) {
+        setCart(pData);
+        jData.setEnabled(false);
+        text();
+    }
+
+    private void text() {
+        if (globalJugada < 3) {
+            globalController.selectCard(0, true);
+        } else {
+            globalController.selectCard(0, false);
+        }
+        globalController.selectCard(0, true);
+        globalJugada++;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton C1;
