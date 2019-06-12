@@ -88,5 +88,9 @@ public class TresDes implements IAlgorithm, Constants {
     
     public void setText(String pText){
         
-    }  
+    }
+    
+    public void setKey(String pKey){
+        key1 = pKey;
+    }
 }

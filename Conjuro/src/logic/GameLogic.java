@@ -103,11 +103,13 @@ public class GameLogic implements Constants {
         while (found) {
             alg = Security.generateAlgorithm(types[pType % TOTAL_CARDS]);
             alg.setText(pCard.getDescription());
+            alg.setKey(pCard.getKey2());
             text = alg.decrypt(pCard.getDescripEncrypted(), pCard.getKey1());
             if (text.equals(pCard.getDescription())) {
                 pType++;
                 break;
             }
+            alg.setKey(pCard.getKey1());
             text = alg.decrypt(pCard.getDescripEncrypted(), pCard.getKey2());
             found = !text.equals(pCard.getDescription());
             pType++;

@@ -53,8 +53,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("jTextField1");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -98,16 +96,25 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        this.globalController.searchGame();
-        
-
+        if(!jTextField1.getText().isEmpty()){
+            this.globalController.insertName(jTextField1.getText());
+            this.globalController.searchGame();
+        }
+        else{
+            nameEmpty();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        this.globalController.insertName(jTextField1.getText());
-        this.globalController.startGame();
-        initGame();
+        // TODO add your handling code here
+        if(!jTextField1.getText().isEmpty()){
+            this.globalController.insertName(jTextField1.getText());
+            this.globalController.startGame();
+            initGame();
+        }
+        else{
+            nameEmpty();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -154,6 +161,10 @@ public class Login extends javax.swing.JFrame {
 
     public void getConnect() {
         JOptionPane.showMessageDialog(null, "No hay servidores");
+    }
+    
+    public void nameEmpty() {
+        JOptionPane.showMessageDialog(null, "Ingrese su nombre");
     }
     
     public  void initGame(){

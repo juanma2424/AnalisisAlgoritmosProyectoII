@@ -45,7 +45,6 @@ public class ServerNet implements Constants, Runnable {
                 ConComms.setClientServer(client);
                 client.addObserver(this.observer);
                 clients.add(client);
-                System.out.println(clients);
                 Thread.sleep(THREAD_SLEEP_TIME);
             } catch (Exception ex) {
                 Logger.Log(ex.getMessage());

@@ -12,7 +12,7 @@ public class Controller implements Constants, Runnable {
     private GameLogic game;
     private int numCards;
     private ConjuroComms comms;
-    Login login;
+    private Login login;
     private boolean decrypt;
     private boolean getCards;
     private String movVrs;
@@ -124,6 +124,11 @@ public class Controller implements Constants, Runnable {
         String[] types = {"Sha256", "MD5", "TresDes", "AES", "Plain", "RSA", "Pgp"};
         window.appendFindCards(types[pType]);
     }
+    
+    public void sendName(){
+        String msg = "0,Name="+game.getName();
+        comms.sendMessage(msg);
+    }
 
     public void discoverCard(int pType) {
         String msg = "3,Type=" + pType;
@@ -155,5 +160,9 @@ public class Controller implements Constants, Runnable {
         window = new Cliente(this);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+    }
+
+    public void setNameContr(String pName) {
+        game.setNameContr(pName);
     }
 }

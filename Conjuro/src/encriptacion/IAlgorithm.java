@@ -12,4 +12,5 @@ public interface IAlgorithm {
     
     public void setText(String pText);
     
+    public void setKey(String pKey);  
 }
