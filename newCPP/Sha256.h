@@ -8,7 +8,29 @@
 #include <string.h>
 using std::cout;
 using std::endl;
-
+#define SHA2_SHFR(x, n)    (x >> n)
+#define SHA2_ROTR(x, n)   ((x >> n) | (x << ((sizeof(x) << 3) - n)))
+#define SHA2_ROTL(x, n)   ((x << n) | (x >> ((sizeof(x) << 3) - n)))
+#define SHA2_CH(x, y, z)  ((x & y) ^ (~x & z))
+#define SHA2_MAJ(x, y, z) ((x & y) ^ (x & z) ^ (y & z))
+#define SHA256_F1(x) (SHA2_ROTR(x,  2) ^ SHA2_ROTR(x, 13) ^ SHA2_ROTR(x, 22))
+#define SHA256_F2(x) (SHA2_ROTR(x,  6) ^ SHA2_ROTR(x, 11) ^ SHA2_ROTR(x, 25))
+#define SHA256_F3(x) (SHA2_ROTR(x,  7) ^ SHA2_ROTR(x, 18) ^ SHA2_SHFR(x,  3))
+#define SHA256_F4(x) (SHA2_ROTR(x, 17) ^ SHA2_ROTR(x, 19) ^ SHA2_SHFR(x, 10))
+#define SHA2_UNPACK32(x, str)                 \
+{                                             \
+    *((str) + 3) = (uint8) ((x)      );       \
+    *((str) + 2) = (uint8) ((x) >>  8);       \
+    *((str) + 1) = (uint8) ((x) >> 16);       \
+    *((str) + 0) = (uint8) ((x) >> 24);       \
+}
+#define SHA2_PACK32(str, x)                   \
+{                                             \
+    *(x) =   ((uint32) *((str) + 3)      )    \
+           | ((uint32) *((str) + 2) <<  8)    \
+           | ((uint32) *((str) + 1) << 16)    \
+           | ((uint32) *((str) + 0) << 24);   \
+}
 class SHA256 {
     const unsigned int sha256_k[64] = //UL = uint32
     {0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
@@ -157,28 +179,6 @@ std::string sha256(std::string input) {
     return std::string(buf);
 };
 
-#define SHA2_SHFR(x, n)    (x >> n)
-#define SHA2_ROTR(x, n)   ((x >> n) | (x << ((sizeof(x) << 3) - n)))
-#define SHA2_ROTL(x, n)   ((x << n) | (x >> ((sizeof(x) << 3) - n)))
-#define SHA2_CH(x, y, z)  ((x & y) ^ (~x & z))
-#define SHA2_MAJ(x, y, z) ((x & y) ^ (x & z) ^ (y & z))
-#define SHA256_F1(x) (SHA2_ROTR(x,  2) ^ SHA2_ROTR(x, 13) ^ SHA2_ROTR(x, 22))
-#define SHA256_F2(x) (SHA2_ROTR(x,  6) ^ SHA2_ROTR(x, 11) ^ SHA2_ROTR(x, 25))
-#define SHA256_F3(x) (SHA2_ROTR(x,  7) ^ SHA2_ROTR(x, 18) ^ SHA2_SHFR(x,  3))
-#define SHA256_F4(x) (SHA2_ROTR(x, 17) ^ SHA2_ROTR(x, 19) ^ SHA2_SHFR(x, 10))
-#define SHA2_UNPACK32(x, str)                 \
-{                                             \
-    *((str) + 3) = (uint8) ((x)      );       \
-    *((str) + 2) = (uint8) ((x) >>  8);       \
-    *((str) + 1) = (uint8) ((x) >> 16);       \
-    *((str) + 0) = (uint8) ((x) >> 24);       \
-}
-#define SHA2_PACK32(str, x)                   \
-{                                             \
-    *(x) =   ((uint32) *((str) + 3)      )    \
-           | ((uint32) *((str) + 2) <<  8)    \
-           | ((uint32) *((str) + 1) << 16)    \
-           | ((uint32) *((str) + 0) << 24);   \
-}
+
 #endif
 

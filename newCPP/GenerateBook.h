@@ -7,10 +7,16 @@
 
 #include "AES.h"
 
+
+
 #include <cassert>
 #include <cstring>
 #include "FileManagement.h"
 
+#include <iostream>
+#include <stdio.h> 
+#include "Sha256.h"
+#include <omp.h>
 
 using namespace std;
 
@@ -42,7 +48,7 @@ private:
                 conjuro = text.substr(i*LENGTH_CONJURO, LENGTH_CONJURO);
                 file.write(aes.encriptAES((unsigned char*) conjuro.c_str()), "conjuro");
                 file.write("X--X", "conjuro");
-               // file.write(sha256(conjuro), "conjuro");
+                file.write(sha256(conjuro), "conjuro");
                 file.write("X-Y-X", "conjuro");
                 file.write(aes.getKey(), "save");
             }
