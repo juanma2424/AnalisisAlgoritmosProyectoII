@@ -4,6 +4,7 @@ import GUI.Cliente;
 import GUI.Login;
 import conjuronet.ConjuroComms;
 import files.ReadFile;
+import java.util.Random;
 import lib.Constants;
 import lib.Logger;
 
@@ -12,7 +13,7 @@ public class Controller implements Constants, Runnable {
     private GameLogic game;
     private int numCards;
     private ConjuroComms comms;
-    Login login;
+    private Login login;
     private boolean decrypt;
     private boolean getCards;
     private String movVrs;
@@ -27,8 +28,6 @@ public class Controller implements Constants, Runnable {
         window = null;
         login = new Login();
         sendController();
-        login.setLocationRelativeTo(null);
-        login.setVisible(true);
         new Thread(this).start();
 
     }
@@ -38,7 +37,7 @@ public class Controller implements Constants, Runnable {
     }
 
     public boolean selectCard(int pType, boolean pJugada) {
-        if (numCards < TOTAL_CARDS - 1) {
+        if (numCards < SELECT_CARDS) {
             game.setSelectedCard(pType, numCards % JUGADA_NUMBER, pJugada);
             numCards++;
             return true;
@@ -49,11 +48,20 @@ public class Controller implements Constants, Runnable {
     public void sendMoves() {
         Card[] select = game.getJugada1().clone();
         String msg = "1,";
-
-        for (int index = 0; index < 6; index++) {
-
-            msg += "Name" + index + "=" + select[index % 3].getName() + ",Description" + index + "=" + select[index % 3].getDescription() + ",DescripEncryp" + index + "=" + select[index % 3].getDescripEncrypted() + ",Key1" + index + "=" + select[index % 3].getKey1() + ",Key2" + index + "=" + select[index % 3].getKey2() + ",";
-            if (index == 2) {
+        Random rand = new Random();
+        String key1;
+        String key2;
+        int pos = 0;
+        for (int index = 0; index < SELECT_CARDS; index++) {
+            pos = index % JUGADA_NUMBER;
+            key1 = select[pos].getKey1();
+            key2 = select[pos].getKey2();
+            if(rand.nextInt() < 0.5){
+                key1 = select[pos].getKey2();
+                key2 = select[pos].getKey1();
+            }
+            msg += "Name" + index + "=" + select[pos].getName() + ",Description" + index + "=" + select[pos].getDescription() + ",DescripEncryp" + index + "=" + select[pos].getDescripEncrypted() + ",Key1" + index + "=" + key1 + ",Key2" + index + "=" + key2 + ",";
+            if (index == JUGADA_NUMBER-1) {
                 select = game.getJugada2();
             }
         }
@@ -106,8 +114,8 @@ public class Controller implements Constants, Runnable {
     public void sendController() {
         login.setController(this);
     }
-    
-    public void setGetCards(){
+
+    public void setGetCards() {
         getCards = true;
     }
 
@@ -116,28 +124,29 @@ public class Controller implements Constants, Runnable {
         numCards = 0;
     }
 
-    public void setCartTXT() {
-
-    }
-    
-    public void findCard(int pType){
+    public void findCard(int pType) {
         String[] types = {"Sha256", "MD5", "TresDes", "AES", "Plain", "RSA", "Pgp"};
         window.appendFindCards(types[pType]);
     }
     
-    public void discoverCard(int pType){
-        String msg = "3,Type="+pType;
+    public void sendName(){
+        String msg = "0,Name="+game.getName();
         comms.sendMessage(msg);
     }
-    
-    public void discoverHalfKey(){
-        
+
+    public void discoverCard(int pType) {
+        String msg = "3,Type=" + pType;
+        comms.sendMessage(msg);
     }
 
-    public void discoverAllKey(){
-        
+    public void discoverHalfKey() {
+
     }
-    
+
+    public void discoverAllKey() {
+
+    }
+
     @Override
     public void run() {
         while (!decrypt || !getCards) {
@@ -147,12 +156,15 @@ public class Controller implements Constants, Runnable {
                 Logger.Log(ex.getMessage());
             }
         }
-      game.initDecode();
+        game.initDecode();
+
     }
 
     public void initWindow() {
         window = new Cliente(this);
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
+    }
+
+    public void setNameContr(String pName) {
+        game.setNameContr(pName);
     }
 }

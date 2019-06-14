@@ -1,8 +1,9 @@
 package GUI;
 
+import lib.Constants;
 import logic.Controller;
 
-public class Cliente extends javax.swing.JFrame {
+public class Cliente extends javax.swing.JFrame implements Constants {
 
     /**
      * Creates new form Cliente
@@ -27,6 +28,10 @@ public class Cliente extends javax.swing.JFrame {
         jButton1.setEnabled(false);
         editMoveOne.setEnabled(false);
         editMoveTwo.setEnabled(false);
+        jTextArea1.setEditable(false);
+        jTextArea2.setEditable(false);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     private void setCart(String pData) {
@@ -38,13 +43,13 @@ public class Cliente extends javax.swing.JFrame {
             if (textMove.getText().length() != 0) {
                 lastTexMove = textMove.getText();
                 textMove.setText(lastTexMove + "," + pData);
-                if (globalClicks == 3) {//si global clicks es igual a 3
+                if (globalClicks == JUGADA_NUMBER) {//si global clicks es igual a 3
                     sendMove.setEnabled(true);//setMsg=true;
                 }
             } else {
                 textMove.setText(pData);// si es la primera vez que se escribe
             }
-            if (globalClicks > 3) {
+            if (globalClicks > JUGADA_NUMBER) {
                 textMove.setText(pData);
                 sendMove.setEnabled(false);//setMsg=false;
                 globalClicks = 1;// global click refresh
@@ -58,6 +63,9 @@ public class Cliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         textMove = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
@@ -87,6 +95,15 @@ public class Cliente extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(1084, 646));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/msg.png"))); // NOI18N
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 90, 60));
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane4.setViewportView(jTextArea3);
+
+        jPanel2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 290, 150));
+
         textMove.setEditable(false);
         textMove.setBackground(new java.awt.Color(0, 0, 51));
         textMove.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
@@ -99,13 +116,13 @@ public class Cliente extends javax.swing.JFrame {
         jTextField2.setBackground(new java.awt.Color(0, 0, 51));
         jTextField2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 80, 210, 60));
+        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 180, 210, 60));
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jScrollPane3.setViewportView(jTextArea2);
 
-        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 190, 100));
+        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 180, 120));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -122,39 +139,40 @@ public class Cliente extends javax.swing.JFrame {
                 jTextField3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 10, 210, 60));
+        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 60, 210, 60));
 
-        jButton1.setText("SEND MOVES");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/sendMoves.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 170, 150, 60));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 280, 220, 60));
 
-        editMoveTwo.setText("Editar jugada 1");
+        editMoveTwo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/edj2.png"))); // NOI18N
         editMoveTwo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editMoveTwoActionPerformed(evt);
             }
         });
-        jPanel2.add(editMoveTwo, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, -1, -1));
+        jPanel2.add(editMoveTwo, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 130, 170, 40));
 
-        editMoveOne.setText("Editar jugada 1");
+        editMoveOne.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/edj1.png"))); // NOI18N
         editMoveOne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editMoveOneActionPerformed(evt);
             }
         });
-        jPanel2.add(editMoveOne, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, -1, -1));
+        jPanel2.add(editMoveOne, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 10, 150, 40));
 
+        sendMove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/setjugada.png"))); // NOI18N
         sendMove.setText("SetJugada");
         sendMove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendMoveActionPerformed(evt);
             }
         });
-        jPanel2.add(sendMove, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 260, 100, 40));
+        jPanel2.add(sendMove, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 150, 50));
 
         C3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/carta3.png"))); // NOI18N
         C3.addActionListener(new java.awt.event.ActionListener() {
@@ -241,37 +259,37 @@ public class Cliente extends javax.swing.JFrame {
 
     private void C3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C3ActionPerformed
         // TODO add your handling code here:
-        setText("c3=3des", C3,2);
+        setText("c3=3des", C3, 2);
     }//GEN-LAST:event_C3ActionPerformed
 
     private void C1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C1ActionPerformed
         // TODO add your handling code here:
-        setText("c1=sha256", C1,0);
+        setText("c1=sha256", C1, 0);
     }//GEN-LAST:event_C1ActionPerformed
 
     private void C4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C4ActionPerformed
         // TODO add your handling code here:
-        setText("c4=aes", C4,3);
+        setText("c4=aes", C4, 3);
     }//GEN-LAST:event_C4ActionPerformed
 
     private void C6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C6ActionPerformed
         // TODO add your handling code here:
-        setText("c6=rsa", C6,5);
+        setText("c6=rsa", C6, 5);
     }//GEN-LAST:event_C6ActionPerformed
 
     private void C5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C5ActionPerformed
         // TODO add your handling code here:
-        setText("c5=plain", C5,4);
+        setText("c5=plain", C5, 4);
     }//GEN-LAST:event_C5ActionPerformed
 
     private void C7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C7ActionPerformed
         // TODO add your handling code here:
-        setText("c7=pgp", C7,6);
+        setText("c7=pgp", C7, 6);
     }//GEN-LAST:event_C7ActionPerformed
 
     private void C2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C2ActionPerformed
         // TODO add your handling code here:
-        setText("c2=md5", C2,1);
+        setText("c2=md5", C2, 1);
     }//GEN-LAST:event_C2ActionPerformed
 
     private void sendMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMoveActionPerformed
@@ -314,15 +332,16 @@ public class Cliente extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         globalController.sendMoves();
-
-
+        jButton1.setEnabled(false);
+        editMoveTwo.setEnabled(false);
+        editMoveOne.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void appendMoves(String pMove){
-        jTextArea1.append(pMove+ "\n");
+    public void appendMoves(String pMove) {
+        jTextArea1.append(pMove + "\n");
     }
-    
-    public void appendFindCards(String pType ){
+
+    public void appendFindCards(String pType) {
         jTextArea2.append(pType + "\n");
     }
 
@@ -362,9 +381,9 @@ public class Cliente extends javax.swing.JFrame {
     }
 
     private void cleanMove(int pData) {
-        if(globalJugada == 6)
-            globalJugada = globalJugada - 3;
-        else{
+        if (globalJugada == SELECT_CARDS) {
+            globalJugada = globalJugada - JUGADA_NUMBER;
+        } else {
             globalJugada = 0;
         }
         this.globalClicks = 0;
@@ -388,11 +407,11 @@ public class Cliente extends javax.swing.JFrame {
             editMoveOne.setEnabled(true);
             readyMoveOne = true;
         } else {
-             avalibleORNot(false);
+            avalibleORNot(false);
             jTextField2.setText(textMove.getText());
             editMoveTwo.setEnabled(true);
             readyMoveTwo = true;
-           
+
         }
     }
 
@@ -403,9 +422,9 @@ public class Cliente extends javax.swing.JFrame {
             jData.setEnabled(false);
         }
     }
-    
+
     private void selectedCard(int pCard) {
-            globalController.selectCard(pCard, !readyMoveOne);
+        globalController.selectCard(pCard, !readyMoveOne);
         globalJugada++;
     }
 
@@ -420,13 +439,16 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JButton editMoveOne;
     private javax.swing.JButton editMoveTwo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JButton sendMove;

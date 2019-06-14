@@ -18,8 +18,6 @@ public class ConjuroComms implements IObserver, Constants {
         boolean getMake = client.makeClient(pHost, PORT_NUMBER);
         client.addObserver(this);
         return getMake;
-        /*ConjuroMsg msg = new ConjuroMsg("0,Nombre=juanmaa,n=j1");
-        client.sendMessage(msg);*/
     }
 
     public void iniciarJuegoNuevo() {
@@ -35,7 +33,7 @@ public class ConjuroComms implements IObserver, Constants {
         ConjuroMsg msg = (ConjuroMsg) pData;
         switch (msg.getType()) {
             case PLAYER_NAME: {
-                System.out.println("aaaa");
+                globalController.setNameContr(msg.getValue("Name"));
                 break;
             }
             case CARDS_SELECTED: {
@@ -54,7 +52,7 @@ public class ConjuroComms implements IObserver, Constants {
                 break;
             }
             default: {
-                System.out.println("nooo");
+       
             }
         }
     }

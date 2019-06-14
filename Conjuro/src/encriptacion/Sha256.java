@@ -73,4 +73,8 @@ public class Sha256 implements IAlgorithm, Constants{
     public void setText(String pText){
         text = pText;
     }
+    
+    public void setKey(String pKey){
+        key1 = pKey;
+    }
 }
