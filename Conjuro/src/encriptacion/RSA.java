@@ -69,4 +69,8 @@ public class RSA implements IAlgorithm, Constants {
     public String getKey1() {
         return this.publicKey;
     }
+    
+    public void setText(String pText){
+        
+    }
 }

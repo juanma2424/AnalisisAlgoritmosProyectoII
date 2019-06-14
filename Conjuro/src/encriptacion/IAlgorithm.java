@@ -10,4 +10,6 @@ public interface IAlgorithm {
     
     public String getKey2();
     
+    public void setText(String pText);
+    
 }

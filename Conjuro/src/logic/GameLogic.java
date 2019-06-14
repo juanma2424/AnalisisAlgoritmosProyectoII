@@ -2,6 +2,7 @@ package logic;
 
 import encriptacion.IAlgorithm;
 import encriptacion.Security;
+import java.util.Hashtable;
 import lib.Constants;
 
 public class GameLogic implements Constants {
@@ -13,13 +14,20 @@ public class GameLogic implements Constants {
     private Card[] jugada2;
     private Card[] jugadaCont1;
     private Card[] jugadaCont2;
+    private Hashtable<String, Integer> types;
+    private Controller globalController;
 
-    public GameLogic() {
+    public GameLogic(Controller pController) {
         jugador = new Player();
+        globalController = pController;
         contrincante = new Player();
         deck = new Card[TOTAL_CARDS];
         jugada1 = new Card[JUGADA_NUMBER];
         jugada2 = new Card[JUGADA_NUMBER];
+        jugadaCont1 = new Card[JUGADA_NUMBER];
+        jugadaCont2 = new Card[JUGADA_NUMBER];
+        types = new Hashtable<String, Integer>();
+        fillHash();
     }
 
     public void setName(String pName) {
@@ -30,8 +38,26 @@ public class GameLogic implements Constants {
         return jugador.getName();
     }
 
+    private void fillHash() {
+        types.put("Sha256", 0);
+        types.put("MD5", 1);
+        types.put("TresDes", 2);
+        types.put("AES", 3);
+        types.put("Plain", 4);
+        types.put("RSA", 5);
+        types.put("Pgp", 6);
+    }
+
     public void setNameContr(String pName) {
         contrincante.setName(pName);
+    }
+
+    public Card[] getJugada1() {
+        return jugada1;
+    }
+
+    public Card[] getJugada2() {
+        return jugada2;
     }
 
     public void insertCard(String pName, String pDescription, String pType, int pPos) {
@@ -54,13 +80,29 @@ public class GameLogic implements Constants {
         }
     }
 
-    public int decodeCard(Card pCard, int pType) {
+    public void initDecode() {
+        Card[] jugadaCont = jugadaCont1.clone();
+        Card[] jugada = jugada1.clone();
+        int typeCard;
+        for (int index = 0; index < JUGADA_NUMBER*2; index++) {
+            typeCard = decodeCard(jugadaCont[index%JUGADA_NUMBER], types.get(jugada[index%JUGADA_NUMBER].getType()));
+            jugadaCont[index%JUGADA_NUMBER].setType(typeCard);
+            globalController.discoverCard(typeCard);
+            if (index == JUGADA_NUMBER - 1) {
+                jugadaCont = jugadaCont2.clone();
+                jugada = jugada2.clone();
+            }
+        }
+    }
+
+    private int decodeCard(Card pCard, int pType) {
         String[] types = {"Sha256", "MD5", "TresDes", "AES", "Plain", "RSA", "Pgp"};
         boolean found = true;
         IAlgorithm alg;
         String text;
         while (found) {
             alg = Security.generateAlgorithm(types[pType % TOTAL_CARDS]);
+            alg.setText(pCard.getDescription());
             text = alg.decrypt(pCard.getDescripEncrypted(), pCard.getKey1());
             if (text.equals(pCard.getDescription())) {
                 pType++;
@@ -71,7 +113,7 @@ public class GameLogic implements Constants {
             pType++;
         }
         pType--;
-        return pType;
+        return pType%TOTAL_CARDS;
     }
 
     public void cleanMove(int pData) {
@@ -86,6 +128,5 @@ public class GameLogic implements Constants {
                 jugada2[index] = null;
             }
         }
-
     }
 }

@@ -10,10 +10,12 @@ import lib.Logger;
 public class MD5 implements IAlgorithm, Constants{
     private String key1;
     private String key2;
+    private String text;
     
     public MD5(){
         key1 = generateKey();
         key2 = generateKey();
+        text = "";
     }
     
     public String encrypt(String input) {
@@ -43,7 +45,10 @@ public class MD5 implements IAlgorithm, Constants{
     }
 
     public String decrypt(String pText, String pKey) {
-        return pText;
+        if(pText.equals(encrypt(text))){
+            return text;
+        }
+        return encrypt(pText);
     }
     
     private String generateKey(){
@@ -63,5 +68,9 @@ public class MD5 implements IAlgorithm, Constants{
 
     public String getKey2() {
         return key2;
+    }
+    
+    public void setText(String pText){
+        text = pText;
     }
 }

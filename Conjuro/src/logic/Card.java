@@ -56,4 +56,9 @@ public class Card {
     public String getType(){
         return type;
     }
+    
+    public void setType(int pType){
+        String[] types = {"Sha256", "MD5", "TresDes", "AES", "Plain", "RSA", "Pgp"};
+        type = types[pType];
+    }
 }

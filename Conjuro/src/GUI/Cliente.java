@@ -12,12 +12,10 @@ public class Cliente extends javax.swing.JFrame {
     private boolean readyMoveTwo = false;
     private int globalJugada = 0;
     private Controller globalController;
-    private guiLogic glogic;
 
     public Cliente(Controller pController) {
         initComponents();
         globalController = pController;
-        //glogic = new guiLogic();
         C1.setToolTipText("Name: C1 | Tipe: Sha256 |desc cifrada | desc no cifrada| key1 | key2");
         C2.setToolTipText("Name: C2 | Tipe: MD5 |desc cifrada | desc no cifrada| key1 | key2");
         C3.setToolTipText("Name: C3 | Tipe: 3DES |desc cifrada | desc no cifrada| key1 | key2");
@@ -26,6 +24,7 @@ public class Cliente extends javax.swing.JFrame {
         C6.setToolTipText("Name: C6 | Tipe: RSA |desc cifrada | desc no cifrada| key1 | key2");
         C7.setToolTipText("Name: C7 | Tipe: PGP |desc cifrada | desc no cifrada| key1 | key2");
         sendMove.setEnabled(false);
+        jButton1.setEnabled(false);
         editMoveOne.setEnabled(false);
         editMoveTwo.setEnabled(false);
     }
@@ -62,6 +61,10 @@ public class Cliente extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         textMove = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         editMoveTwo = new javax.swing.JButton();
@@ -97,6 +100,18 @@ public class Cliente extends javax.swing.JFrame {
         jTextField2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 80, 210, 60));
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane3.setViewportView(jTextArea2);
+
+        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 190, 100));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 320, 180));
 
         jTextField3.setEditable(false);
         jTextField3.setBackground(new java.awt.Color(0, 0, 51));
@@ -226,37 +241,37 @@ public class Cliente extends javax.swing.JFrame {
 
     private void C3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C3ActionPerformed
         // TODO add your handling code here:
-        setText("c3=3des", C3);
+        setText("c3=3des", C3,2);
     }//GEN-LAST:event_C3ActionPerformed
 
     private void C1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C1ActionPerformed
-        // TODO add your handling code here
-        setText("c1=sha256", C1);
+        // TODO add your handling code here:
+        setText("c1=sha256", C1,0);
     }//GEN-LAST:event_C1ActionPerformed
 
     private void C4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C4ActionPerformed
         // TODO add your handling code here:
-        setText("c4=aes", C4);
+        setText("c4=aes", C4,3);
     }//GEN-LAST:event_C4ActionPerformed
 
     private void C6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C6ActionPerformed
         // TODO add your handling code here:
-        setText("c6=rsa", C6);
+        setText("c6=rsa", C6,5);
     }//GEN-LAST:event_C6ActionPerformed
 
     private void C5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C5ActionPerformed
         // TODO add your handling code here:
-        setText("c5=plain", C5);
+        setText("c5=plain", C5,4);
     }//GEN-LAST:event_C5ActionPerformed
 
     private void C7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C7ActionPerformed
         // TODO add your handling code here:
-        setText("c7=pgp", C7);
+        setText("c7=pgp", C7,6);
     }//GEN-LAST:event_C7ActionPerformed
 
     private void C2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C2ActionPerformed
         // TODO add your handling code here:
-        setText("c2=md5", C2);
+        setText("c2=md5", C2,1);
     }//GEN-LAST:event_C2ActionPerformed
 
     private void sendMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMoveActionPerformed
@@ -264,6 +279,9 @@ public class Cliente extends javax.swing.JFrame {
         selectMove();
         textMove.setText(null);// CLEAN
         sendMove.setEnabled(false);
+        if (readyMoveOne && readyMoveTwo) {
+            jButton1.setEnabled(true);
+        }
         avalibleORNot(true);
     }//GEN-LAST:event_sendMoveActionPerformed
 
@@ -273,7 +291,9 @@ public class Cliente extends javax.swing.JFrame {
 
     private void editMoveOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMoveOneActionPerformed
         // TODO add your handling code here:
+        jButton1.setEnabled(false);
         jTextField3.setText(null);
+        textMove.setText(null);
         editMoveOne.setEnabled(false);
         readyMoveOne = false;///
         cleanMove(0);
@@ -282,20 +302,29 @@ public class Cliente extends javax.swing.JFrame {
 
     private void editMoveTwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMoveTwoActionPerformed
         // TODO add your handling code here:
+        jButton1.setEnabled(false);
         avalibleORNot(true);
         jTextField2.setText(null);
+        textMove.setText(null);
         editMoveTwo.setEnabled(false);
         readyMoveTwo = false;///
         cleanMove(1);
-
     }//GEN-LAST:event_editMoveTwoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        //globalController.
+        globalController.sendMoves();
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void appendMoves(String pMove){
+        jTextArea1.append(pMove+ "\n");
+    }
+    
+    public void appendFindCards(String pType ){
+        jTextArea2.append(pType + "\n");
+    }
 
     /**
      * @param args the command line arguments
@@ -333,7 +362,12 @@ public class Cliente extends javax.swing.JFrame {
     }
 
     private void cleanMove(int pData) {
-        globalJugada = globalJugada - 3;
+        if(globalJugada == 6)
+            globalJugada = globalJugada - 3;
+        else{
+            globalJugada = 0;
+        }
+        this.globalClicks = 0;
         globalController.cleanMove(pData);
 
     }
@@ -362,21 +396,19 @@ public class Cliente extends javax.swing.JFrame {
         }
     }
 
-    private void setText(String pData, javax.swing.JButton jData) {
-        setCart(pData);
-        jData.setEnabled(false);
-        text();
-    }
-
-    private void text() {
-        if (globalJugada < 3) {
-            globalController.selectCard(0, true);
-        } else {
-            globalController.selectCard(0, false);
+    private void setText(String pData, javax.swing.JButton jData, int pNum) {
+        if (!readyMoveOne || !readyMoveTwo) {
+            selectedCard(pNum);
+            setCart(pData);
+            jData.setEnabled(false);
         }
-        globalController.selectCard(0, true);
+    }
+    
+    private void selectedCard(int pCard) {
+            globalController.selectCard(pCard, !readyMoveOne);
         globalJugada++;
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton C1;
     private javax.swing.JButton C2;
@@ -391,6 +423,10 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JButton sendMove;

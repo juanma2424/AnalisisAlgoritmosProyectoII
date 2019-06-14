@@ -19,8 +19,8 @@ public class ConjuroMsg implements Constants {
             values = new Hashtable<String, String>();
 
             for (int valuesIndex = 1; valuesIndex < msgValues.length; valuesIndex++) {
-                String[] keyMap = msgValues[valuesIndex].split(MESSAGE_VALUES_SEPARATOR);
-                System.out.println(keyMap[0]);
+                int divKey = msgValues[valuesIndex].indexOf(MESSAGE_VALUES_SEPARATOR);
+                String[] keyMap = {msgValues[valuesIndex].substring(0,divKey), msgValues[valuesIndex].substring(divKey+1)};
                 values.put(keyMap[0], keyMap[1]);
             }
         }
