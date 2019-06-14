@@ -1,3 +1,5 @@
+#ifndef FILEMANAGEMENT_H
+#define FILEMANAGEMENT_H
 #include <iostream>
 #include <stdio.h> 
 #include <fstream>
@@ -25,8 +27,8 @@ public:
         }
     }
 
-    string FileManagement::getText() {
-        return text;
+  string getText() {
+       return text;
     };
 
     void openWrite() {
@@ -45,7 +47,7 @@ public:
         clean.open("Conjuro.txt", std::ofstream::out | std::ofstream::trunc);
         clean.close();
     };
-    string getText();
+   
 
     void readSecret() {
         string line;

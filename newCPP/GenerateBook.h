@@ -2,7 +2,7 @@
 #define GENERATEBOOK_H
 #include <iostream>
 #include <stdio.h> 
-#include "Sha256.h"
+
 #include <omp.h>
 
 #include "AES.h"
@@ -14,6 +14,11 @@
 
 using namespace std;
 
+
+string text;
+    string book[3][100];
+    const int LENGTH_CONJURO = 200;
+    
 class GenerateBook {
 public:
 
@@ -37,7 +42,7 @@ private:
                 conjuro = text.substr(i*LENGTH_CONJURO, LENGTH_CONJURO);
                 file.write(aes.encriptAES((unsigned char*) conjuro.c_str()), "conjuro");
                 file.write("X--X", "conjuro");
-                file.write(sha256(conjuro), "conjuro");
+               // file.write(sha256(conjuro), "conjuro");
                 file.write("X-Y-X", "conjuro");
                 file.write(aes.getKey(), "save");
             }
@@ -47,9 +52,7 @@ private:
             file.closeWrite();
         }
     };
-    string text;
-    string book[3][100];
-    const int LENGTH_CONJURO = 200;
+    
 };
 
 #endif

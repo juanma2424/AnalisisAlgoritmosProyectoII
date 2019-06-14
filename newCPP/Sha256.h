@@ -10,7 +10,7 @@ using std::cout;
 using std::endl;
 
 class SHA256 {
-    const unsigned int SHA256::sha256_k[64] = //UL = uint32
+    const unsigned int sha256_k[64] = //UL = uint32
     {0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
         0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
         0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
@@ -32,7 +32,7 @@ protected:
     typedef unsigned int uint32;
     typedef unsigned long long uint64;
 
-    const static uint32 sha256_k[];
+    //const static uint32 sha256_k[];
     static const unsigned int SHA224_256_BLOCK_SIZE = (512 / 8);
 
 
@@ -181,3 +181,4 @@ std::string sha256(std::string input) {
            | ((uint32) *((str) + 0) << 24);   \
 }
 #endif
+
