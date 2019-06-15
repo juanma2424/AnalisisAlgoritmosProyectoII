@@ -41,8 +41,6 @@ void FileManagement::readSecret(){
 
 
 
-
-
 void FileManagement::CleanFiles(){
 	 ofstream clean;
 	 clean.open("Save.txt", std::ofstream::out | std::ofstream::trunc);

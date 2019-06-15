@@ -62,11 +62,13 @@ public:
   
   string encriptAES(unsigned char po[]);
   
+  string decryptAes(unsigned char in[], string pKey);
+  
   string getKey();
 
   unsigned char *EncryptECB(unsigned char in[], unsigned int inLen, unsigned  char key[], unsigned int &outLen);
 
-  unsigned char *DecryptECB(unsigned char in[], unsigned  char key[]);
+  unsigned char *DecryptECB(unsigned char in[], unsigned int inLen, unsigned  char key[], unsigned int &outLen);
 
   unsigned char *newKey(); 
   

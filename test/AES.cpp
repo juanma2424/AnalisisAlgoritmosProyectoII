@@ -5,7 +5,6 @@
 #include <stdlib.h> 
 #include <iomanip>
 #include <sstream>
-#include <fstream>
 
 using namespace std;
 string auxkey;
@@ -46,9 +45,9 @@ unsigned char* AES::newKey(){
      tm *ltm = localtime(&now);
    
 //   int sec = 1 + ltm->tm_sec; 
-	int numkeys[31];
+	int numkeys[32];
 	auxkey = "";
-	for(int indexTime= 0; indexTime<31;indexTime++){
+	for(int indexTime= 0; indexTime<32;indexTime++){
 		int min = 1 + ltm->tm_min;
 	    int sec = 1 + ltm->tm_sec; 
 		int numKey = (rand()%1000)+1+sec+min;
@@ -58,7 +57,7 @@ unsigned char* AES::newKey(){
 		stringstream ss;
 		ss << numKey;
 		out_string = ss.str();
-		if(indexTime<=29){
+		if(indexTime<=30){
 				auxkey =  auxkey + out_string +",";	
 		}else{
 				auxkey =  auxkey + out_string ;	
@@ -66,10 +65,10 @@ unsigned char* AES::newKey(){
 		
 		
 		}
-		 unsigned char outkey [31] = {numkeys[0],numkeys[1],numkeys[2],numkeys[3],numkeys[4],numkeys[5],numkeys[6],numkeys[7],
+		 unsigned char outkey [32] = {numkeys[0],numkeys[1],numkeys[2],numkeys[3],numkeys[4],numkeys[5],numkeys[6],numkeys[7],
 									  numkeys[8],numkeys[9],numkeys[10],numkeys[11],numkeys[12],numkeys[13],numkeys[14],numkeys[15], 
 									  numkeys[16],numkeys[17],numkeys[18],numkeys[19],numkeys[20],numkeys[21],numkeys[22],numkeys[23],
-									 numkeys[24],numkeys[25],numkeys[26],numkeys[27],numkeys[28],numkeys[29],numkeys[30]
+									 numkeys[24],numkeys[25],numkeys[26],numkeys[27],numkeys[28],numkeys[29],numkeys[30],numkeys[31]
 									 };
 	    return  outkey;
 }
@@ -78,28 +77,23 @@ unsigned char* AES::newKey(){
 string AES::encriptAES(unsigned char po[])
 {
   AES aes(256);
+  int lenChar = 208 * sizeof(unsigned char);
   unsigned char* keydata = aes.newKey(); 
   unsigned char key[] = {keydata[0],keydata[1],keydata[2],keydata[3],keydata[4],keydata[5],keydata[6],keydata[7],
                          keydata[8],keydata[9],keydata[10],keydata[11],keydata[12],keydata[13],keydata[14],keydata[15],
 						 keydata[16],keydata[17],keydata[18],keydata[19],keydata[20],keydata[21],keydata[22],keydata[23],
-						 keydata[24],keydata[25],keydata[26],keydata[27],keydata[28], keydata[29],keydata[30]};
+						 keydata[24],keydata[25],keydata[26],keydata[27],keydata[28], keydata[29],keydata[30],keydata[31]};
   unsigned int len = 0;
-  unsigned char *out = aes.EncryptECB(po, 208 * sizeof(unsigned char), key, len);
-  //cout<<out<<endl;
-  string p(reinterpret_cast<char*>(out));
-  //cout<<p<<endl;
-  cout<<(unsigned char*)p.c_str()<<endl;
-  unsigned char *innew = aes.DecryptECB(out, key);
-  ofstream conjuro;
-  conjuro.open("ConjuroDec.txt");
-  string sName(reinterpret_cast<char*>(innew));
-  conjuro << sName + "\n";
-  cout<<sName<<endl;
-  conjuro.close();
-  string strOut(reinterpret_cast<char*>(out));
-  auxkey= p;
+  unsigned char *out = aes.EncryptECB(po, lenChar, key, len);
+ // unsigned char *innew = aes.DecryptECB(out, 208 * sizeof(unsigned char), key, len);
+  //cout << innew << endl;
+  stringstream ss;
+  for(int i =0; i<lenChar;i++){
+  	ss << out[i];
+  }
+  string strOut(ss.str());
   delete[] out;
-  delete[] innew;
+  //delete[] innew;
   return strOut;
 }
 
@@ -122,17 +116,45 @@ unsigned char * AES::EncryptECB(unsigned char in[], unsigned int inLen, unsigned
   return out;
 }
 
-unsigned char * AES::DecryptECB(unsigned char in[], unsigned  char key[])
+string AES::decryptAes(unsigned char in[], string pKey)
 {
-	unsigned int outLen = 0;
-	unsigned int inLen = 208*sizeof(unsigned char);
-  	outLen = GetPaddingLength(inLen);
-  	unsigned char *alignIn  = PaddingNulls(in, inLen, outLen);
-  	unsigned char *out = new unsigned char[outLen];
-  	for (unsigned int i = 0; i < outLen; i+= blockBytesLen)
-  	{
-    	DecryptBlock(alignIn + i, out + i, key);
-  	}
+	unsigned int len = 0;
+	unsigned int lenChar = 208*sizeof(unsigned char);
+	unsigned char key[32];
+   std::string token;
+   std::istringstream tokenStream(pKey);
+   int count = 0;
+   int trueValue = 0;
+   while (std::getline(tokenStream, token, ','))
+   {
+  
+    // object from the class stringstream 
+    	stringstream geek(token); 
+  
+    // The object has the value 12345 and stream 
+    // it to the integer x 
+    	geek >> trueValue;
+      key[count] = trueValue;
+      count++;
+   }
+   unsigned char * conjuroDecryted = DecryptECB(in, lenChar, key, len);
+   stringstream ss;
+  ss << conjuroDecryted;
+  string ucs(ss.str());
+   
+   return ucs;
+   
+}
+
+unsigned char * AES::DecryptECB(unsigned char in[], unsigned int inLen, unsigned  char key[], unsigned int &outLen)
+{
+  outLen = GetPaddingLength(inLen);
+  unsigned char *alignIn  = PaddingNulls(in, inLen, outLen);
+  unsigned char *out = new unsigned char[outLen];
+  for (unsigned int i = 0; i < outLen; i+= blockBytesLen)
+  {
+    DecryptBlock(alignIn + i, out + i, key);
+  }
   
   delete[] alignIn;
   return out;
