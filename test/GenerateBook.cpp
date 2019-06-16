@@ -19,7 +19,7 @@ void GenerateBook::makeBook()
 		file.CleanFiles(); 
         file.openWrite();
         string padre = "";
-        for(int i = 0; i < 3; i++){     
+        for(int i = 0; i < 100; i++){     
 	    	conjuro = text.substr(i*LENGTH_CONJURO,LENGTH_CONJURO);
 	    	string conjEncrypted = aes.encriptAES((unsigned char*)conjuro.c_str());
 //	    	file.write(conjEncrypted,"Conjuro");
@@ -74,7 +74,8 @@ void GenerateBook::searchConjuro(string pKeys){
 	int fin = 0;
 	string auxAes = "";
 	string auxSha256 = "";
-	for(int index = 0; index<2;index++ ){
+	string AesDecrypted = "";
+	for(int index = 0; index<100;index++ ){
 		fin = books.find("Y-Y-Y");
 		auxAes = books.substr(start,fin);
 		cout<<"----------------------------Aes-------------------------------"<<endl;
@@ -85,8 +86,13 @@ void GenerateBook::searchConjuro(string pKeys){
 		auxSha256 = books.substr(start,fin);
 		books = books.substr(fin+5);
 		cout<<"----------------------------Prueba-------------------------------"<<endl;
-		cout<<aes.decryptAes((unsigned char*)auxAes.c_str(),pKey)<<endl;
+		AesDecrypted = aes.decryptAes((unsigned char*)auxAes.c_str(),pKey);
+		cout<<AesDecrypted<<endl;
 		cout<<"----------------------------Prueba Fin-------------------------------"<<endl;
+		if(sha256(AesDecrypted) == auxSha256){
+			cout<<"--------------Encontrado-----------------"<<endl;
+			break;
+		}
 	}
 	
 }
