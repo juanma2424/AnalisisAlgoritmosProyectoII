@@ -55,6 +55,10 @@ public class ConjuroComms implements IObserver, Constants {
                 globalController.setKey(msg.getValue("Key"));
                 break;
             }
+            case CONJURO: {
+                globalController.setConjuro(msg.getValue("Conjuro"));
+                break;
+            }
             default: {
        
             }

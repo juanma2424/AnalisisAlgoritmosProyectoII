@@ -110,6 +110,11 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 200, 60));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/msg.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 90, 60));
 
         jTextArea3.setBackground(new java.awt.Color(0, 0, 51));
@@ -389,6 +394,11 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         editMoveOne.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        globalController.sendConjuro(jTextArea3.getText());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public void appendMoves(String pMove) {
         jTextArea1.append(pMove + "\n");
     }
@@ -399,6 +409,10 @@ public class Cliente extends javax.swing.JFrame implements Constants {
     
     public void appendFindCardsC(String pType) {
         jTextArea4.append(pType + "\n");
+    }
+    
+    public void viewConjuro(String pConjuro){
+        jTextArea3.append(pConjuro);
     }
 
     /**

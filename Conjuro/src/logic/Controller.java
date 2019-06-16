@@ -162,6 +162,15 @@ public class Controller implements Constants, Runnable {
     public void discoverHalfKey() {
 
     }
+    
+    public void sendConjuro(String pConjuro){
+        String msg = "2,Conjuro="+pConjuro;
+        comms.sendMessage(msg);
+    }
+    
+    public void setConjuro(String pConjuro){
+        window.viewConjuro(pConjuro);
+    }
 
     public void discoverAllKey() {
 
