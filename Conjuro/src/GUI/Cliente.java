@@ -63,16 +63,22 @@ public class Cliente extends javax.swing.JFrame implements Constants {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         textMove = new javax.swing.JTextField();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextArea5 = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextArea4 = new javax.swing.JTextArea();
         jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         editMoveTwo = new javax.swing.JButton();
@@ -95,14 +101,17 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         jPanel2.setPreferredSize(new java.awt.Dimension(1084, 646));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/opponent.png"))); // NOI18N
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 200, 60));
+
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/msg.png"))); // NOI18N
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 90, 60));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 90, 60));
 
         jTextArea3.setColumns(20);
         jTextArea3.setRows(5);
         jScrollPane4.setViewportView(jTextArea3);
 
-        jPanel2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 290, 150));
+        jPanel2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 290, 150));
 
         textMove.setEditable(false);
         textMove.setBackground(new java.awt.Color(0, 0, 51));
@@ -111,6 +120,18 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         jScrollPane1.setViewportView(textMove);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 420, 90));
+
+        jTextArea5.setEditable(false);
+        jTextArea5.setColumns(20);
+        jTextArea5.setRows(5);
+        jTextArea5.setText("\tKEY");
+        jScrollPane6.setViewportView(jTextArea5);
+
+        jPanel2.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 300, 70));
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 570, 170, 60));
 
         jTextField2.setEditable(false);
         jTextField2.setBackground(new java.awt.Color(0, 0, 51));
@@ -122,13 +143,19 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         jTextArea2.setRows(5);
         jScrollPane3.setViewportView(jTextArea2);
 
-        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 180, 120));
+        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, 200, 80));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 320, 180));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 420, 130));
+
+        jTextArea4.setColumns(20);
+        jTextArea4.setRows(5);
+        jScrollPane5.setViewportView(jTextArea4);
+
+        jPanel2.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, 210, 80));
 
         jTextField3.setEditable(false);
         jTextField3.setBackground(new java.awt.Color(0, 0, 51));
@@ -427,6 +454,11 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         globalController.selectCard(pCard, !readyMoveOne);
         globalJugada++;
     }
+    
+    
+    private void selecteNameVS(String pCard) {
+        jLabel1.setText(pCard);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton C1;
@@ -440,15 +472,21 @@ public class Cliente extends javax.swing.JFrame implements Constants {
     private javax.swing.JButton editMoveTwo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JButton sendMove;
