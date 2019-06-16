@@ -21,7 +21,6 @@ class FileManagement
 		void closeWrite();
 		void CleanFiles();
 		string getText();
-		void readSecret();
 		string readBook();
 		void writeBook(string pText);
 	private:

@@ -25,10 +25,6 @@ string FileManagement::readBook()
 	ifstream in("test");   
   in.read((char *) &textBook, sizeof textBook);   
      
-  cout<<"---------------------------------------------------------Texto---------------------------------------------------------\n" ;
-    cout << textBook << " \n";   
-    cout<<"---------------------------------------------------------Texto FIn---------------------------------------------------------\n" ;
-     
   in.close(); 
   return textBook;
 }
@@ -56,25 +52,6 @@ void FileManagement::openWrite(){
 	
 }
 
-
-
-void FileManagement::readSecret(){
-  string line;
-  cout<<"1";
-  ifstream myfile ("DataPLay.txt");
-  if (myfile.is_open())
-  {
-    while ( getline (myfile,line) )
-    {
-      cout << line << '\n';
-    }
-    myfile.close();
-  }
-
-}
-
-
-
 void FileManagement::CleanFiles(){
 	 ofstream clean;
 	 clean.open("Save.txt", std::ofstream::out | std::ofstream::trunc);
@@ -100,7 +77,6 @@ string FileManagement::getText()
 {
 	return text;
 }
-
 
 
 void FileManagement::writeBook(string pText){ 

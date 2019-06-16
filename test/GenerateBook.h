@@ -16,7 +16,7 @@ class GenerateBook
 		}
 		void getBook();
 		void makeBook(bool);
-		void searchConjuro(string pKey);
+		void searchConjuro();
 	private:
 		string text;
 		const int LENGTH_CONJURO = 200;
