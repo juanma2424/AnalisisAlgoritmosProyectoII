@@ -5,7 +5,8 @@ public enum MessageType {
     CARDS_SELECTED(1),
     CONJURO(2),
     CARD_FOUND(3),
-    DEFEAT(4);
+    KEY_MSG(4),
+    DEFEAT(5);
     
     
     public int value;
