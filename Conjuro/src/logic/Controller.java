@@ -3,6 +3,7 @@ package logic;
 import GUI.Cliente;
 import GUI.Login;
 import conjuronet.ConjuroComms;
+import files.FileManagement;
 import files.ReadFile;
 import java.util.Random;
 import lib.Constants;
@@ -73,6 +74,8 @@ public class Controller implements Constants, Runnable {
     public void startGame() {
         comms.iniciarJuegoNuevo();
         generateCard();
+        FileManagement fileKey = new FileManagement();
+        game.setKey(fileKey.readKeys());
     }
 
     public void searchGame() {
@@ -129,6 +132,16 @@ public class Controller implements Constants, Runnable {
         window.appendFindCards(types[pType]);
     }
     
+    public void setKey(String pKey) {
+        game.setKey(pKey);
+        sendName();
+    }
+    
+    public void sendKey() {
+        String msg = "4,Key="+game.getKey();
+        comms.sendMessage(msg);
+    }
+    
     public void sendName(){
         String msg = "0,Name="+game.getName();
         comms.sendMessage(msg);
@@ -157,6 +170,7 @@ public class Controller implements Constants, Runnable {
             }
         }
         game.initDecode();
+        window.viewKey(game.getKey());
 
     }
 
@@ -166,5 +180,6 @@ public class Controller implements Constants, Runnable {
 
     public void setNameContr(String pName) {
         game.setNameContr(pName);
+        window.setNameVS(pName);
     }
 }

@@ -16,10 +16,13 @@ public class GameLogic implements Constants {
     private Card[] jugadaCont2;
     private Hashtable<String, Integer> types;
     private Controller globalController;
+    private String key;
+    private boolean gameOver;
 
     public GameLogic(Controller pController) {
         jugador = new Player();
         globalController = pController;
+        gameOver = false;
         contrincante = new Player();
         deck = new Card[TOTAL_CARDS];
         jugada1 = new Card[JUGADA_NUMBER];
@@ -37,7 +40,15 @@ public class GameLogic implements Constants {
     public String getName() {
         return jugador.getName();
     }
+    
+    public void setKey(String pKey) {
+        key = pKey;
+    }
 
+    public String getKey() {
+        return key;
+    }
+    
     private void fillHash() {
         types.put("Sha256", 0);
         types.put("MD5", 1);
@@ -50,6 +61,10 @@ public class GameLogic implements Constants {
 
     public void setNameContr(String pName) {
         contrincante.setName(pName);
+    }
+    
+    public void gameOverLoser(){
+        gameOver = true;
     }
 
     public Card[] getJugada1() {
@@ -84,8 +99,10 @@ public class GameLogic implements Constants {
         Card[] jugadaCont = jugadaCont1.clone();
         Card[] jugada = jugada1.clone();
         int typeCard;
-        for (int index = 0; index < SELECT_CARDS; index++) {
+        for (int index = 0; index < SELECT_CARDS && !gameOver; index++) {
             typeCard = decodeCard(jugadaCont[index%JUGADA_NUMBER], types.get(jugada[index%JUGADA_NUMBER].getType()));
+            if(typeCard == -1)
+                break;
             jugadaCont[index%JUGADA_NUMBER].setType(typeCard);
             globalController.discoverCard(typeCard);
             if (index == JUGADA_NUMBER - 1) {
@@ -101,6 +118,8 @@ public class GameLogic implements Constants {
         IAlgorithm alg;
         String text;
         while (found) {
+            if(gameOver)
+                return -1;
             alg = Security.generateAlgorithm(types[pType % TOTAL_CARDS]);
             alg.setText(pCard.getDescription());
             alg.setKey(pCard.getKey2());

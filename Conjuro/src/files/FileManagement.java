@@ -30,39 +30,42 @@ public class FileManagement {
             Logger.Log(ex.getMessage());
         }
     }
-    
-    public String readKeys(String pPathkeys) throws java.io.IOException {
 
-        
+    public String readKeys() {
+
         Random rand = new Random();
-        int randomNum = rand.nextInt(  (MAX_KEYS - DATA_CERO) + 1) + DATA_CERO;
-        
+        int randomNum = rand.nextInt((MAX_KEYS - DATA_CERO) + 1) + DATA_CERO;
+
         String auxKey = "";
-        BufferedReader bufferKey = new BufferedReader(new FileReader(pPathkeys));
-        
-        int indexKEY = DATA_CERO;
-         
-        while (DATA_CERO < randomNum) {
-            auxKey = bufferKey.readLine();
-            indexKEY++;
+        BufferedReader bufferKey = null;
+        try {
+            bufferKey = new BufferedReader(new FileReader("Save.txt"));
+            int indexKEY = DATA_CERO;
+
+            while (DATA_CERO < randomNum) {
+                auxKey = bufferKey.readLine();
+                indexKEY++;
+            }
+            bufferKey.close();
+        } catch (Exception ex) {
+            Logger.Log(ex.getMessage());
         }
-        bufferKey.close();
-        return auxKey ;
+
+        return auxKey;
     }
-    
-    public void writeFile(String pText, String pPath){
+
+    public void writeFile(String pText, String pPath) {
         FileWriter fichero = null;
         PrintWriter pw = null;
-        try
-        {
+        try {
             fichero = new FileWriter(pPath);
             pw = new PrintWriter(fichero);
 
             pw.println(pText);
-            
+
             fichero.close();
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());
-        }   
+        }
     }
 }

@@ -36,9 +36,6 @@ void GenerateBook::makeBook(bool entry)
 	string conjuro;
 	FileManagement file = FileManagement();
 	 AES aes(256);
-	#pragma omp parallel
-    {
-        #pragma omp for
 		file.CleanFiles(); 
         file.openWrite();
         string padre = "";
@@ -55,7 +52,6 @@ void GenerateBook::makeBook(bool entry)
 	    file.closeWrite();
 	    if(entry)
 	    	searchConjuro();
-	}
 	
 }
 
@@ -73,7 +69,6 @@ void GenerateBook::searchConjuro(){
 		if(time >= 720.0 && refresh){
 			makeBook(false);
 			refresh = false;
-			cout<<"perdio"<<endl;
 		}
 	}
 	string books = files.readBook();
@@ -83,6 +78,7 @@ void GenerateBook::searchConjuro(){
 	string auxAes = "";
 	string auxSha256 = "";
 	string AesDecrypted = "";
+	#pragma omp parallel for
 	for(int index = 0; index<100;index++ ){
 		fin = books.find("Y-Y-Y");
 		auxAes = books.substr(start,fin);
@@ -95,7 +91,6 @@ void GenerateBook::searchConjuro(){
 			files.openWrite();
 			files.write(AesDecrypted,"Conjuro");
 			files.closeWrite();
-			break;
 		}
 	}
 	if(!refresh){

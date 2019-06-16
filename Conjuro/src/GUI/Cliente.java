@@ -455,9 +455,13 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         globalJugada++;
     }
     
+    public void viewKey(String pKey){
+        jTextArea5.append("\n"+pKey);
+    }
     
-    private void selecteNameVS(String pCard) {
-        jLabel1.setText(pCard);
+    
+    public void setNameVS(String pName) {
+        jLabel1.setText(pName);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

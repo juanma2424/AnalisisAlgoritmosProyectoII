@@ -51,6 +51,10 @@ public class ConjuroComms implements IObserver, Constants {
                 globalController.findCard(Integer.parseInt(msg.getValue("Type")));
                 break;
             }
+            case KEY_MSG: {
+                globalController.setKey(msg.getValue("Key"));
+                break;
+            }
             default: {
        
             }
@@ -59,5 +63,7 @@ public class ConjuroComms implements IObserver, Constants {
 
     public void setClientServer(ClientSocket pClient) {
         this.client = pClient;
+        globalController.sendName();
+        globalController.sendKey();
     }
 }
