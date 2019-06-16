@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.Random;
+import static lib.Constants.DATA_CERO;
+import static lib.Constants.MAX_KEYS;
 import lib.Logger;
 
 public class FileManagement {
@@ -26,6 +29,25 @@ public class FileManagement {
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());
         }
+    }
+    
+    public String readKeys(String pPathkeys) throws java.io.IOException {
+
+        
+        Random rand = new Random();
+        int randomNum = rand.nextInt(  (MAX_KEYS - DATA_CERO) + 1) + DATA_CERO;
+        
+        String auxKey = "";
+        BufferedReader bufferKey = new BufferedReader(new FileReader(pPathkeys));
+        
+        int indexKEY = DATA_CERO;
+         
+        while (DATA_CERO < randomNum) {
+            auxKey = bufferKey.readLine();
+            indexKEY++;
+        }
+        bufferKey.close();
+        return auxKey ;
     }
     
     public void writeFile(String pText, String pPath){
