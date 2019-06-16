@@ -36,8 +36,7 @@ string FileManagement::readBook()
 string FileManagement::readKey()
 {
 	string textKey = "";
-	while(!ifstream("key.txt")){
-	}
+
 	string line = "";
     ifstream fe("key.txt");
 	

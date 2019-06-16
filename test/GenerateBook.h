@@ -4,6 +4,8 @@
 #include <stdio.h> 
 #include "Sha256.h"
 #include <omp.h>
+#include <iostream>
+#include <ctime> 
 using namespace std;
 
 class GenerateBook
@@ -13,11 +15,10 @@ class GenerateBook
 			text = pText;
 		}
 		void getBook();
-		void makeBook();
+		void makeBook(bool);
 		void searchConjuro(string pKey);
 	private:
 		string text;
-		string book[3][100];
 		const int LENGTH_CONJURO = 200;
 };
 

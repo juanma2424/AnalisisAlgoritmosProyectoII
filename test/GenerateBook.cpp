@@ -8,7 +8,7 @@
 using namespace std;
 
 
-void GenerateBook::makeBook()
+void GenerateBook::makeBook(bool entry)
 {
 	string conjuro;
 	FileManagement file = FileManagement();
@@ -56,7 +56,8 @@ void GenerateBook::makeBook()
 		file.write("X-X-X","save"); 	
 	    file.closeWrite();
 	    cout<<"--------Finallllllllllllllllllllllllllllllll-----------"<<endl;
-	    searchConjuro("sad");
+	    if(entry)
+	    	searchConjuro("sad");
 	}
 	
 }
@@ -65,6 +66,18 @@ void GenerateBook::makeBook()
 void GenerateBook::searchConjuro(string pKeys){
 	AES aes(256);
 	FileManagement files = FileManagement();
+	
+	unsigned t0, t1;
+	t0=clock();
+	bool refresh = true;
+	while(!ifstream("key.txt")){
+		t1 = clock();
+		double time = (double(t1-t0)/CLOCKS_PER_SEC);
+		if(time >= 30.0 && refresh){
+			makeBook(false);
+			refresh = false;
+		}
+	}
 	string books = files.readBook();
 	string pKey = files.readKey();	
 	cout<<"----------------------------Key-------------------------------"<<endl;
@@ -89,7 +102,7 @@ void GenerateBook::searchConjuro(string pKeys){
 		AesDecrypted = aes.decryptAes((unsigned char*)auxAes.c_str(),pKey);
 		cout<<AesDecrypted<<endl;
 		cout<<"----------------------------Prueba Fin-------------------------------"<<endl;
-		if(sha256(AesDecrypted) == auxSha256){
+		if(sha256(AesDecrypted) == auxSha256&&refresh){
 			cout<<"--------------Encontrado-----------------"<<endl;
 			files.openWrite();
 			files.write(AesDecrypted,"Conjuro");
@@ -97,5 +110,10 @@ void GenerateBook::searchConjuro(string pKeys){
 			break;
 		}
 	}
-	
+	if(!refresh){
+		cout<<"--------------No encontrado-----------------"<<endl;
+		files.openWrite();
+		files.write("Game Over","Conjuro");
+		files.closeWrite();
+	}
 }

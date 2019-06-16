@@ -10,6 +10,6 @@ using namespace std;
 int main() {
 	FileManagement fileM = FileManagement("Texto.txt"); 
 	GenerateBook geneB = GenerateBook(fileM.getText());
-	geneB.makeBook();
+	geneB.makeBook(true);
 	return 0;
 }
