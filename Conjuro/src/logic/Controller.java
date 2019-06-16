@@ -19,6 +19,7 @@ public class Controller implements Constants, Runnable {
     private boolean getCards;
     private String movVrs;
     private Cliente window;
+    private boolean isServer;
 
     public Controller() {
         game = new GameLogic(this);
@@ -30,7 +31,7 @@ public class Controller implements Constants, Runnable {
         login = new Login();
         sendController();
         new Thread(this).start();
-
+        isServer = false;
     }
 
     public void insertName(String pName) {
@@ -69,6 +70,9 @@ public class Controller implements Constants, Runnable {
         msg = msg.substring(0, msg.length() - 1);
         comms.sendMessage(msg);
         decrypt = true;
+        sendName();
+        if(isServer)
+            sendKey();
     }
 
     public void startGame() {
@@ -76,6 +80,7 @@ public class Controller implements Constants, Runnable {
         generateCard();
         FileManagement fileKey = new FileManagement();
         game.setKey(fileKey.readKeys());
+        isServer = true;
     }
 
     public void searchGame() {
@@ -148,8 +153,10 @@ public class Controller implements Constants, Runnable {
     }
 
     public void discoverCard(int pType) {
+        String[] types = {"Sha256", "MD5", "TresDes", "AES", "Plain", "RSA", "Pgp"};
         String msg = "3,Type=" + pType;
         comms.sendMessage(msg);
+        window.appendFindCardsC(types[pType]);
     }
 
     public void discoverHalfKey() {

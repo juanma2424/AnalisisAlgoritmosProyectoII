@@ -63,7 +63,5 @@ public class ConjuroComms implements IObserver, Constants {
 
     public void setClientServer(ClientSocket pClient) {
         this.client = pClient;
-        globalController.sendName();
-        globalController.sendKey();
     }
 }

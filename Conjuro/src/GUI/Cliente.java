@@ -30,6 +30,9 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         editMoveTwo.setEnabled(false);
         jTextArea1.setEditable(false);
         jTextArea2.setEditable(false);
+        jTextArea4.setEditable(false);
+        jTextArea4.append("Me \n");
+        jTextArea2.append("Opponent \n");
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -130,7 +133,6 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         jPanel2.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 300, 70));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel1.setText("jLabel1");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 570, 170, 60));
 
         jTextField2.setEditable(false);
@@ -370,6 +372,10 @@ public class Cliente extends javax.swing.JFrame implements Constants {
 
     public void appendFindCards(String pType) {
         jTextArea2.append(pType + "\n");
+    }
+    
+    public void appendFindCardsC(String pType) {
+        jTextArea4.append(pType + "\n");
     }
 
     /**

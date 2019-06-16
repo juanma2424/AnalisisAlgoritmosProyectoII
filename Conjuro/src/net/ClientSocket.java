@@ -33,6 +33,7 @@ public class ClientSocket extends Observable implements Constants, Runnable {
     }
 
     public void run() {
+       
         while (isListening) {
             try {
                 String msgData = inputReader.readUTF();

@@ -35,17 +35,20 @@ public class FileManagement {
 
         Random rand = new Random();
         int randomNum = rand.nextInt((MAX_KEYS - DATA_CERO) + 1) + DATA_CERO;
-
+        System.out.println(randomNum);
         String auxKey = "";
         BufferedReader bufferKey = null;
         try {
-            bufferKey = new BufferedReader(new FileReader("Save.txt"));
+            FileReader file = new FileReader("Save.txt");
+            bufferKey = new BufferedReader(file);
+            
             int indexKEY = DATA_CERO;
-
-            while (DATA_CERO < randomNum) {
+            System.out.println(randomNum);
+            while (indexKEY < randomNum) {
                 auxKey = bufferKey.readLine();
                 indexKEY++;
             }
+            System.out.println(auxKey);
             bufferKey.close();
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());

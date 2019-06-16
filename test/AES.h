@@ -204,7 +204,7 @@ unsigned char* AES::newKey(){
 		ss << numKey;
 		out_string = ss.str();
 		if(indexTime<=30){
-				auxkey =  auxkey + out_string +",";	
+				auxkey =  auxkey + out_string +".";	
 		}else{
 				auxkey =  auxkey + out_string ;	
 		}
@@ -268,7 +268,7 @@ string AES::decryptAes(unsigned char in[], string pKey)
    std::istringstream tokenStream(pKey);
    int count = 0;
    int trueValue = 0;
-   while (std::getline(tokenStream, token, ','))
+   while (std::getline(tokenStream, token, '.'))
    {
   
     stringstream geek(token); 
