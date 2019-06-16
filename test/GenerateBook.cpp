@@ -91,6 +91,9 @@ void GenerateBook::searchConjuro(string pKeys){
 		cout<<"----------------------------Prueba Fin-------------------------------"<<endl;
 		if(sha256(AesDecrypted) == auxSha256){
 			cout<<"--------------Encontrado-----------------"<<endl;
+			files.openWrite();
+			files.write(AesDecrypted,"Conjuro");
+			files.closeWrite();
 			break;
 		}
 	}
