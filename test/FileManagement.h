@@ -21,6 +21,9 @@ class FileManagement
 		void CleanFiles();
 		string getText();
 		void readSecret();
+		string readBook();
+		void m(string text);
+		void b();
 	private:
 		string readFile(char pPath[]);
 		string text;

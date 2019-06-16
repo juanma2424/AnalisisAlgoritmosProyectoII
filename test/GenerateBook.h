@@ -14,6 +14,7 @@ class GenerateBook
 			makeBook();
 		}
 		void getBook();
+		void searchConjuro(string pKey);
 	private:
 		void makeBook();
 		string text;

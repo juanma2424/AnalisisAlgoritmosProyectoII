@@ -11,5 +11,6 @@ using namespace std;
 int main() {
 	FileManagement fileM = FileManagement("Texto.txt"); 
 	GenerateBook geneB = GenerateBook(fileM.getText());
+	geneB.searchConjuro("sad");
 	return 0;
 }
