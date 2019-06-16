@@ -16,6 +16,7 @@ class FileManagement
 			text = readFile(pPath);
 		}
 		void write(string text,string pPath);
+		string readKey();
 		void openWrite();
 		void closeWrite();
 		void CleanFiles();

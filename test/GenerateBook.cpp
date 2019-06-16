@@ -42,6 +42,7 @@ void GenerateBook::makeBook()
 	    	cout<<conjEncrypted<<endl;
 	    	cout<<"--------Fin-----------"<<endl;
 			cout<<aes.decryptAes((unsigned char*)conjEncrypted.c_str(),aes.getKey())<<endl;	 
+			
 	    }
 //		file.write("X-X-X","save"); 
 //		file.write("X-X-X","Conjuro");  
@@ -55,27 +56,37 @@ void GenerateBook::makeBook()
 		file.write("X-X-X","save"); 	
 	    file.closeWrite();
 	    cout<<"--------Finallllllllllllllllllllllllllllllll-----------"<<endl;
-	    
+	    searchConjuro("sad");
 	}
+	
 }
-void GenerateBook::searchConjuro(string pKey){
-	//AES aes(256);
-	FileManagement file = FileManagement();
-	string book = file.readBook();	
-	/*int start = 0;
+
+
+void GenerateBook::searchConjuro(string pKeys){
+	AES aes(256);
+	FileManagement files = FileManagement();
+	string books = files.readBook();
+	string pKey = files.readKey();	
+	cout<<"----------------------------Key-------------------------------"<<endl;
+	cout<<pKey<<endl;
+	cout<<"----------------------------Key Fin-------------------------------"<<endl;
+	int start = 0;
 	int fin = 0;
 	string auxAes = "";
 	string auxSha256 = "";
-	for(int index = 0; index<1;index++ ){
-		fin = book.find("Y-Y-Y");
-		auxAes = book.substr(start,fin);
-		book = book.substr(fin+5);
-		fin = book.find("Z-Z-Z");
-		auxSha256 = book.substr(start,fin);
-		book = book.substr(fin+5);
+	for(int index = 0; index<2;index++ ){
+		fin = books.find("Y-Y-Y");
+		auxAes = books.substr(start,fin);
+		cout<<"----------------------------Aes-------------------------------"<<endl;
+	cout<<auxAes<<endl;
+	cout<<"----------------------------Aes Fin-------------------------------"<<endl;
+		books = books.substr(fin+5);
+		fin = books.find("Z-Z-Z");
+		auxSha256 = books.substr(start,fin);
+		books = books.substr(fin+5);
 		cout<<"----------------------------Prueba-------------------------------"<<endl;
-		//cout<<aes.decryptAes((unsigned char*)auxAes.c_str(),pKey)<<endl;
+		cout<<aes.decryptAes((unsigned char*)auxAes.c_str(),pKey)<<endl;
 		cout<<"----------------------------Prueba Fin-------------------------------"<<endl;
-	}*/
+	}
 	
 }

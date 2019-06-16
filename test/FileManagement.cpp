@@ -1,7 +1,8 @@
 #include "FileManagement.h"
 ofstream save;
 ofstream conjuro;
-ofstream out("test"); 
+ofstream pou("test"); 
+
 string FileManagement::readFile(char pPath[])
 {
 	string line = "";
@@ -20,16 +21,34 @@ string FileManagement::readFile(char pPath[])
 
 string FileManagement::readBook()
 {
-	string text = "";
+	string textBook = "";
 	ifstream in("test");   
-  in.read((char *) &text, sizeof text);   
+  in.read((char *) &textBook, sizeof textBook);   
      
   cout<<"---------------------------------------------------------Texto---------------------------------------------------------\n" ;
-    cout << text << " \n";   
+    cout << textBook << " \n";   
     cout<<"---------------------------------------------------------Texto FIn---------------------------------------------------------\n" ;
      
   in.close(); 
-  return text;
+  return textBook;
+}
+
+string FileManagement::readKey()
+{
+	string textKey = "";
+	while(!ifstream("key.txt")){
+	}
+	string line = "";
+    ifstream fe("key.txt");
+	
+	
+	while(getline(fe, line)) {
+		textKey = textKey + line;
+    }
+   	fe.close();
+     
+  fe.close(); 
+  return textKey;
 }
 
 void FileManagement::openWrite(){
@@ -65,9 +84,10 @@ void FileManagement::CleanFiles(){
 	
 }
 void FileManagement::closeWrite(){
+	   pou.close();
        save.close();
 	   conjuro.close();	
-	   out.close();
+	   
 }
 
 void FileManagement::write(string text, string pPath){
@@ -81,8 +101,11 @@ string FileManagement::getText()
 {
 	return text;
 }
+
+
+
 void FileManagement::writeBook(string pText){ 
      
-  out.write((char *) &pText, sizeof pText);   
+  pou.write((char *) &pText, sizeof pText);   
 }
 
