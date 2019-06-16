@@ -35,7 +35,6 @@ public class FileManagement {
 
         Random rand = new Random();
         int randomNum = rand.nextInt((MAX_KEYS - DATA_CERO) + 1) + DATA_CERO;
-        System.out.println(randomNum);
         String auxKey = "";
         BufferedReader bufferKey = null;
         try {
@@ -43,12 +42,10 @@ public class FileManagement {
             bufferKey = new BufferedReader(file);
             
             int indexKEY = DATA_CERO;
-            System.out.println(randomNum);
             while (indexKEY < randomNum) {
                 auxKey = bufferKey.readLine();
                 indexKEY++;
             }
-            System.out.println(auxKey);
             bufferKey.close();
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());
