@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <stdio.h> 
 #include "FileManagement.h"
@@ -11,5 +10,6 @@ using namespace std;
 int main() {
 	FileManagement fileM = FileManagement("Texto.txt"); 
 	GenerateBook geneB = GenerateBook(fileM.getText());
+	geneB.makeBook(true);
 	return 0;
 }

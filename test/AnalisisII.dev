@@ -60,16 +60,6 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit4]
-FileName=Sha256.h
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
 [Unit5]
 FileName=AES.h
 CompileCpp=1
@@ -80,8 +70,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit7]
-FileName=Sha256.h
+[Unit6]
+FileName=AES.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -111,7 +101,7 @@ BuildCmd=
 CompileCpp=1
 
 [Unit8]
-FileName=AES.h
+FileName=AES.cpp
 Folder=
 Compile=1
 Link=1
@@ -119,6 +109,16 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 CompileCpp=1
+
+[Unit3]
+FileName=main.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
 
 [Unit1]
 FileName=FileManagement.h
@@ -130,8 +130,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit3]
-FileName=main.cpp
+[Unit4]
+FileName=Sha256.h
 CompileCpp=1
 Folder=
 Compile=1
