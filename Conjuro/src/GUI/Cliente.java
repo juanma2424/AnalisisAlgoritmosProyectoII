@@ -141,7 +141,7 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         jTextArea5.setText("\tKEY");
         jScrollPane6.setViewportView(jTextArea5);
 
-        jPanel2.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 580, 350, 40));
+        jPanel2.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 580, 620, 60));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 51));
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
@@ -412,7 +412,7 @@ public class Cliente extends javax.swing.JFrame implements Constants {
     }
     
     public void viewConjuro(String pConjuro){
-        jTextArea3.append(pConjuro);
+        jTextArea6.append(pConjuro);
     }
 
     /**

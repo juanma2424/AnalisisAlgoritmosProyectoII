@@ -22,6 +22,7 @@ class FileManagement
 		void CleanFiles();
 		string getText();
 		string readBook();
+		string readConj();
 		void writeBook(string pText);
 	private:
 		string readFile(char pPath[]);
@@ -63,6 +64,23 @@ string FileManagement::readKey()
 
 	string line = "";
     ifstream fe("key.txt");
+	
+	
+	while(getline(fe, line)) {
+		textKey = textKey + line;
+    }
+   	fe.close();
+     
+  fe.close(); 
+  return textKey;
+}
+
+string FileManagement::readConj()
+{
+	string textKey = "";
+
+	string line = "";
+    ifstream fe("verConjuro.txt");
 	
 	
 	while(getline(fe, line)) {

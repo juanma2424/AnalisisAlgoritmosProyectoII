@@ -23,8 +23,10 @@ class GenerateBook
 		void getBook();
 		void makeBook(bool);
 		void searchConjuro();
+		void comparateDigest();
 	private:
 		string text;
+		string auxBook;
 		const int LENGTH_CONJURO = 200;
 };
 
@@ -50,8 +52,10 @@ void GenerateBook::makeBook(bool entry)
 	    }
 		file.writeBook(padre);	
 	    file.closeWrite();
-	    if(entry)
+	    if(entry){
 	    	searchConjuro();
+	    	comparateDigest();
+	    }
 	
 }
 
@@ -72,6 +76,7 @@ void GenerateBook::searchConjuro(){
 		}
 	}
 	string books = files.readBook();
+	auxBook = books;
 	string pKey = files.readKey();	
 	int start = 0;
 	int fin = 0;
@@ -99,6 +104,41 @@ void GenerateBook::searchConjuro(){
 		files.closeWrite();
 	}
 	remove("key.txt");
+	files.writeBook(auxBook);
 }
 
+
+void GenerateBook::comparateDigest(){
+	AES aes(256);
+	FileManagement files = FileManagement();
+	bool refresh = true;
+	while(!ifstream("verConjuro.txt")){
+	}
+	string books = files.readBook();
+	string conjuroEn = files.readConj();	
+	int start = 0;
+	int fin = 0;
+	string conjuroSha = sha256(conjuroEn);
+	string auxSha256 = "";
+	#pragma omp parallel for
+	for(int index = 0; index<100;index++ ){
+		fin = books.find("Y-Y-Y");
+		books = books.substr(fin+5);
+		fin = books.find("Z-Z-Z");
+		auxSha256 = books.substr(start,fin);
+		books = books.substr(fin+5);
+		if(conjuroSha == auxSha256){
+			files.openWrite();
+			files.write("El conjuro si es el correcto","Conjuro");
+			files.closeWrite();
+			refresh = false;
+		}
+	}
+	if(refresh){
+		files.openWrite();
+		files.write("No encontrado","Conjuro");
+		files.closeWrite();
+	}
+	remove("verConjuro.txt");
+}
 #endif
