@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0000000000000000000000000
-UnitCount=9
+UnitCount=5
 
 [VersionInfo]
 Major=1
@@ -50,37 +50,7 @@ ProductVersion=
 AutoIncBuildNr=0
 SyncProduct=1
 
-[Unit1]
-FileName=FileManagement.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
 [Unit2]
-FileName=FileManagement.h
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit3]
-FileName=GenerateBook.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit4]
 FileName=GenerateBook.h
 CompileCpp=1
 Folder=
@@ -91,7 +61,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit5]
-FileName=main.cpp
+FileName=AES.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -101,17 +71,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit6]
-FileName=Sha256.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit7]
-FileName=Sha256.h
+FileName=AES.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -141,7 +101,7 @@ BuildCmd=
 CompileCpp=1
 
 [Unit8]
-FileName=AES.h
+FileName=AES.cpp
 Folder=
 Compile=1
 Link=1
@@ -149,4 +109,34 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 CompileCpp=1
+
+[Unit3]
+FileName=main.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit1]
+FileName=FileManagement.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit4]
+FileName=Sha256.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
 

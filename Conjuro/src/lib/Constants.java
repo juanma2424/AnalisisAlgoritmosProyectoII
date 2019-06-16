@@ -29,7 +29,7 @@ public interface Constants {
     public static String LIMIT_FILE = "X-X-X";
     public static String LIMIT_DESCRIPTION = "-FinText-";
     public static String LIMIT_NAME = "-FinName-";
-    public static String HOST = "192.168.1.125";
+    public static String HOST = "172.19.49.37";
     public static String PATH_KEY = "\\C++\\Save.txt";
     public static String PATH_PLAY_DATA = "\\C++\\DataPlay.txt";
 }
