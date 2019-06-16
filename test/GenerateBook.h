@@ -11,12 +11,11 @@ class GenerateBook
 	public:
 		GenerateBook(string pText){
 			text = pText;
-			makeBook();
 		}
 		void getBook();
+		void makeBook();
 		void searchConjuro(string pKey);
 	private:
-		void makeBook();
 		string text;
 		string book[3][100];
 		const int LENGTH_CONJURO = 200;

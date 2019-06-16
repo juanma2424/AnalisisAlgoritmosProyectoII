@@ -51,21 +51,31 @@ void GenerateBook::makeBook()
 		cout<<"---------------padre------------------" <<endl;
 		cout<<padre<<endl;
 		cout<<"---------------padre Fin------------------" <<endl;
-		file.m(padre);
-		file.write("X-X-X","save"); 
-		file.m("X-X-X");  
-		file.m("X-X-X"); 	
+		file.writeBook(padre);
+		file.write("X-X-X","save"); 	
 	    file.closeWrite();
 	    cout<<"--------Finallllllllllllllllllllllllllllllll-----------"<<endl;
-	    searchConjuro("Nose");
 	    
 	}
 }
 void GenerateBook::searchConjuro(string pKey){
+	//AES aes(256);
 	FileManagement file = FileManagement();
-	file.b();	
-	int start = 0;
+	string book = file.readBook();	
+	/*int start = 0;
 	int fin = 0;
-	//fin = book.find("Y-Y-Y");
-//	cout<<book<<endl;
+	string auxAes = "";
+	string auxSha256 = "";
+	for(int index = 0; index<1;index++ ){
+		fin = book.find("Y-Y-Y");
+		auxAes = book.substr(start,fin);
+		book = book.substr(fin+5);
+		fin = book.find("Z-Z-Z");
+		auxSha256 = book.substr(start,fin);
+		book = book.substr(fin+5);
+		cout<<"----------------------------Prueba-------------------------------"<<endl;
+		//cout<<aes.decryptAes((unsigned char*)auxAes.c_str(),pKey)<<endl;
+		cout<<"----------------------------Prueba Fin-------------------------------"<<endl;
+	}*/
+	
 }

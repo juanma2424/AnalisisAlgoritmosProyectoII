@@ -20,17 +20,16 @@ string FileManagement::readFile(char pPath[])
 
 string FileManagement::readBook()
 {
-	string line = "";
-    ifstream fe("Conjuro.txt");
-    string text = "";
-	int i = 0;
-	
-	while(getline(fe, line) ){
-		text = text + line;
-		cout<<line<<endl;
-    }
-   	fe.close();
-   	return text;
+	string text = "";
+	ifstream in("test");   
+  in.read((char *) &text, sizeof text);   
+     
+  cout<<"---------------------------------------------------------Texto---------------------------------------------------------\n" ;
+    cout << text << " \n";   
+    cout<<"---------------------------------------------------------Texto FIn---------------------------------------------------------\n" ;
+     
+  in.close(); 
+  return text;
 }
 
 void FileManagement::openWrite(){
@@ -82,34 +81,8 @@ string FileManagement::getText()
 {
 	return text;
 }
-void FileManagement::m(string text){
-  
-       
-  if(!out) {   
-    cout << "Cannot open file";   
-    //return 1;   
-  }   
+void FileManagement::writeBook(string pText){ 
      
-  out.write((char *) &text, sizeof text);   
-     
-     
-     
-//  for(i=0; i<5; i++) 
-//    n[i] = "aja";   
-       
-     
- // return 0;   
+  out.write((char *) &pText, sizeof pText);   
 }
 
-void FileManagement::b(){
-	string n = "";
-	ifstream in("test");   
-  in.read((char *) &n, sizeof n);   
-     
-  //for(i=0; i<5; i++) // show values read from file 
-  cout<<"---------------------------------------------------------Texto---------------------------------------------------------\n" ;
-    cout << n << " \n";   
-    cout<<"---------------------------------------------------------Texto FIn---------------------------------------------------------\n" ;
-     
-  in.close(); 
-}

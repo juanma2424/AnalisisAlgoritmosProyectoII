@@ -22,8 +22,7 @@ class FileManagement
 		string getText();
 		void readSecret();
 		string readBook();
-		void m(string text);
-		void b();
+		void writeBook(string pText);
 	private:
 		string readFile(char pPath[]);
 		string text;
