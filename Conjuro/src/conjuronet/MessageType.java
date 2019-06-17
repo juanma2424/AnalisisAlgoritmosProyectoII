@@ -1,14 +1,15 @@
 package conjuronet;
 
+import static lib.Constants.*;
+
 public enum MessageType {
-    PLAYER_NAME(0),
-    CARDS_SELECTED(1),
-    CONJURO(2),
-    CARD_FOUND(3),
-    KEY_MSG(4),
-    DEFEAT(5);
-    
-    
+    PLAYER_NAME(DATA_CERO),
+    CARDS_SELECTED(DATA_ONE),
+    CONJURO(DATA_TWO),
+    CARD_FOUND(DATA_THREE),
+    KEY_MSG(DATA_FOUR),
+    DEFEAT(DATA_FIVE);
+  
     public int value;
 
     MessageType(int pValue) {

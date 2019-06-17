@@ -6,7 +6,6 @@ import java.util.Random;
 import lib.Constants;
 import lib.Logger;
 
-// Java program to calculate MD5 hash value 
 public class MD5 implements IAlgorithm, Constants{
     private String key1;
     private String key2;
@@ -22,19 +21,18 @@ public class MD5 implements IAlgorithm, Constants{
         String hashtext = "";
         try {
 
-            // Static getInstance method is called with hashing MD5 
+            //getInstance con hash MD5
             MessageDigest md = MessageDigest.getInstance("MD5");
 
-            // digest() method is called to calculate message digest 
-            //  of an input digest() return array of byte 
+            // digest() calcula el resultado del mns
             byte[] messageDigest = md.digest(input.getBytes());
 
-            // Convert byte array into signum representation 
-            BigInteger no = new BigInteger(1, messageDigest);
-
-            // Convert message digest into hex value 
-            hashtext = no.toString(16);
-            while (hashtext.length() < 32) {
+        
+            // msg a hex
+            BigInteger no = new BigInteger(DATA_ONE, messageDigest);
+            hashtext = no.toString(DATA_SIXTEEN);//16 palabras 
+            
+            while (hashtext.length() < DATA_THIRTY_TWO ) {// 32 bits
                 hashtext = "0" + hashtext;
             }
 
@@ -44,6 +42,8 @@ public class MD5 implements IAlgorithm, Constants{
         return hashtext;
     }
 
+    
+    
     public String decrypt(String pText, String pKey) {
         if(pText.equals(encrypt(text))){
             return text;
@@ -54,10 +54,10 @@ public class MD5 implements IAlgorithm, Constants{
     private String generateKey(){
         Random rnd = new Random();
         String key = "";
-        for(int i = 0; i < LENGTH_KEY; i++){
-            key += (char)(rnd.nextInt(26)+65);
-            if(rnd.nextInt(4) < 1)
-                key += rnd.nextInt(10);
+        for(int i = DATA_CERO; i < LENGTH_KEY; i++){
+            key += (char)(rnd.nextInt(DATA_TWENTY_SIX)+ SIXTY_FIVE);
+            if(rnd.nextInt(DATA_FOUR) < DATA_ONE)
+                key += rnd.nextInt(DATA_TEN);
         }
         return key;
     }

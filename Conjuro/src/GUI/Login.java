@@ -103,7 +103,7 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(!jTextField1.getText().isEmpty()){
             this.globalController.insertName(jTextField1.getText());
-            this.globalController.searchGame();
+            this.globalController.searchGame();//SEARCH GAME START
         }
         else{
             nameEmpty();
@@ -114,8 +114,8 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here
         if(!jTextField1.getText().isEmpty()){
             this.globalController.insertName(jTextField1.getText());
-            this.globalController.startGame();
-            initGame();
+            this.globalController.startGame();//START SERVER 
+            initGame();//START GAME
         }
         else{
             nameEmpty();
@@ -152,10 +152,6 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
-//                Login window = new Login();
-//                window.setLocationRelativeTo(null);
-//                window.setVisible(true);
             }
         });
     }

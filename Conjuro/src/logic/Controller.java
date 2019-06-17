@@ -25,7 +25,7 @@ public class Controller implements Constants, Runnable {
         game = new GameLogic(this);
         decrypt = false;
         getCards = false;
-        numCards = 0;
+        numCards = DATA_CERO;
         comms = new ConjuroComms(this);
         window = null;
         login = new Login();
@@ -35,9 +35,10 @@ public class Controller implements Constants, Runnable {
     }
 
     public void insertName(String pName) {
-        game.setName(pName);
+        game.setName(pName);// SET NAME TO PLAYER
     }
 
+    // SEPARED SIX CARDS IN TWO MOVES
     public boolean selectCard(int pType, boolean pJugada) {
         if (numCards < SELECT_CARDS) {
             game.setSelectedCard(pType, numCards % JUGADA_NUMBER, pJugada);
@@ -47,53 +48,68 @@ public class Controller implements Constants, Runnable {
         return false;
     }
 
+    //
     public void sendMoves() {
-        Card[] select = game.getJugada1().clone();
-        String msg = "1,";
+        Card[] select = game.getJugada1().clone();// fisrt move
+        String msg = "1,";//start msg
         Random rand = new Random();
         String key1;
         String key2;
-        int pos = 0;
-        for (int index = 0; index < SELECT_CARDS; index++) {
+        int pos = DATA_CERO;
+        for (int index = DATA_CERO; index < SELECT_CARDS; index++) {
             pos = index % JUGADA_NUMBER;
             key1 = select[pos].getKey1();
             key2 = select[pos].getKey2();
-            if(rand.nextInt() < 0.5){
+            if(rand.nextInt() < DATA_CEROFIVE){
                 key1 = select[pos].getKey2();
                 key2 = select[pos].getKey1();
             }
-            msg += "Name" + index + "=" + select[pos].getName() + ",Description" + index + "=" + select[pos].getDescription() + ",DescripEncryp" + index + "=" + select[pos].getDescripEncrypted() + ",Key1" + index + "=" + key1 + ",Key2" + index + "=" + key2 + ",";
-            if (index == JUGADA_NUMBER-1) {
-                select = game.getJugada2();
+            
+            msg += "Name" + index + "=" + select[pos].getName() 
+            + ",Description" + index + "=" + select[pos].getDescription() 
+            + ",DescripEncryp" + index + "=" + select[pos].getDescripEncrypted() 
+            + ",Key1" + index + "=" + key1 + ",Key2" + index + "=" + key2 + ",";
+            
+            if (index == JUGADA_NUMBER-DATA_ONE) {
+                select = game.getJugada2();// past a next move 
             }
         }
-        msg = msg.substring(0, msg.length() - 1);
+        msg = msg.substring(DATA_CERO, msg.length() - DATA_ONE);
+        
         comms.sendMessage(msg);
         decrypt = true;
         sendName();
         if(isServer)
-            sendKey();
+           sendKey();
     }
 
+    //levanta un server 
     public void startGame() {
-        comms.iniciarJuegoNuevo();
+        comms.iniciarJuegoNuevo();// levanta server y lo pone a la escucha 
         generateCard();
-        FileManagement fileKey = new FileManagement();
-        game.setKey(fileKey.readKeys());
+        FileManagement fileKey = new FileManagement();// lee archivo de llaves
+        game.setKey(fileKey.readKeys());// set de la llave seleccionada aleatoriamenre
         isServer = true;
     }
 
+    
     public void searchGame() {
-        if (!comms.conectarAJuego(HOST)) {
-            login.getConnect();
+        if (!comms.conectarAJuego(HOST)) {// if not are servers
+            login.getConnect();// show msg
         } else {
-            login.initGame();
-            generateCard();
+            login.initGame();// new window
+            generateCard(); 
         }
     }
 
-    public void setCardCont(String pName, String pDescription, String pDescripEncrypted, String pKey1, String pKey2, int pPos, boolean pJugada) {
-        window.appendMoves(("Name=" + pName + ",Description=" + pDescription + ",DescripEncryp=" + pDescripEncrypted + ",Key1=" + pKey1 + ",Key2=" + pKey2 + "dsd"));
+    
+    // SET CARDS CONDIF MY AND CONTRICAND
+    public void setCardCont(String pName, String pDescription, String pDescripEncrypted, 
+                                  String pKey1, String pKey2, int pPos, boolean pJugada) {
+        
+        window.appendMoves(("Name=" + pName + ",Description=" + pDescription + 
+                ",DescripEncryp=" + pDescripEncrypted + ",Key1=" + pKey1 + ",Key2=" + pKey2 + "dsd"));// PRINCIPAL BOARD
+        
         game.setSelectedCardCont(pName, pDescription, pDescripEncrypted, pKey1, pKey2, pPos, pJugada);
     }
 
@@ -106,39 +122,40 @@ public class Controller implements Constants, Runnable {
     }
 
     public void generateCard() {
-        String[] types = {"Sha256", "MD5", "TresDes", "AES", "Plain", "RSA", "Pgp"};
+        String[] types = {"Sha256", "MD5", "TresDes", "AES", "Plain", "RSA", "Pgp"};// tipo de carta
         ReadFile fr = new ReadFile();
         String text = fr.readDescription();
-        String[] description = text.split(LIMIT_DESCRIPTION);
-        int count = 0;
+        String[] description = text.split(LIMIT_DESCRIPTION);// descripcion de cada carta
+        int count = DATA_CERO;
         String[] parts;
         while (count < TOTAL_CARDS) {
             parts = description[count].split(LIMIT_NAME);
-            game.insertCard(parts[0], parts[1], types[count], count);
-            count++;
+                                  // name   , descripction   ,    type     , num             
+            game.insertCard(parts[DATA_CERO], parts[DATA_ONE], types[count], count);// gamelogic 
+            count++;                             
         }
     }
 
     public void sendController() {
-        login.setController(this);
+        login.setController(this);// set controlle to login
     }
 
     public void setGetCards() {
-        getCards = true;
+        getCards = true;//IF HAVE A CARDS
     }
 
     public void cleanMove(int pData) {
-        game.cleanMove(pData);
-        numCards = 0;
+        game.cleanMove(pData);// clean in game logic
+        numCards = DATA_CERO;
     }
 
     public void findCard(int pType) {
         String[] types = {"Sha256", "MD5", "TresDes", "AES", "Plain", "RSA", "Pgp"};
-        window.appendFindCards(types[pType]);
+        window.appendFindCards(types[pType]);//SHOW A FIND CARD OPPONED
     }
     
     public void setKey(String pKey) {
-        game.setKey(pKey);
+        game.setKey(pKey);//STE KEY TO GAME LOGIC
         sendName();
     }
     
@@ -159,9 +176,6 @@ public class Controller implements Constants, Runnable {
         window.appendFindCardsC(types[pType]);
     }
 
-    public void discoverHalfKey() {
-
-    }
     
     public void sendConjuro(String pConjuro){
         String msg = "2,Conjuro="+pConjuro;
@@ -169,12 +183,10 @@ public class Controller implements Constants, Runnable {
     }
     
     public void setConjuro(String pConjuro){
-        window.viewConjuro(pConjuro);
+        window.viewConjuro(pConjuro);// SEND CONJURO TO GUI
     }
 
-    public void discoverAllKey() {
-
-    }
+  
 
     @Override
     public void run() {
@@ -191,7 +203,7 @@ public class Controller implements Constants, Runnable {
     }
 
     public void initWindow() {
-        window = new Cliente(this);
+        window = new Cliente(this);// windows game ande set controller
     }
 
     public void setNameContr(String pName) {

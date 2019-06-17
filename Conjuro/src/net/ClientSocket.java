@@ -68,6 +68,7 @@ public class ClientSocket extends Observable implements Constants, Runnable {
         }
     }
 
+    //XX
     private void initReaders() {
         if (client != null) {
             try {

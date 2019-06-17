@@ -50,7 +50,6 @@ public class FileManagement {
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());
         }
-
         return auxKey;
     }
 

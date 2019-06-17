@@ -20,7 +20,7 @@ public class Sha256 implements IAlgorithm, Constants{
     public String encrypt(String pText){
         String hashText = "";
         try {
-
+           
             // Static getInstance method is called with hashing SHA 
             MessageDigest md = MessageDigest.getInstance("SHA-256");
 
@@ -30,12 +30,12 @@ public class Sha256 implements IAlgorithm, Constants{
             byte[] messageDigest = md.digest(pText.getBytes());
 
             // Convert byte array into signum representation 
-            BigInteger no = new BigInteger(1, messageDigest);
+            BigInteger no = new BigInteger(DATA_ONE, messageDigest);
 
             // Convert message digest into hex value 
-            hashText = no.toString(16);
+            hashText = no.toString(DATA_SIXTEEN);
 
-            while (hashText.length() < 32) {
+            while (hashText.length() < DATA_THIRTY_TWO) {
                 pText = "0" + pText;
             }
         }catch (Exception ex) {
@@ -54,10 +54,10 @@ public class Sha256 implements IAlgorithm, Constants{
     private String generateKey(){
         Random rnd = new Random();
         String key = "";
-        for(int i = 0; i < LENGTH_KEY; i++){
-            key += (char)(rnd.nextInt(26)+65);
-            if(rnd.nextInt(4) < 1)
-                key += rnd.nextInt(10);
+         for(int i = DATA_CERO; i < LENGTH_KEY; i++){
+            key += (char)(rnd.nextInt(DATA_TWENTY_SIX)+ SIXTY_FIVE);
+            if(rnd.nextInt(DATA_FOUR) < DATA_ONE)
+                key += rnd.nextInt(DATA_TEN);
         }
         return key;
     }

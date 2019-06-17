@@ -31,10 +31,10 @@ public class RSA implements IAlgorithm, Constants {
     public String encrypt(String pMsg) {
         String result = "";
         try {
-            byte[] keyBytes = Base64.getDecoder().decode(getKey1());
+            byte[] keyBytes = Base64.getDecoder().decode(getKey1());//KEY BYTE
             X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
-            KeyFactory kf = KeyFactory.getInstance("RSA");
-            this.cipher.init(Cipher.ENCRYPT_MODE, kf.generatePublic(spec));
+            KeyFactory kf = KeyFactory.getInstance("RSA");//TIPO ENCRIPT
+            this.cipher.init(Cipher.ENCRYPT_MODE, kf.generatePublic(spec));//COMANDO DE ENCRPIT
             result = new String(org.apache.commons.codec.binary.Base64.encodeBase64(cipher.doFinal(pMsg.getBytes("UTF-8"))));
         } catch (Exception ex) {
             Logger.Log(ex.getMessage());
