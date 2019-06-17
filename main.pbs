@@ -1,0 +1,9 @@
+#PBS -N main 
+#PBS -q phi-n1h72 
+#PBS -l nodes=1 
+#PBS -l walltime=00:15:00 cd $PBS_O_WORKDIR
+
+
+./main 4000 
+
+                                                                    

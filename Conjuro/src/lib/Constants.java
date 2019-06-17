@@ -1,0 +1,53 @@
+package lib;
+
+public interface Constants {
+
+    //---------------INTS---------------------//
+    public static int PORT_NUMBER = 10000;
+    public static int STATE_MATRIZ_LEN = 4;
+    public static int LIMIT_RANDOM = 10000;
+    public static int THREAD_SLEEP_TIME = 50;
+    public static int CANT_SAVE = 100;
+    public static int CANT_DATA_PLAY = 3;
+    public static int MAX_DATA_PLAY = 99;
+    public static int MIN_DATA_PLAY = 0;
+    //----------------------------------//
+    public static double DATA_CEROFIVE = 0.5;
+    public static int LIMIT_TIME = 12;
+    public static int DANGER_TIME = 3;
+     public static int TIME_GAME_REFRESH = 60000;
+    public static int DATA_CERO = 0;
+    public static int DATA_ONE = 1;
+    public static int DATA_TWO = 2;
+    public static int DATA_THREE = 3;
+    public static int DATA_FOUR = 4;
+    public static int DATA_FIVE = 5;
+    public static int DATA_SIX = 6;
+    public static int DATA_EIGHT = 8;
+    public static int DATA_TWENTY_FOUR= 24;
+    public static int DATA_TEN = 10;
+    public static int DATA_SIXTEEN = 16;//16 palabras de 32  o vueltas
+    public static int DATA_THIRTY_TWO = 32;//caracteres hex para 128
+    public static int SIXTY_FIVE = 65;//vueltas de cifrado 
+    public static int DATA_TWENTY_SIX = 26;
+    //----------------------------------//
+    public static int TOTAL_CARDS = 7;
+    public static int SELECT_CARDS = 6;
+    public static int JUGADA_NUMBER = 3;
+    public static int LENGTH_KEY = 128;
+    public static int RSA_LENGTH_KEY = 4096;
+    public static int MAX_KEYS = 100;
+     public static int FORMAT_KEYS_AES = 128;
+
+    //---------------STRINGS---------------------//
+    public static String MESSAGE_SEPARATOR = ",";
+    public static String MESSAGE_VALUES_SEPARATOR = "=";
+    public static String LIMIT_ENCRYPTATION_AES = "X--X";
+    public static String LIMIT_ENCRYPTATION_SHA256 = "X-Y-X";
+    public static String LIMIT_FILE = "X-X-X";
+    public static String LIMIT_DESCRIPTION = "-FinText-";
+    public static String LIMIT_NAME = "-FinName-";
+    public static String HOST = "192.168.0.106";
+    public static String PATH_KEY = "\\C++\\Save.txt";
+    public static String PATH_PLAY_DATA = "\\C++\\DataPlay.txt";
+}
