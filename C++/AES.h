@@ -11,6 +11,7 @@
 #include <iomanip>
 #include <sstream>
 
+//256 AES
 
 using namespace std;
 
@@ -176,7 +177,6 @@ AES::AES(int keyLen = 256)
   default:
     throw "Incorrect key length";
   }
-
   blockBytesLen = 4 * this->Nb * sizeof(unsigned char);
 }
 
@@ -320,6 +320,7 @@ void AES::EncryptBlock(unsigned char in[], unsigned char out[], unsigned  char k
   unsigned char **state = new unsigned char *[4];
   state[0] = new unsigned  char[4 * Nb];
   int i, j, round;
+  
   for (i = 0; i < 4; i++)
   {
     state[i] = state[0] + Nb * i;
@@ -334,9 +335,9 @@ void AES::EncryptBlock(unsigned char in[], unsigned char out[], unsigned  char k
     }
   }
 
-  AddRoundKey(state, w);
+  AddRoundKey(state, w);//sumador xor
 
-  for (round = 1; round <= Nr - 1; round++)
+  for (round = 1; round <= Nr - 1; round++)// durante las 9 vueltas
   {
     SubBytes(state);
     ShiftRows(state);
@@ -344,10 +345,12 @@ void AES::EncryptBlock(unsigned char in[], unsigned char out[], unsigned  char k
     AddRoundKey(state, w + round * 4 * Nb);
   }
 
+  // en la ronda 10
   SubBytes(state);
   ShiftRows(state);
   AddRoundKey(state, w + Nr * 4 * Nb);
 
+ // extraccion del criptograma
   for (i = 0; i < 4; i++)
   {
     for (j = 0; j < Nb; j++)
@@ -395,6 +398,7 @@ void AES::DecryptBlock(unsigned char in[], unsigned char out[], unsigned  char k
   InvShiftRows(state);
   AddRoundKey(state, w);
 
+  //extracion del msg
   for (i = 0; i < 4; i++)
   {
     for (j = 0; j < Nb; j++) {
@@ -408,6 +412,7 @@ void AES::DecryptBlock(unsigned char in[], unsigned char out[], unsigned  char k
 }
 
 
+//sustitucion en l matrix de estado mediante la tabla sbox
 void AES::SubBytes(unsigned char **state)
 {
   int i, j;
@@ -423,6 +428,7 @@ void AES::SubBytes(unsigned char **state)
 
 }
 
+// rotacion de las filas determinadas limitadas a su valor de bits 
 void AES::ShiftRow(unsigned char **state, int i, int n)    // shift row i on n positions
 {
   unsigned char t;
@@ -438,12 +444,14 @@ void AES::ShiftRow(unsigned char **state, int i, int n)    // shift row i on n p
   }
 }
 
+// llama a las rotaciones en las filas 
 void AES::ShiftRows(unsigned char **state)
 {
   ShiftRow(state, 1, 1);
   ShiftRow(state, 2, 2);
   ShiftRow(state, 3, 3);
 }
+
 
 unsigned char AES::xtime(unsigned char b)    // multiply on x
 {
@@ -477,6 +485,7 @@ unsigned char AES::mul_bytes(unsigned char a, unsigned char b)
   return c;
 }
 
+// multiplica cada una de la matrix de estado por un polinomio 
 void AES::MixColumns(unsigned char **state)
 {
   unsigned char s[4], s1[4];
@@ -502,6 +511,7 @@ void AES::MixColumns(unsigned char **state)
 
 }
 
+// sumador xor de la matriz de estado y la clave de cada vuelta 
 void AES::AddRoundKey(unsigned char **state, unsigned char *key)
 {
   int i, j;
@@ -514,6 +524,8 @@ void AES::AddRoundKey(unsigned char **state, unsigned char *key)
   }
 }
 
+
+// subbyte aplicado a A
 void AES::SubWord(unsigned char *a)
 {
   int i;
@@ -523,6 +535,7 @@ void AES::SubWord(unsigned char *a)
   }
 }
 
+// rota el ultimo byte de a
 void AES::RotWord(unsigned char *a)
 {
   unsigned char c = a[0];
@@ -531,7 +544,7 @@ void AES::RotWord(unsigned char *a)
   a[2] = a[3];
   a[3] = c;
 }
-
+// xor con la columna dada y la columna 3 posiciones atras ademas del xor 
 void AES::XorWords(unsigned char *a, unsigned char *b, unsigned char *c)
 {
   int i;
@@ -541,6 +554,7 @@ void AES::XorWords(unsigned char *a, unsigned char *b, unsigned char *c)
   }
 }
 
+//calculo del vector de rcon
 void AES::Rcon(unsigned char * a, int n)
 {
   int i;
@@ -554,6 +568,8 @@ void AES::Rcon(unsigned char * a, int n)
   a[1] = a[2] = a[3] = 0;
 }
 
+// rotword subbyts xor 1-3 xor rcon
+// genera las 10 subclaes de cada vuelta
 void AES::KeyExpansion(unsigned char key[], unsigned char w[])
 {
   unsigned char *temp = new unsigned char[4];

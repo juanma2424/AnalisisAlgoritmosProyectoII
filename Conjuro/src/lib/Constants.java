@@ -13,6 +13,9 @@ public interface Constants {
     public static int MIN_DATA_PLAY = 0;
     //----------------------------------//
     public static double DATA_CEROFIVE = 0.5;
+    public static int LIMIT_TIME = 12;
+    public static int DANGER_TIME = 3;
+     public static int TIME_GAME_REFRESH = 60000;
     public static int DATA_CERO = 0;
     public static int DATA_ONE = 1;
     public static int DATA_TWO = 2;

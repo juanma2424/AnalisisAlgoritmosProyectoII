@@ -1,6 +1,12 @@
 package GUI;
 
+
+import java.awt.Color;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.swing.JOptionPane;
 import lib.Constants;
+import static lib.Constants.LIMIT_TIME;
 import logic.Controller;
 
 public class Cliente extends javax.swing.JFrame implements Constants {
@@ -13,9 +19,15 @@ public class Cliente extends javax.swing.JFrame implements Constants {
     private boolean readyMoveTwo = false;
     private int globalJugada = DATA_CERO;
     private Controller globalController;
+    private int counter;
+    private int limit;
+    private String strLimit;
+    private Timer timer;
 
     public Cliente(Controller pController) {
         initComponents();
+        counter = 0;
+        limit =0;
         globalController = pController;
         C1.setToolTipText("Name: C1 | Tipe: Sha256 |desc cifrada | desc no cifrada| key1 | key2");
         C2.setToolTipText("Name: C2 | Tipe: MD5 |desc cifrada | desc no cifrada| key1 | key2");
@@ -35,6 +47,9 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         jTextArea2.append("Opponent cards found :\n");
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        startTimer();
+        String strLimit ="";
+        jTextField1.setText("Tiempo Restante : \n  12 Min");
     }
 
     private void setCart(String pData) {
@@ -84,6 +99,7 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTextArea4 = new javax.swing.JTextArea();
+        jTextField1 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         editMoveTwo = new javax.swing.JButton();
@@ -115,7 +131,7 @@ public class Cliente extends javax.swing.JFrame implements Constants {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 90, 60));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 90, 60));
 
         jTextArea3.setBackground(new java.awt.Color(0, 0, 51));
         jTextArea3.setColumns(20);
@@ -186,6 +202,15 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         jScrollPane5.setViewportView(jTextArea4);
 
         jPanel2.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, 210, 80));
+
+        jTextField1.setEditable(false);
+        jTextField1.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 190, 60));
 
         jTextField3.setEditable(false);
         jTextField3.setBackground(new java.awt.Color(0, 0, 51));
@@ -399,6 +424,10 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         globalController.sendConjuro(jTextArea3.getText());
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     public void appendMoves(String pMove) {
         jTextArea1.append(pMove + "\n");
     }
@@ -456,8 +485,8 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         } else {
             globalJugada = DATA_CERO;
         }
-        
-        this.globalClicks = DATA_CERO; 
+
+        this.globalClicks = DATA_CERO;
         globalController.cleanMove(pData);// CLEAN DATA IN CONTROLLER 
     }
 
@@ -484,7 +513,6 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         }
     }
 
-                                       
     private void setText(String pData, javax.swing.JButton jData, int pNum) {
         if (!readyMoveOne || !readyMoveTwo) {// !IF TWO MOVES ARENT DONE
             selectedCard(pNum);//SELECT CARD BY NUM CARD 
@@ -504,6 +532,57 @@ public class Cliente extends javax.swing.JFrame implements Constants {
 
     public void setNameVS(String pName) {
         jLabel1.setText(pName);
+    }
+    
+    public void gameOver() {
+        this.dispose();
+         JOptionPane.showMessageDialog(null, "GAME OVER");
+    }
+
+    public void startTimer() {
+        
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+            }
+        };
+
+        //create thread to print counter value
+        Thread t = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        if ( (LIMIT_TIME - counter) == DATA_CERO ) {
+                            timer.cancel();
+                            gameOver();
+                            break;
+                        }
+                        
+                        Thread.sleep(TIME_GAME_REFRESH);
+                        counter++;
+                        limit = LIMIT_TIME - counter ;
+                        strLimit = Integer.toString(limit);
+                        
+                        
+                        if ( (LIMIT_TIME - counter) <  DANGER_TIME) {
+                           jTextField1.setText("Tiempo Restante : \n "+strLimit +" Min");
+                           jTextField1.setForeground(Color.red);
+                        }else{
+                          jTextField1.setText("Tiempo Restante : \n "+strLimit +" Min");
+                        } 
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        timer = new Timer("MyTimer");//create a new timer
+        timer.scheduleAtFixedRate(timerTask, 30, 3000);//start timer in 30ms to increment  counter
+        t.start();//start thread to display counter
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -535,6 +614,7 @@ public class Cliente extends javax.swing.JFrame implements Constants {
     private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextArea jTextArea6;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JButton sendMove;
