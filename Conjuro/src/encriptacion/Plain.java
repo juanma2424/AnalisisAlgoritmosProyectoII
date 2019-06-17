@@ -23,10 +23,10 @@ public class Plain implements IAlgorithm, Constants {
     private String generateKey(){
         Random rnd = new Random();
         String key = "";
-        for(int i = 0; i < LENGTH_KEY; i++){
-            key += (char)(rnd.nextInt(26)+65);
-            if(rnd.nextInt(4) < 1)
-                key += rnd.nextInt(10);
+        for(int i = DATA_CERO; i < LENGTH_KEY; i++){
+            key += (char)(rnd.nextInt(DATA_TWENTY_SIX)+SIXTY_FIVE);
+            if(rnd.nextInt(DATA_FOUR) < DATA_ONE)
+                key += rnd.nextInt(DATA_TEN);
         }
         return key;
     }

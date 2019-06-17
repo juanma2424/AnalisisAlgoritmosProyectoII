@@ -39,7 +39,6 @@ public class ServerNet implements Constants, Runnable {
         while (isListening) {
             try {
                 Socket newSocket = serversocket.accept();
-                
                 ClientSocket client = new ClientSocket(newSocket);
                 ConjuroComms ConComms = (ConjuroComms) this.observer;
                 ConComms.setClientServer(client);

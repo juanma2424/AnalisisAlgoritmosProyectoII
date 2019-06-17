@@ -8,10 +8,10 @@ public class Cliente extends javax.swing.JFrame implements Constants {
     /**
      * Creates new form Cliente
      */
-    private int globalClicks = 0;
+    private int globalClicks = DATA_CERO;
     private boolean readyMoveOne = false;
     private boolean readyMoveTwo = false;
-    private int globalJugada = 0;
+    private int globalJugada = DATA_CERO;
     private Controller globalController;
 
     public Cliente(Controller pController) {
@@ -31,8 +31,8 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         jTextArea1.setEditable(false);
         jTextArea2.setEditable(false);
         jTextArea4.setEditable(false);
-        jTextArea4.append("Me \n");
-        jTextArea2.append("Opponent \n");
+        jTextArea4.append("My cards found :\n");
+        jTextArea2.append("Opponent cards found :\n");
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -42,21 +42,21 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         globalClicks++;
         if (!readyMoveOne || !readyMoveTwo) {
 
-            // si ya existe algo escrito
-            if (textMove.getText().length() != 0) {
+            // !IF EMPTY
+            if (textMove.getText().length() != DATA_CERO) {
                 lastTexMove = textMove.getText();
                 textMove.setText(lastTexMove + "," + pData);
-                if (globalClicks == JUGADA_NUMBER) {//si global clicks es igual a 3
-                    sendMove.setEnabled(true);//setMsg=true;
+                if (globalClicks == JUGADA_NUMBER) {//IF GLOBAL CLICKS AS EQUAL A 3
+                    sendMove.setEnabled(true);//SETMSG = TRUE 
                 }
             } else {
-                textMove.setText(pData);// si es la primera vez que se escribe
+                textMove.setText(pData);// ITS FIRST TIME TO WRITE
             }
             if (globalClicks > JUGADA_NUMBER) {
-                textMove.setText(pData);
-                sendMove.setEnabled(false);//setMsg=false;
-                globalClicks = 1;// global click refresh
-                avalibleORNot(true);
+                textMove.setText(pData);// SAVE DATA
+                sendMove.setEnabled(false);//SETMSG = FALSE
+                globalClicks = DATA_ONE;//GLOBALCLICKS REFRESH
+                avalibleORNot(true);//AVALIBLE BUTTON CARDS
             }
         }
     }
@@ -141,7 +141,7 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         jTextArea5.setText("\tKEY");
         jScrollPane6.setViewportView(jTextArea5);
 
-        jPanel2.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 580, 610, 60));
+        jPanel2.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 580, 620, 60));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 51));
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
@@ -316,48 +316,48 @@ public class Cliente extends javax.swing.JFrame implements Constants {
 
     private void C3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C3ActionPerformed
         // TODO add your handling code here:
-        setText("c3=3des", C3, 2);
+        setText("c3=3des", C3, DATA_TWO);
     }//GEN-LAST:event_C3ActionPerformed
 
     private void C1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C1ActionPerformed
         // TODO add your handling code here:
-        setText("c1=sha256", C1, 0);
+        setText("c1=sha256", C1, DATA_CERO);
     }//GEN-LAST:event_C1ActionPerformed
 
     private void C4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C4ActionPerformed
         // TODO add your handling code here:
-        setText("c4=aes", C4, 3);
+        setText("c4=aes", C4, DATA_THREE);
     }//GEN-LAST:event_C4ActionPerformed
 
     private void C6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C6ActionPerformed
         // TODO add your handling code here:
-        setText("c6=rsa", C6, 5);
+        setText("c6=rsa", C6, DATA_FIVE);
     }//GEN-LAST:event_C6ActionPerformed
 
     private void C5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C5ActionPerformed
         // TODO add your handling code here:
-        setText("c5=plain", C5, 4);
+        setText("c5=plain", C5, DATA_FOUR);
     }//GEN-LAST:event_C5ActionPerformed
 
     private void C7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C7ActionPerformed
         // TODO add your handling code here:
-        setText("c7=pgp", C7, 6);
+        setText("c7=pgp", C7, DATA_SIX);
     }//GEN-LAST:event_C7ActionPerformed
 
     private void C2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C2ActionPerformed
         // TODO add your handling code here:
-        setText("c2=md5", C2, 1);
+        setText("c2=md5", C2, DATA_ONE);
     }//GEN-LAST:event_C2ActionPerformed
 
     private void sendMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMoveActionPerformed
         // TODO add your handling code here:
         selectMove();
-        textMove.setText(null);// CLEAN
+        textMove.setText(null);// CLEAN GUI
         sendMove.setEnabled(false);
         if (readyMoveOne && readyMoveTwo) {
-            jButton1.setEnabled(true);
+            jButton1.setEnabled(true);//AVALIBLE BUTTON TRUE
         }
-        avalibleORNot(true);
+        avalibleORNot(true);// SET AVALIBLE ALLCARDS
     }//GEN-LAST:event_sendMoveActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -370,25 +370,25 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         jTextField3.setText(null);
         textMove.setText(null);
         editMoveOne.setEnabled(false);
-        readyMoveOne = false;///
-        cleanMove(0);
-        avalibleORNot(true);
+        readyMoveOne = false;
+        cleanMove(DATA_CERO);//CLEAN MOVE IN CONTROLLER 0 BECAUSE IS A FIRST MOVE
+        avalibleORNot(true);// SET AVALIBLE ALLCARDS
     }//GEN-LAST:event_editMoveOneActionPerformed
 
     private void editMoveTwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMoveTwoActionPerformed
         // TODO add your handling code here:
         jButton1.setEnabled(false);
-        avalibleORNot(true);
+        avalibleORNot(true);// SET AVALIBLE ALLCARDS
         jTextField2.setText(null);
         textMove.setText(null);
         editMoveTwo.setEnabled(false);
-        readyMoveTwo = false;///
-        cleanMove(1);
+        readyMoveTwo = false;
+        cleanMove(DATA_ONE);// CLEAN MOVE IN CONTROLLER 0 BECAUSE IS A SECOND MOVE
     }//GEN-LAST:event_editMoveTwoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        globalController.sendMoves();
+        globalController.sendMoves();// SENDMOVES TO CONTROLLER 
         jButton1.setEnabled(false);
         editMoveTwo.setEnabled(false);
         editMoveOne.setEnabled(false);
@@ -406,12 +406,12 @@ public class Cliente extends javax.swing.JFrame implements Constants {
     public void appendFindCards(String pType) {
         jTextArea2.append(pType + "\n");
     }
-    
+
     public void appendFindCardsC(String pType) {
         jTextArea4.append(pType + "\n");
     }
-    
-    public void viewConjuro(String pConjuro){
+
+    public void viewConjuro(String pConjuro) {
         jTextArea6.append(pConjuro);
     }
 
@@ -451,14 +451,14 @@ public class Cliente extends javax.swing.JFrame implements Constants {
     }
 
     private void cleanMove(int pData) {
-        if (globalJugada == SELECT_CARDS) {
+        if (globalJugada == SELECT_CARDS) {// IF ARE TWO MOVES  
             globalJugada = globalJugada - JUGADA_NUMBER;
         } else {
-            globalJugada = 0;
+            globalJugada = DATA_CERO;
         }
-        this.globalClicks = 0;
-        globalController.cleanMove(pData);
-
+        
+        this.globalClicks = DATA_CERO; 
+        globalController.cleanMove(pData);// CLEAN DATA IN CONTROLLER 
     }
 
     private void avalibleORNot(boolean pData) {
@@ -473,23 +473,23 @@ public class Cliente extends javax.swing.JFrame implements Constants {
 
     private void selectMove() {
         if (!readyMoveOne) {
-            jTextField3.setText(textMove.getText());
-            editMoveOne.setEnabled(true);
-            readyMoveOne = true;
+            jTextField3.setText(textMove.getText());//GET MOVES TO TEXT PRINCIPAL BOARD
+            editMoveOne.setEnabled(true);//EDIT MOVE ONE
+            readyMoveOne = true; //MOVE ONE READY
         } else {
-            avalibleORNot(false);
+            avalibleORNot(false);// GET MOVE TO TEXT PRINCIPAL BOARD
             jTextField2.setText(textMove.getText());
-            editMoveTwo.setEnabled(true);
-            readyMoveTwo = true;
-
+            editMoveTwo.setEnabled(true);//EDIT MOVE TOW
+            readyMoveTwo = true;// MOVE TWO READY
         }
     }
 
+                                       
     private void setText(String pData, javax.swing.JButton jData, int pNum) {
-        if (!readyMoveOne || !readyMoveTwo) {
-            selectedCard(pNum);
-            setCart(pData);
-            jData.setEnabled(false);
+        if (!readyMoveOne || !readyMoveTwo) {// !IF TWO MOVES ARENT DONE
+            selectedCard(pNum);//SELECT CARD BY NUM CARD 
+            setCart(pData);// SET CARD INTO GUI
+            jData.setEnabled(false);//SET ENABLE CARD 
         }
     }
 
@@ -497,12 +497,11 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         globalController.selectCard(pCard, !readyMoveOne);
         globalJugada++;
     }
-    
-    public void viewKey(String pKey){
-        jTextArea5.append("\n"+pKey);
+
+    public void viewKey(String pKey) {
+        jTextArea5.append("\n" + pKey);
     }
-    
-    
+
     public void setNameVS(String pName) {
         jLabel1.setText(pName);
     }

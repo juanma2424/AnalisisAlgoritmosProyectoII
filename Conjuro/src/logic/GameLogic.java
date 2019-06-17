@@ -42,7 +42,7 @@ public class GameLogic implements Constants {
     }
     
     public void setKey(String pKey) {
-        key = pKey;
+        key = pKey;//SAVE KEY
     }
 
     public String getKey() {
@@ -50,13 +50,13 @@ public class GameLogic implements Constants {
     }
     
     private void fillHash() {
-        types.put("Sha256", 0);
-        types.put("MD5", 1);
-        types.put("TresDes", 2);
-        types.put("AES", 3);
-        types.put("Plain", 4);
-        types.put("RSA", 5);
-        types.put("Pgp", 6);
+        types.put("Sha256", DATA_CERO);
+        types.put("MD5", DATA_ONE);
+        types.put("TresDes", DATA_TWO);
+        types.put("AES", DATA_THREE);
+        types.put("Plain", DATA_FOUR);
+        types.put("RSA", DATA_FIVE);
+        types.put("Pgp", DATA_SIX);
     }
 
     public void setNameContr(String pName) {
@@ -75,10 +75,13 @@ public class GameLogic implements Constants {
         return jugada2;
     }
 
+    // SAVE CARDS LIKE NAME DECRIPTION AND TYPE , IN DECK                         
     public void insertCard(String pName, String pDescription, String pType, int pPos) {
         deck[pPos] = new Card(pName, pDescription, pType);
     }
 
+    
+    // SAVE SELECT CARD IN TWO MOVES 
     public void setSelectedCard(int pType, int pPos, boolean pJugada) {
         if (pJugada) {
             jugada1[pPos] = deck[pType];
@@ -86,7 +89,8 @@ public class GameLogic implements Constants {
             jugada2[pPos] = deck[pType];
         }
     }
-
+    
+    // SAVE SELECT CARD IN TWO MOVES OF CONT 
     public void setSelectedCardCont(String pName, String pDescription, String pDescripEncrypted, String pKey1, String pKey2, int pPos, boolean pJugada) {
         if (pJugada) {
             jugadaCont1[pPos] = new Card(pName, pDescription, pDescripEncrypted, pKey1, pKey2);
@@ -95,6 +99,7 @@ public class GameLogic implements Constants {
         }
     }
 
+    // DECODE MOVES 
     public void initDecode() {
         Card[] jugadaCont = jugadaCont1.clone();
         Card[] jugada = jugada1.clone();
@@ -112,6 +117,7 @@ public class GameLogic implements Constants {
         }
     }
 
+    //DECODE CARD 
     private int decodeCard(Card pCard, int pType) {
         String[] types = {"Sha256", "MD5", "TresDes", "AES", "Plain", "RSA", "Pgp"};
         boolean found = true;
@@ -137,16 +143,15 @@ public class GameLogic implements Constants {
         return pType%TOTAL_CARDS;
     }
 
+    
     public void cleanMove(int pData) {
-        if (pData == 0) {
-            for (int index = 0; index < JUGADA_NUMBER; index++) {
-                jugada1[index] = null;
+        if (pData == DATA_CERO) {// if clean a first move
+            for (int index = DATA_CERO; index < JUGADA_NUMBER; index++) {
+                jugada1[index] = null;//set first move null
             }
-
         } else {
-
-            for (int index = 0; index < JUGADA_NUMBER; index++) {
-                jugada2[index] = null;
+            for (int index = DATA_CERO; index < JUGADA_NUMBER; index++) {
+                jugada2[index] = null;//set first move null
             }
         }
     }

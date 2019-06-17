@@ -23,7 +23,6 @@ class AES implements IAlgorithm, Constants {
         String result = "";
         try {
             byte[] pTextB = pText.getBytes("UTF-8"); // obtienen el dato de la gui y codifica en una secuencia de bytes 
-            
             SecretKeySpec skeySpec = new SecretKeySpec(Base64.getDecoder().decode(key1), "AES");// Crea el objeto SecretKey pasa la clave y el algoritmo "AES"
             Cipher cipher = Cipher.getInstance("AES");//Crear un objeto de cifrado de tipo AES
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec);//  modo de operación (cifrar o descifrar) y la clave pública
@@ -75,7 +74,7 @@ class AES implements IAlgorithm, Constants {
 
         sr.setSeed(seed);//Establezca la semilla del generador de números aleatorios con la secuencia de byts del aleatorio porcesado
 
-        kgen.init(128, sr); // especificar el tamaño de la clave minimo de 128
+        kgen.init(FORMAT_KEYS_AES, sr); // especificar el tamaño de la clave minimo de 128
         SecretKey skey = kgen.generateKey();// genera la clave
         return skey.getEncoded();//codificación de caracteres del numero aleatorio y lo guarda en raw
     }

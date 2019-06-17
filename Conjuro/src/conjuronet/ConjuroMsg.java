@@ -4,24 +4,23 @@ import java.util.*;
 import lib.Constants;
 
 public class ConjuroMsg implements Constants {
-
+  
     private Hashtable<String, String> values;
     private MessageType type;
 
-    // formato del msg
-    // Type, key=value, key=value...key=value
+    
+    // APPLI FORMAT MSG AND GET VALUE OF MSG XX
     public ConjuroMsg(String pData) {
+        
         String[] msgValues = pData.split(MESSAGE_SEPARATOR);
         
-        if (msgValues != null && msgValues.length > 0) {
-            type = MessageType.values()[Integer.parseInt(msgValues[0])];
-
+        if (msgValues != null && msgValues.length > DATA_CERO) {
+            type = MessageType.values()[Integer.parseInt(msgValues[DATA_CERO])];
             values = new Hashtable<String, String>();
-
-            for (int valuesIndex = 1; valuesIndex < msgValues.length; valuesIndex++) {
+            for (int valuesIndex = DATA_ONE; valuesIndex < msgValues.length; valuesIndex++) {
                 int divKey = msgValues[valuesIndex].indexOf(MESSAGE_VALUES_SEPARATOR);
-                String[] keyMap = {msgValues[valuesIndex].substring(0,divKey), msgValues[valuesIndex].substring(divKey+1)};
-                values.put(keyMap[0], keyMap[1]);
+                String[] keyMap = {msgValues[valuesIndex].substring(DATA_CERO ,divKey), msgValues[valuesIndex].substring(divKey+1)};
+                values.put(keyMap[DATA_CERO ], keyMap[DATA_ONE]);
             }
         }
     }
