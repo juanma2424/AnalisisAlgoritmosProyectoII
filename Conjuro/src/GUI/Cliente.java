@@ -2,8 +2,11 @@ package GUI;
 
 
 import java.awt.Color;
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
 import lib.Constants;
 import static lib.Constants.LIMIT_TIME;
@@ -50,6 +53,7 @@ public class Cliente extends javax.swing.JFrame implements Constants {
         startTimer();
         String strLimit ="";
         jTextField1.setText("Tiempo Restante : \n  12 Min");
+         music();
     }
 
     private void setCart(String pData) {
@@ -539,6 +543,20 @@ public class Cliente extends javax.swing.JFrame implements Constants {
          JOptionPane.showMessageDialog(null, "GAME OVER");
     }
 
+    public static void music() {
+       try
+    {
+        Clip clip = AudioSystem.getClip();
+        clip.open(AudioSystem.getAudioInputStream(new File("song.wav")));
+        clip.start();
+    }
+    catch (Exception exc)
+    {
+        exc.printStackTrace(System.out);
+    }
+    }
+    
+    
     public void startTimer() {
         
         TimerTask timerTask = new TimerTask() {
@@ -562,10 +580,9 @@ public class Cliente extends javax.swing.JFrame implements Constants {
                         
                         Thread.sleep(TIME_GAME_REFRESH);
                         counter++;
+                        music();
                         limit = LIMIT_TIME - counter ;
                         strLimit = Integer.toString(limit);
-                        
-                        
                         if ( (LIMIT_TIME - counter) <  DANGER_TIME) {
                            jTextField1.setText("Tiempo Restante : \n "+strLimit +" Min");
                            jTextField1.setForeground(Color.red);
