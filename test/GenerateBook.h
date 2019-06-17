@@ -38,10 +38,11 @@ void GenerateBook::makeBook(bool entry)
 	 AES aes(256);
 	#pragma omp parallel
     {
-        #pragma omp for
+       
 		file.CleanFiles(); 
         file.openWrite();
         string padre = "";
+         #pragma omp for
         for(int i = 0; i < 100; i++){     
 	    	conjuro = text.substr(i*LENGTH_CONJURO,LENGTH_CONJURO);
 	    	string conjEncrypted = aes.encriptAES((unsigned char*)conjuro.c_str());
